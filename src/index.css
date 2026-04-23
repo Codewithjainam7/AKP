@@ -151,42 +151,7 @@
     position: relative;
   }
 
-  /* Custom cursor */
-  .custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 14px;
-    height: 14px;
-    background-color: var(--primary);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-  }
 
-  .custom-cursor-ring {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--primary);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: opacity 0.3s, transform 0.3s;
-  }
-
-  .cursor-hover .custom-cursor {
-    transform: scale(0) !important;
-  }
-
-  .cursor-hover .custom-cursor-ring {
-    opacity: 1 !important;
-    transform: scale(1) !important;
-  }
 
   .text-gradient {
     color: var(--primary);

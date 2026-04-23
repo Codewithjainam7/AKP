@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 export default function Projects() {
+  const scrollRef = useRef(null);
+  
   const portfolio = [
     { 
       title: 'Sea Surface Temperature Device', 
@@ -16,6 +18,16 @@ export default function Projects() {
     }
   ];
 
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const scrollAmount = 400;
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const tags = ['Research', 'Patents', 'Machine Learning', 'Data Science', 'Publications'];
 
   return (
@@ -27,74 +39,105 @@ export default function Projects() {
             Lets have a look at <span style={{ color: 'var(--primary)' }}>my Research</span>
           </h2>
           
-          <button style={{ backgroundColor: 'var(--primary)', color: 'var(--white)', borderRadius: '999px', padding: '12px 32px', fontWeight: '600', border: 'none' }} className="hover-target">
+          <button style={{ backgroundColor: 'var(--primary)', color: 'var(--white)', borderRadius: '999px', padding: '12px 32px', fontWeight: '600', border: 'none', cursor: 'pointer' }}>
             See All
           </button>
         </div>
 
         {/* Carousel Container */}
-        <div style={{ display: 'flex', gap: '30px', overflowX: 'hidden', paddingBottom: '40px' }}>
-          {/* Card 1 */}
-          <div style={{ flex: '0 0 48%', position: 'relative' }} className="hover-target">
-             {/* Left Arrow inside card */}
-             <div style={{ position: 'absolute', left: '-25px', top: '40%', width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'var(--white)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 10, boxShadow: '0 10px 20px rgba(255,119,51,0.3)', cursor: 'pointer' }}>
-               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-             </div>
-             
-             <div style={{ borderRadius: '24px', overflow: 'hidden', backgroundColor: '#F8F9FA' }}>
-                <img src={portfolio[0].img} alt="Portfolio 1" style={{ width: '100%', height: '400px', objectFit: 'cover' }} />
-                
-                {/* Overlay Text inside Image */}
-                <div style={{ 
-                  position: 'absolute', 
-                  bottom: '40px', 
-                  left: '40px', 
-                  right: '40px',
-                  backgroundColor: 'rgba(255,255,255,0.7)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
-                  padding: '24px',
-                  borderRadius: '16px',
-                  border: '1px solid rgba(255,255,255,0.8)'
-                 }}>
-                   <h3 style={{ fontSize: '32px', color: '#1B1B3A', marginBottom: '8px' }}>SST Device</h3>
-                   <div style={{ color: 'var(--primary)', fontWeight: '600', fontSize: '14px' }}>Design Patent / Hardware</div>
-                </div>
-             </div>
+        <div style={{ position: 'relative' }}>
+          {/* Navigation Buttons */}
+          <div 
+            onClick={() => scroll('left')}
+            style={{ 
+              position: 'absolute', 
+              left: '-20px', 
+              top: '50%', 
+              transform: 'translateY(-50%)',
+              width: '50px', 
+              height: '50px', 
+              borderRadius: '50%', 
+              backgroundColor: 'var(--primary)', 
+              color: 'var(--white)', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              zIndex: 20, 
+              boxShadow: '0 10px 20px rgba(255,119,51,0.3)', 
+              cursor: 'pointer',
+              border: 'none'
+            }}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </div>
 
-          {/* Card 2 */}
-          <div style={{ flex: '0 0 48%', position: 'relative' }} className="hover-target">
-             <div style={{ borderRadius: '24px', overflow: 'hidden', backgroundColor: '#F8F9FA' }}>
-                 <img src={portfolio[1].img} alt="Portfolio 2" style={{ width: '100%', height: '400px', objectFit: 'cover' }} />
-                 
-                 {/* Overlay Text inside Image */}
-                <div style={{ 
-                  position: 'absolute', 
-                  bottom: '40px', 
-                  left: '40px', 
-                  right: '40px',
-                  backgroundColor: 'rgba(255,255,255,0.7)',
-                  backdropFilter: 'blur(20px)',
-                  WebkitBackdropFilter: 'blur(20px)',
-                  padding: '24px',
-                  borderRadius: '16px',
-                  border: '1px solid rgba(255,255,255,0.8)'
-                 }}>
-                   <h3 style={{ fontSize: '32px', color: '#1B1B3A', marginBottom: '8px' }}>Global Temperature</h3>
-                   <div style={{ color: 'var(--primary)', fontWeight: '600', fontSize: '14px' }}>Software Copyright / ML</div>
-                </div>
-             </div>
+          <div 
+            onClick={() => scroll('right')}
+            style={{ 
+              position: 'absolute', 
+              right: '-20px', 
+              top: '50%', 
+              transform: 'translateY(-50%)',
+              width: '50px', 
+              height: '50px', 
+              borderRadius: '50%', 
+              backgroundColor: 'var(--primary)', 
+              color: 'var(--white)', 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              zIndex: 20, 
+              boxShadow: '0 10px 20px rgba(255,119,51,0.3)', 
+              cursor: 'pointer',
+              border: 'none'
+            }}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
 
-              {/* Right Arrow inside card */}
-             <div style={{ position: 'absolute', right: '-25px', top: '40%', width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'var(--white)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 10, boxShadow: '0 10px 20px rgba(255,119,51,0.3)', cursor: 'pointer' }}>
-               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-             </div>
+          <div 
+            ref={scrollRef}
+            style={{ 
+              display: 'flex', 
+              gap: '30px', 
+              overflowX: 'auto', 
+              paddingBottom: '40px',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
+          >
+            {/* Hiding Scrollbar */}
+            <style>{`.container div::-webkit-scrollbar { display: none; }`}</style>
+            
+            {portfolio.map((item, idx) => (
+              <div key={idx} style={{ flex: '0 0 48%', position: 'relative', minWidth: '350px' }}>
+                 <div style={{ borderRadius: '24px', overflow: 'hidden', backgroundColor: '#F8F9FA' }}>
+                    <img src={item.img} alt={item.title} style={{ width: '100%', height: '400px', objectFit: 'cover' }} />
+                    
+                    {/* Overlay Text inside Image */}
+                    <div style={{ 
+                      position: 'absolute', 
+                      bottom: '40px', 
+                      left: '40px', 
+                      right: '40px',
+                      backgroundColor: 'rgba(255,255,255,0.7)',
+                      backdropFilter: 'blur(20px)',
+                      WebkitBackdropFilter: 'blur(20px)',
+                      padding: '24px',
+                      borderRadius: '16px',
+                      border: '1px solid rgba(255,255,255,0.8)'
+                     }}>
+                       <h3 style={{ fontSize: '32px', color: '#1B1B3A', marginBottom: '8px' }}>{item.title.split(' ').slice(0,2).join(' ')}</h3>
+                       <div style={{ color: 'var(--primary)', fontWeight: '600', fontSize: '14px' }}>{item.category}</div>
+                    </div>
+                 </div>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Carousel Pagination */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '60px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', margin: '40px 0 60px' }}>
           <div style={{ width: '24px', height: '8px', borderRadius: '4px', backgroundColor: 'var(--primary)' }}></div>
           <div style={{ width: '8px', height: '8px', borderRadius: '4px', backgroundColor: '#E5E5E5' }}></div>
           <div style={{ width: '8px', height: '8px', borderRadius: '4px', backgroundColor: '#E5E5E5' }}></div>
@@ -113,7 +156,7 @@ export default function Projects() {
                fontWeight: '500',
                cursor: 'pointer',
                boxShadow: '0 4px 10px rgba(0,0,0,0.02)'
-             }} className="hover-target">
+             }}>
                {tag}
              </div>
           ))}
@@ -123,7 +166,7 @@ export default function Projects() {
         <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto', paddingBottom: '80px' }}>
            <h3 style={{ fontSize: '32px', color: '#1B1B3A', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
               Sea Surface Temperature Predicting Device
-              <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'var(--white)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px' }}>↗</div>
+              <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'var(--white)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', cursor: 'pointer' }}>↗</div>
            </h3>
            <p style={{ color: 'var(--text-muted)', lineHeight: '1.6' }}>
              Designed and patented a sophisticated portable device for real-time monitoring and mapping of sea surface temperature and potential marine pollution anomalies, utilizing advanced neural architectures.
@@ -134,3 +177,4 @@ export default function Projects() {
     </section>
   );
 }
+

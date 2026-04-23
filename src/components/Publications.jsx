@@ -72,7 +72,7 @@ export default function Publications() {
                 </div>
               </div>
 
-              <button className="pill-btn-outline hover-target" style={{ padding: '8px 20px', fontSize: '14px' }}>
+              <button className="pill-btn-outline" style={{ padding: '8px 20px', fontSize: '14px' }}>
                 Read Paper
               </button>
 

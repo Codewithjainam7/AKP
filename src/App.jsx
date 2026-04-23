@@ -9,7 +9,7 @@ import Patents from './components/Patents';
 import SkillsMarquee from './components/SkillsMarquee';
 import Publications from './components/Publications';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
+
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -40,7 +40,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <CustomCursor />
+
       <Navbar />
       <main>
         <Hero />

@@ -83,8 +83,8 @@ const Hero = () => {
         {/* Main Content Area */}
         <div className="max-w-2xl mx-auto mt-16 relative">
           {/* Portrait Area */}
-          <div className="w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full bg-primary-600/5 border-4 border-primary-600/20 relative mb-16 flex items-center justify-center overflow-hidden">
-             <div className="absolute inset-0 bg-gradient-to-t from-primary-600/20 to-transparent z-10"></div>
+          <div className="w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full border-4 border-slate-200 relative mb-16 flex items-center justify-center overflow-hidden">
+             
              <img src="/amit_sir_photo.png" alt="Amit Kumar Pandey" className="w-full h-full object-cover relative z-0" />
           </div>
 

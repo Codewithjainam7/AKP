@@ -10,7 +10,7 @@ export default function Collaboration() {
           <h2 style={{ fontSize: '56px', letterSpacing: '-1px' }}>
             Lets Connect there
           </h2>
-          <a href="mailto:amitpandey8089@gmail.com" className="pill-btn hover-target" style={{ backgroundColor: 'var(--bg-card)', color: 'var(--primary)', padding: '16px 40px', fontSize: '18px', border: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <a href="mailto:amitpandey8089@gmail.com" className="pill-btn" style={{ backgroundColor: 'var(--bg-card)', color: 'var(--primary)', padding: '16px 40px', fontSize: '18px', border: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
             Hire me ↗
           </a>
         </div>
