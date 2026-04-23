@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark-900 text-white pt-24 pb-12 mt-24 rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden border-t border-white/5 shadow-2xl">
+    <footer id="contact" className="bg-dark-900 text-white pt-24 pb-12 mt-24 rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden border-t border-white/5 shadow-2xl">
       {/* Orange Bottom Line Glow */}
       <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-primary-700 via-primary-500 to-primary-700 shadow-[0_0_20px_rgba(234,88,12,0.8)]"></div>
 
@@ -63,11 +63,12 @@ const Footer = () => {
             <div>
               <h4 className="text-primary-600 font-bold mb-8 transition-colors">Navigation</h4>
               <ul className="space-y-5 text-sm font-medium text-slate-100">
-                <li><a href="#" className="hover:text-primary-600 transition-colors">Home</a></li>
-                <li><a href="#" className="hover:text-primary-600 transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-primary-600 transition-colors">Service</a></li>
-                <li><a href="#" className="hover:text-primary-600 transition-colors">Resume</a></li>
-                <li><a href="#" className="hover:text-primary-600 transition-colors">Project</a></li>
+                <li><a href="#hero" className="hover:text-primary-600 transition-colors">Home</a></li>
+                <li><a href="#about" className="hover:text-primary-600 transition-colors">About Us</a></li>
+                <li><a href="#research" className="hover:text-primary-600 transition-colors">Research</a></li>
+                <li><a href="#experience" className="hover:text-primary-600 transition-colors">Career</a></li>
+                <li><a href="#patents" className="hover:text-primary-600 transition-colors">Patents</a></li>
+                <li><a href="#project" className="hover:text-primary-600 transition-colors">Projects</a></li>
               </ul>
             </div>
 

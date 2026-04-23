@@ -62,7 +62,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="hero min-h-screen flex flex-col justify-center items-center py-32 px-6 relative overflow-hidden bg-white text-dark-900">
+    <section id="hero" ref={heroRef} className="hero min-h-screen flex flex-col justify-center items-center py-32 px-6 relative overflow-hidden bg-white text-dark-900">
       <div className="container mx-auto relative z-10 text-center">
         
         {/* Badge */}
