@@ -8,7 +8,7 @@ export default function Experience() {
   ];
 
   return (
-    <section id="resume" className="section-padding" style={{ backgroundColor: '#FFFFFF', position: 'relative', zIndex: 11 }}>
+    <section id="experience" className="section-padding" style={{ backgroundColor: '#FFFFFF', position: 'relative', zIndex: 11 }}>
       <div className="container" style={{ maxWidth: '900px' }}>
         
         <h2 style={{ fontSize: '48px', color: '#1B1B3A', textAlign: 'center', marginBottom: '80px', letterSpacing: '-1px' }}>

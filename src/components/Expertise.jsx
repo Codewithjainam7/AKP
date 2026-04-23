@@ -34,7 +34,7 @@ export default function Services() {
   }, []);
 
   return (
-    <section id="service" ref={containerRef} style={{
+    <section id="about" ref={containerRef} style={{
       position: 'relative',
       padding: '100px 0',
       backgroundColor: '#121212', // Dark background replacing black wave

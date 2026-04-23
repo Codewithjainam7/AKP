@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-dark-900 text-white pt-24 pb-12 mt-24 rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden border-t border-white/5 shadow-2xl">
+    <footer id="contact" className="bg-dark-900 text-white pt-24 pb-12 mt-24 rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden border-t border-white/5 shadow-2xl">
       {/* Orange Bottom Line Glow */}
       <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-primary-700 via-primary-500 to-primary-700 shadow-[0_0_20px_rgba(234,88,12,0.8)]"></div>
 

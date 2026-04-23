@@ -134,7 +134,7 @@ export default function Publications() {
   };
 
   return (
-    <section id="publications" className="section-padding" style={{ backgroundColor: '#0a0a0a', color: '#fff' }}>
+    <section id="research" className="section-padding" style={{ backgroundColor: '#0a0a0a', color: '#fff' }}>
       <div className="container">
         
         <motion.div 
