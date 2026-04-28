@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import GSAPTextReveal from './GSAPTextReveal';
 
 export default function WhyWorkWithMe() {
   return (
@@ -103,9 +104,9 @@ export default function WhyWorkWithMe() {
           viewport={{ once: true, margin: "-100px" }}
           style={{ flex: 1, paddingLeft: '40px' }}
         >
-          <h2 style={{ fontSize: '56px', color: '#1B1B3A', marginBottom: '24px', letterSpacing: '-1px' }}>
-            Why <span style={{ color: 'var(--primary)' }}>Hire me?</span>
-          </h2>
+          <div style={{ fontSize: '56px', color: '#1B1B3A', marginBottom: '24px', letterSpacing: '-1px', fontWeight: 'bold' }}>
+            <GSAPTextReveal text="Why Hire me?" />
+          </div>
           
           <p style={{ color: 'var(--text-muted)', fontSize: '16px', lineHeight: '1.6', maxWidth: '400px', marginBottom: '40px' }}>
             To secure a challenging and growth-oriented position in a dynamic organization where I can apply my knowledge of Artificial Intelligence, data science, and soft computing to real-world problem solving.

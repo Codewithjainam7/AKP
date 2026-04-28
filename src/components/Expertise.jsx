@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import GSAPTextReveal from './GSAPTextReveal';
 
 const ServiceCard = ({ service, idx }) => {
   const ref = useRef(null);
@@ -113,7 +114,7 @@ export default function Services() {
       <div className="container" style={{ padding: '0 5%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '60px' }}>
           <h2 style={{ fontSize: '48px', color: 'var(--white)', letterSpacing: '-1px' }}>
-            My <span style={{ color: 'var(--primary)' }}>Services</span>
+            <GSAPTextReveal text="My Services" />
           </h2>
           <p style={{ maxWidth: '400px', fontSize: '14px', color: '#AAAAAA', textAlign: 'right' }}>
             I aim to leverage my technical skills, research experience and passion for emerging technologies to develop impactful and sustainable AI solutions.

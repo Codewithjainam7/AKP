@@ -1,5 +1,6 @@
 import React from 'react';
 import TiltCard from './TiltCard';
+import GSAPTextReveal from './GSAPTextReveal';
 
 export default function Experience() {
   const experiences = [
@@ -13,7 +14,7 @@ export default function Experience() {
       <div className="container" style={{ maxWidth: '900px' }}>
         
         <h2 style={{ fontSize: '48px', color: '#1B1B3A', textAlign: 'center', marginBottom: '80px', letterSpacing: '-1px' }}>
-          My <span style={{ color: 'var(--primary)' }}>Work Experience</span>
+          <GSAPTextReveal text="My Work Experience" />
         </h2>
 
         <div style={{ position: 'relative' }}>

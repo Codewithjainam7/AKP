@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import GSAPTextReveal from './GSAPTextReveal';
 
 export default function Projects() {
   const scrollRef = useRef(null);
@@ -36,14 +37,9 @@ export default function Projects() {
       <div className="container">
         
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '80px' }}>
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{ fontSize: '56px', color: '#1B1B3A', letterSpacing: '-1px', lineHeight: '1.1', maxWidth: '500px' }}
-          >
-            Lets have a look at <span style={{ color: 'var(--primary)' }}>my Research</span>
-          </motion.h2>
+          <div style={{ fontSize: '56px', color: '#1B1B3A', letterSpacing: '-1px', lineHeight: '1.1', maxWidth: '500px', fontWeight: 'bold' }}>
+            <GSAPTextReveal text="Lets have a look at my Research" />
+          </div>
           
           <button style={{ backgroundColor: 'var(--primary)', color: 'var(--white)', borderRadius: '999px', padding: '12px 32px', fontWeight: '600', border: 'none', cursor: 'pointer' }}>
             See All
