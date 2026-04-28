@@ -10,6 +10,7 @@ import SkillsMarquee from './components/SkillsMarquee';
 import Publications from './components/Publications';
 import Footer from './components/Footer';
 
+
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -40,6 +41,7 @@ function App() {
 
   return (
     <div className="app-container">
+
 
       <Navbar />
       <main>
