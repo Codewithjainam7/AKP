@@ -7,7 +7,13 @@ export default function WhyWorkWithMe() {
       <div className="container" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
         
         {/* Left Side Avatar */}
-        <div style={{ flex: '0 0 45%', position: 'relative', height: '550px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-100px" }}
+          style={{ flex: '0 0 45%', position: 'relative', height: '550px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
           
           {/* Vertical Name Along Left Edge */}
           <div style={{
@@ -87,10 +93,16 @@ export default function WhyWorkWithMe() {
             <span style={{ fontSize: '10px', fontWeight: '700', letterSpacing: '3px', color: '#999', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>Researcher · Innovator</span>
             <div style={{ flex: 1, height: '1px', backgroundColor: '#D0CCC5' }}></div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Side Content */}
-        <div style={{ flex: 1, paddingLeft: '40px' }}>
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          viewport={{ once: true, margin: "-100px" }}
+          style={{ flex: 1, paddingLeft: '40px' }}
+        >
           <h2 style={{ fontSize: '56px', color: '#1B1B3A', marginBottom: '24px', letterSpacing: '-1px' }}>
             Why <span style={{ color: 'var(--primary)' }}>Hire me?</span>
           </h2>
@@ -113,7 +125,7 @@ export default function WhyWorkWithMe() {
           <a href="#contact" className="pill-btn" style={{ backgroundColor: '#1B1B1B', color: 'var(--white)', padding: '16px 40px', fontSize: '18px', border: 'none' }}>
             Hire me
           </a>
-        </div>
+        </motion.div>
 
       </div>
     </section>
