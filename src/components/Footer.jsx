@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Magnetic from './Magnetic';
 import { motion } from 'framer-motion';
 
@@ -79,12 +80,12 @@ const Footer = () => {
             <div>
               <h4 className="text-primary-600 font-bold mb-8 transition-colors">Navigation</h4>
               <ul className="space-y-5 text-sm font-medium text-slate-100">
-                <li><a href="#hero" className="hover:text-primary-600 transition-colors">Home</a></li>
-                <li><a href="#about" className="hover:text-primary-600 transition-colors">About Us</a></li>
-                <li><a href="#research" className="hover:text-primary-600 transition-colors">Research</a></li>
-                <li><a href="#experience" className="hover:text-primary-600 transition-colors">Career</a></li>
-                <li><a href="#patents" className="hover:text-primary-600 transition-colors">Patents</a></li>
-                <li><a href="#project" className="hover:text-primary-600 transition-colors">Projects</a></li>
+                <li><Link to="/" className="hover:text-primary-600 transition-colors">Home</Link></li>
+                <li><Link to="/#about" className="hover:text-primary-600 transition-colors">About Us</Link></li>
+                <li><Link to="/research" className="hover:text-primary-600 transition-colors">Research</Link></li>
+                <li><Link to="/#experience" className="hover:text-primary-600 transition-colors">Career</Link></li>
+                <li><Link to="/research#patents" className="hover:text-primary-600 transition-colors">Patents</Link></li>
+                <li><Link to="/research" className="hover:text-primary-600 transition-colors">Projects</Link></li>
               </ul>
             </div>
 

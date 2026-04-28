@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import Magnetic from './Magnetic';
 
@@ -44,18 +45,18 @@ const Navbar = () => {
         >
           {/* Left Links */}
           <ul className="hidden md:flex items-center space-x-8 w-1/3 justify-start">
-            <li><Magnetic><a href="#hero" className="text-white hover:text-primary-600 transition-colors inline-block">Home</a></Magnetic></li>
-            <li><Magnetic><a href="#about" className="text-white hover:text-primary-600 transition-colors inline-block">About</a></Magnetic></li>
-            <li><Magnetic><a href="#research" className="text-white hover:text-primary-600 transition-colors inline-block">Research</a></Magnetic></li>
+            <li><Magnetic><Link to="/" className="text-white hover:text-primary-600 transition-colors inline-block">Home</Link></Magnetic></li>
+            <li><Magnetic><Link to="/#about" className="text-white hover:text-primary-600 transition-colors inline-block">About</Link></Magnetic></li>
+            <li><Magnetic><Link to="/research" className="text-white hover:text-primary-600 transition-colors inline-block">Research</Link></Magnetic></li>
           </ul>
           
           {/* Logo (Center) */}
           <div className="w-1/3 flex justify-center">
             <Magnetic>
-              <a href="#" className="flex items-center space-x-1 group whitespace-nowrap inline-block">
+              <Link to="/" className="flex items-center space-x-1 group whitespace-nowrap inline-block">
                 <span className="text-white font-black text-2xl tracking-tighter transition-all group-hover:text-primary-600">AMIT</span>
                 <span className="text-primary-600 font-black text-2xl tracking-tighter">.</span>
-              </a>
+              </Link>
             </Magnetic>
           </div>
           
@@ -63,9 +64,9 @@ const Navbar = () => {
           <div className="w-1/3 flex justify-end">
             {/* Desktop Right Links */}
             <ul className="hidden md:flex items-center space-x-8">
-              <li><Magnetic><a href="#patents" className="text-white hover:text-primary-600 transition-colors inline-block">Patents</a></Magnetic></li>
-              <li><Magnetic><a href="#experience" className="text-white hover:text-primary-600 transition-colors inline-block">Career</a></Magnetic></li>
-              <li><Magnetic><a href="#contact" className="text-white hover:text-primary-600 transition-colors inline-block">Contact</a></Magnetic></li>
+              <li><Magnetic><Link to="/research#patents" className="text-white hover:text-primary-600 transition-colors inline-block">Patents</Link></Magnetic></li>
+              <li><Magnetic><Link to="/#experience" className="text-white hover:text-primary-600 transition-colors inline-block">Career</Link></Magnetic></li>
+              <li><Magnetic><Link to="/#contact" className="text-white hover:text-primary-600 transition-colors inline-block">Contact</Link></Magnetic></li>
             </ul>
             
             {/* Mobile Toggle */}
@@ -101,22 +102,22 @@ const Navbar = () => {
 
         <ul className="space-y-6 flex-1 flex flex-col justify-center">
           {[
-            { name: 'Home', href: '#hero' },
-            { name: 'About', href: '#about' },
-            { name: 'Research', href: '#research' },
-            { name: 'Patents', href: '#patents' },
-            { name: 'Career', href: '#experience' },
-            { name: 'Contact', href: '#contact' },
+            { name: 'Home', href: '/' },
+            { name: 'About', href: '/#about' },
+            { name: 'Research', href: '/research' },
+            { name: 'Patents', href: '/research#patents' },
+            { name: 'Career', href: '/#experience' },
+            { name: 'Contact', href: '/#contact' },
           ].map((item) => (
             <li key={item.name}>
-              <a 
-                href={item.href} 
+              <Link 
+                to={item.href} 
                 className="text-4xl text-slate-400 font-black uppercase tracking-widest hover:text-white flex items-center justify-between group transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 <span>{item.name}</span> 
                 <ArrowRight className="w-8 h-8 opacity-0 group-hover:opacity-100 transition-all" />
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

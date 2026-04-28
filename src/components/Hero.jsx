@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, ChevronDown, Star } from 'lucide-react';
@@ -283,15 +284,15 @@ const Hero = () => {
               
               {/* Revamped Premium Button (Glitch-free) */}
               <div className="hero-cta">
-                <a href="#research" className="group flex items-center gap-4 px-8 py-4 bg-[#1B1B3A] hover:bg-[#ea580c] text-white rounded-full shadow-[0_8px_20px_rgba(27,27,58,0.15)] hover:shadow-[0_15px_30px_rgba(234,88,12,0.3)] transition-all duration-300 transform hover:-translate-y-1">
+                <Link to="/research" className="group flex items-center gap-4 px-8 py-4 bg-[#1B1B3A] hover:bg-[#ea580c] text-white rounded-full shadow-[0_8px_20px_rgba(27,27,58,0.15)] hover:shadow-[0_15px_30px_rgba(234,88,12,0.3)] transition-all duration-300 transform hover:-translate-y-1">
                   <span className="font-bold text-[13px] sm:text-sm tracking-[0.2em] uppercase">
-                    View Resume 
+                    View Research 
                   </span>
                   
                   <div className="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center group-hover:bg-white transition-all duration-300 group-hover:rotate-45 group-hover:scale-110">
                     <ArrowUpRight className="w-4 h-4 text-white group-hover:text-[#ea580c] transition-colors duration-300" />
                   </div>
-                </a>
+                </Link>
               </div>
 
               {/* Clean Inline Stats */}

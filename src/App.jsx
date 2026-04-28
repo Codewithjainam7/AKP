@@ -1,14 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Expertise from './components/Expertise';
-import Experience from './components/Experience';
-import WhyWorkWithMe from './components/WhyWorkWithMe';
-import Projects from './components/Projects';
-import Patents from './components/Patents';
-import SkillsMarquee from './components/SkillsMarquee';
-import Publications from './components/Publications';
 import Footer from './components/Footer';
+
+import Home from './pages/Home';
+import Research from './pages/Research';
 
 
 import gsap from 'gsap';
@@ -58,7 +56,6 @@ function App() {
         }
       );
     });
-
     return () => {
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
@@ -66,19 +63,30 @@ function App() {
   }, []);
 
   return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  return (
     <div className="app-container">
-
-
       <Navbar />
       <main>
-        <Hero />
-        <Expertise />
-        <Experience />
-        <WhyWorkWithMe />
-        <Projects />
-        <Patents />
-        <SkillsMarquee />
-        <Publications />
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/research" element={<Research />} />
+          </Routes>
+        </AnimatePresence>
       </main>
       <Footer />
     </div>
