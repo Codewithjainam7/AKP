@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, ExternalLink, GraduationCap } from 'lucide-react';
+import TiltCard from './TiltCard';
 
 const PUBLICATIONS = [
   {
@@ -113,7 +114,7 @@ export default function Publications() {
           }}
         >
           {PUBLICATIONS.map((pub, idx) => (
-            <motion.div 
+            <TiltCard 
               key={idx} 
               variants={itemVariants}
               className="pub-card-modern hover-target"
@@ -197,7 +198,7 @@ export default function Publications() {
               </a>
 
               <div className="card-shine" />
-            </motion.div>
+            </TiltCard>
           ))}
         </motion.div>
 

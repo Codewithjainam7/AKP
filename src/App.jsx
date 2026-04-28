@@ -1,24 +1,43 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Expertise from './components/Expertise';
-import Experience from './components/Experience';
-import WhyWorkWithMe from './components/WhyWorkWithMe';
-import Projects from './components/Projects';
-import Patents from './components/Patents';
-import SkillsMarquee from './components/SkillsMarquee';
-import Publications from './components/Publications';
 import Footer from './components/Footer';
+
+import Home from './pages/Home';
+import Research from './pages/Research';
 
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
-    // Smoother scroll setup or global animations can go here
+    // Initialize Lenis
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    // Sync GSAP ScrollTrigger with Lenis
+    lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
     
     // Global Scroll Reveal
     const elements = document.querySelectorAll('.reveal');
@@ -37,22 +56,37 @@ function App() {
         }
       );
     });
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(lenis.raf);
+    };
   }, []);
 
   return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  return (
     <div className="app-container">
-
-
       <Navbar />
       <main>
-        <Hero />
-        <Expertise />
-        <Experience />
-        <WhyWorkWithMe />
-        <Projects />
-        <Patents />
-        <SkillsMarquee />
-        <Publications />
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/research" element={<Research />} />
+          </Routes>
+        </AnimatePresence>
       </main>
       <Footer />
     </div>

@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Magnetic from './Magnetic';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   return (
@@ -8,14 +11,22 @@ const Footer = () => {
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         {/* Top Header */}
-        <div className="mb-20 flex flex-col md:flex-row md:items-center justify-between gap-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-20 flex flex-col md:flex-row md:items-center justify-between gap-8"
+        >
           <h2 className="text-5xl md:text-7xl lg:text-[5.5rem] font-bold tracking-tighter text-white">
             Lets Connect there
           </h2>
-          <a href="#" className="inline-flex items-center justify-center bg-white text-primary-600 font-bold px-8 py-4 rounded-full hover:bg-slate-100 transition duration-300">
-            Hire me ↗
-          </a>
-        </div>
+          <Magnetic>
+            <a href="#" className="inline-flex items-center justify-center bg-white text-primary-600 font-bold px-8 py-4 rounded-full hover:bg-slate-100 transition duration-300">
+              Hire me ↗
+            </a>
+          </Magnetic>
+        </motion.div>
 
         {/* Main Grid Content */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-24 border-t border-white/10 pt-16">
@@ -41,16 +52,22 @@ const Footer = () => {
 
             {/* Icons */}
             <div className="flex items-center space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center text-sm font-medium text-slate-300 hover:text-white">
-                in
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center text-sm font-medium text-slate-300 hover:text-white">
-                tw
-              </a>
+              <Magnetic>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center text-sm font-medium text-slate-300 hover:text-white">
+                  in
+                </a>
+              </Magnetic>
+              <Magnetic>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center text-sm font-medium text-slate-300 hover:text-white">
+                  tw
+                </a>
+              </Magnetic>
               <div className="flex items-end space-x-8">
-                 <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center text-sm font-medium text-slate-300 hover:text-white">
-                   ig
-                 </a>
+                 <Magnetic>
+                   <a href="#" className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center text-sm font-medium text-slate-300 hover:text-white">
+                     ig
+                   </a>
+                 </Magnetic>
                  <div className="w-3 h-3 rounded-full bg-primary-600 mb-1"></div>
               </div>
             </div>
@@ -63,12 +80,12 @@ const Footer = () => {
             <div>
               <h4 className="text-primary-600 font-bold mb-8 transition-colors">Navigation</h4>
               <ul className="space-y-5 text-sm font-medium text-slate-100">
-                <li><a href="#hero" className="hover:text-primary-600 transition-colors">Home</a></li>
-                <li><a href="#about" className="hover:text-primary-600 transition-colors">About Us</a></li>
-                <li><a href="#research" className="hover:text-primary-600 transition-colors">Research</a></li>
-                <li><a href="#experience" className="hover:text-primary-600 transition-colors">Career</a></li>
-                <li><a href="#patents" className="hover:text-primary-600 transition-colors">Patents</a></li>
-                <li><a href="#project" className="hover:text-primary-600 transition-colors">Projects</a></li>
+                <li><Link to="/" className="hover:text-primary-600 transition-colors">Home</Link></li>
+                <li><Link to="/#about" className="hover:text-primary-600 transition-colors">About Us</Link></li>
+                <li><Link to="/research" className="hover:text-primary-600 transition-colors">Research</Link></li>
+                <li><Link to="/#experience" className="hover:text-primary-600 transition-colors">Career</Link></li>
+                <li><Link to="/research#patents" className="hover:text-primary-600 transition-colors">Patents</Link></li>
+                <li><Link to="/research" className="hover:text-primary-600 transition-colors">Projects</Link></li>
               </ul>
             </div>
 
