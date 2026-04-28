@@ -1,4 +1,5 @@
 import React from 'react';
+import TiltCard from './TiltCard';
 
 export default function Experience() {
   const experiences = [
@@ -39,13 +40,11 @@ export default function Experience() {
             }}>
               
               {/* Left Column (Company) */}
-              <div style={{ 
-                flex: 1, 
-                paddingRight: '60px', 
-                textAlign: 'right' 
-              }}>
-                <h3 style={{ fontSize: '24px', color: '#1B1B3A', marginBottom: '8px' }}>{exp.company}</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '14px', fontWeight: '500' }}>{exp.date}</p>
+              <div style={{ flex: 1, paddingRight: '60px', textAlign: 'right' }}>
+                <TiltCard style={{ padding: '20px', background: '#F8F9FA', borderRadius: '16px', display: 'inline-block' }}>
+                  <h3 style={{ fontSize: '24px', color: '#1B1B3A', marginBottom: '8px' }}>{exp.company}</h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', fontWeight: '500' }}>{exp.date}</p>
+                </TiltCard>
               </div>
 
               {/* Center Dot (Filled Orange if active, outline otherwise) */}
@@ -73,13 +72,11 @@ export default function Experience() {
               </div>
 
               {/* Right Column (Role details) */}
-              <div style={{ 
-                flex: 1, 
-                paddingLeft: '60px',
-                textAlign: 'left'
-              }}>
-                <h3 style={{ fontSize: '24px', color: '#1B1B3A', marginBottom: '8px' }}>{exp.role}</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: '1.6', maxWidth: '300px' }}>{exp.desc}</p>
+              <div style={{ flex: 1, paddingLeft: '60px', textAlign: 'left' }}>
+                <TiltCard style={{ padding: '20px', background: '#F8F9FA', borderRadius: '16px', display: 'inline-block' }}>
+                  <h3 style={{ fontSize: '24px', color: '#1B1B3A', marginBottom: '8px' }}>{exp.role}</h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: '1.6', maxWidth: '300px' }}>{exp.desc}</p>
+                </TiltCard>
               </div>
 
             </div>

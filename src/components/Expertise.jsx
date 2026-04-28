@@ -1,5 +1,90 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+
+const ServiceCard = ({ service, idx }) => {
+  const ref = useRef(null);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
+  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
+
+  const handleMouseMove = (e) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: idx * 0.1 }}
+      viewport={{ once: true }}
+      style={{
+        backgroundColor: 'rgba(255,255,255,0.05)',
+        border: '1px solid rgba(255,255,255,0.1)',
+        borderRadius: '24px',
+        padding: '30px',
+        display: 'flex',
+        flexDirection: 'column',
+        backdropFilter: 'blur(10px)',
+        transformStyle: 'preserve-3d',
+        rotateX,
+        rotateY,
+      }}
+    >
+      <div style={{ transform: 'translateZ(50px)' }}>
+        <h3 style={{ fontSize: '24px', marginBottom: '24px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '16px' }}>{service.title}</h3>
+        
+        <div style={{ 
+          position: 'relative', 
+          borderRadius: '16px', 
+          overflow: 'hidden', 
+          height: '300px'
+        }}>
+          <img src={service.img} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
+
+        <button style={{
+          marginTop: '20px',
+          alignSelf: 'flex-end',
+          width: '48px',
+          height: '48px',
+          borderRadius: '50%',
+          backgroundColor: 'var(--bg-dark)',
+          border: '1px solid var(--primary)',
+          color: 'var(--primary)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '20px',
+          cursor: 'pointer',
+          transform: 'translateZ(20px)'
+        }}>↗</button>
+      </div>
+    </motion.div>
+  );
+};
 
 export default function Services() {
   const services = [
@@ -42,51 +127,7 @@ export default function Services() {
           gap: '30px' 
         }}>
           {services.map((service, idx) => (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              style={{
-                backgroundColor: 'rgba(255,255,255,0.05)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '24px',
-                padding: '30px',
-                display: 'flex',
-                flexDirection: 'column',
-                backdropFilter: 'blur(10px)',
-                transition: 'transform 0.3s'
-              }}
-              whileHover={{ y: -10 }}
-            >
-              <h3 style={{ fontSize: '24px', marginBottom: '24px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '16px' }}>{service.title}</h3>
-              
-              <div style={{ 
-                position: 'relative', 
-                borderRadius: '16px', 
-                overflow: 'hidden', 
-                height: '300px'
-              }}>
-                <img src={service.img} alt={service.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-
-               <button style={{
-                  marginTop: '20px',
-                  alignSelf: 'flex-end',
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--bg-dark)',
-                  border: '1px solid var(--primary)',
-                  color: 'var(--primary)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '20px',
-                  cursor: 'pointer'
-               }}>↗</button>
-            </motion.div>
+            <ServiceCard key={idx} service={service} idx={idx} />
           ))}
         </div>
       </div>

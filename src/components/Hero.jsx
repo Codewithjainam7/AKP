@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowUpRight, ChevronDown } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Star } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -186,6 +187,9 @@ const GenerativeAIBackground = () => {
 
 const Hero = () => {
   const heroRef = useRef(null);
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
+  const scaleImage = useTransform(scrollY, [0, 1000], [1, 1.1]);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -301,7 +305,6 @@ const Hero = () => {
                   <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Mentored</span>
                 </div>
               </div>
-              
             </div>
           </div>
 

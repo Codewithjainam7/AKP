@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Projects() {
   const scrollRef = useRef(null);
@@ -35,9 +36,14 @@ export default function Projects() {
       <div className="container">
         
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '80px' }}>
-          <h2 style={{ fontSize: '56px', color: '#1B1B3A', letterSpacing: '-1px', lineHeight: '1.1', maxWidth: '500px' }}>
+          <motion.h2 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ fontSize: '56px', color: '#1B1B3A', letterSpacing: '-1px', lineHeight: '1.1', maxWidth: '500px' }}
+          >
             Lets have a look at <span style={{ color: 'var(--primary)' }}>my Research</span>
-          </h2>
+          </motion.h2>
           
           <button style={{ backgroundColor: 'var(--primary)', color: 'var(--white)', borderRadius: '999px', padding: '12px 32px', fontWeight: '600', border: 'none', cursor: 'pointer' }}>
             See All
@@ -110,9 +116,22 @@ export default function Projects() {
             <style>{`.container div::-webkit-scrollbar { display: none; }`}</style>
             
             {portfolio.map((item, idx) => (
-              <div key={idx} style={{ flex: '0 0 48%', position: 'relative', minWidth: '350px' }}>
-                 <div style={{ borderRadius: '24px', overflow: 'hidden', backgroundColor: '#F8F9FA' }}>
-                    <img src={item.img} alt={item.title} style={{ width: '100%', height: '400px', objectFit: 'cover' }} />
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                style={{ flex: '0 0 48%', position: 'relative', minWidth: '350px' }}
+              >
+                 <div style={{ borderRadius: '24px', overflow: 'hidden', backgroundColor: '#F8F9FA', position: 'relative' }}>
+                    <motion.img 
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.4 }}
+                      src={item.img} 
+                      alt={item.title} 
+                      style={{ width: '100%', height: '400px', objectFit: 'cover' }} 
+                    />
                     
                     {/* Overlay Text inside Image */}
                     <div style={{ 
@@ -131,7 +150,7 @@ export default function Projects() {
                        <div style={{ color: 'var(--primary)', fontWeight: '600', fontSize: '14px' }}>{item.category}</div>
                     </div>
                  </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
