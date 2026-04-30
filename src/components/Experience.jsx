@@ -204,7 +204,6 @@ export default function Experience() {
       </div>
 
       <div className="relative bg-[#FAFAFA] py-24 overflow-hidden">
-        <LiquidBackground />
         <div className="container mx-auto px-6 max-w-4xl relative z-10">
           
           <h2 className="exp-heading text-4xl sm:text-5xl font-bold text-[#1B1B3A] text-center mb-16 md:mb-20 tracking-tight">

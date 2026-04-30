@@ -235,7 +235,6 @@ const Hero = () => {
       ref={heroRef} 
       className="hero relative w-full h-screen min-h-[650px] flex flex-col justify-center items-center overflow-hidden bg-[#FAFAFA] will-change-transform"
     >
-      <LiquidBackground />
 
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10 h-full flex flex-col justify-center items-center pt-32 lg:pt-0">
