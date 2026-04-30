@@ -15,7 +15,7 @@ export default function Services() {
       id="service" 
       className="relative z-10 bg-[#FAFAFA]"
     >
-      <div className="relative py-24 bg-[#0F0F11] rounded-t-[48px] md:rounded-t-[64px] border-t border-white/10 shadow-[0_-20px_40px_rgba(0,0,0,0.2)]">
+      <div className="relative py-24 bg-[#0F0F11] rounded-t-[48px] md:rounded-t-[64px] border-t border-white/10">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">

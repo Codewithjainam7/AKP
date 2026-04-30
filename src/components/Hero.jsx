@@ -232,7 +232,7 @@ const Hero = () => {
     <section 
       id="hero" 
       ref={heroRef} 
-      className="hero relative w-full h-[100dvh] min-h-[650px] flex flex-col justify-center items-center overflow-hidden bg-[#FAFAFA]"
+      className="hero relative w-full h-screen min-h-[650px] flex flex-col justify-center items-center overflow-hidden bg-[#FAFAFA] will-change-transform"
     >
 
 
@@ -240,12 +240,12 @@ const Hero = () => {
         
         <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
           
-          <div className="w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 z-20 pointer-events-auto">
+          <div className="w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 z-20 pointer-events-auto will-change-transform">
             
-            <h1 className="text-4xl sm:text-6xl lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.1] tracking-tight text-[#1B1B3A]">
-              <div className="overflow-hidden pb-1"><div className="hero-title">I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-orange-400">Amit,</span></div></div>
+            <h1 className="text-4xl sm:text-6xl lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.1] tracking-tight text-[#1B1B3A] will-change-transform">
+              <div className="overflow-hidden pb-1"><div className="hero-title will-change-transform">I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-orange-400">Amit,</span></div></div>
               <div className="overflow-hidden pb-4">
-                <div className="hero-title">
+                <div className="hero-title will-change-transform">
                   Academic{' '}
                   <span className="relative inline-block">
                     Innovator
@@ -257,7 +257,7 @@ const Hero = () => {
               </div>
             </h1>
             
-            <p className="hero-subtitle mt-4 sm:mt-8 text-base sm:text-xl text-slate-500 max-w-xl font-medium leading-relaxed">
+            <p className="hero-subtitle mt-4 sm:mt-8 text-base sm:text-xl text-slate-500 max-w-xl font-medium leading-relaxed will-change-transform">
               Bridging the gap between cutting-edge <strong className="text-[#1B1B3A]">Machine Learning</strong> research and scalable practical solutions.
             </p>
 
