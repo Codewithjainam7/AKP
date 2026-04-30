@@ -74,7 +74,7 @@ export default function WhyWorkWithMe() {
             </div>
           </div>
 
-          <a href="#contact" className="inline-flex items-center justify-center bg-[#1B1B3A] hover:bg-primary-600 text-white font-bold px-10 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
+          <a href="https://wa.me/918369831270" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-[#1B1B3A] hover:bg-primary-600 text-white font-bold px-10 py-4 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
             Hire me
           </a>
         </motion.div>

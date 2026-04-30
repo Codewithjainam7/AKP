@@ -22,7 +22,7 @@ const Footer = () => {
             Lets Connect there
           </h2>
           <Magnetic>
-            <a href="#" className="inline-flex items-center justify-center bg-white text-primary-600 font-bold px-8 py-4 rounded-full hover:bg-slate-100 transition duration-300">
+            <a href="https://wa.me/918369831270" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center bg-white text-primary-600 font-bold px-8 py-4 rounded-full hover:bg-slate-100 transition duration-300">
               Hire me ↗
             </a>
           </Magnetic>
