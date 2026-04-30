@@ -79,24 +79,24 @@ export default function Publications() {
   };
 
   return (
-    <section id="research" className="section-padding" style={{ backgroundColor: '#0a0a0a', color: '#fff' }}>
-      <div className="container">
+    <section id="research" className="py-24 bg-[#0a0a0a] text-white overflow-hidden">
+      <div className="container mx-auto px-6 lg:px-12">
         
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          style={{ textAlign: 'center', marginBottom: '80px' }}
+          className="text-center mb-16 md:mb-20"
         >
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', color: 'var(--primary)', marginBottom: '16px', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '14px' }}>
-            <GraduationCap size={20} />
+          <div className="inline-flex items-center gap-2.5 text-primary-600 mb-4 font-bold uppercase tracking-[0.2em] text-xs sm:text-sm">
+            <GraduationCap size={18} />
             Research Work
           </div>
-          <h2 style={{ fontSize: 'clamp(32px, 5vw, 48px)', color: '#fff', marginBottom: '20px' }}>
-            International <span style={{ color: 'var(--primary)' }}>Publications</span>
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            International <span className="text-primary-600">Publications</span>
           </h2>
-          <p style={{ color: '#a1a1aa', fontSize: '18px', maxWidth: '700px', margin: '0 auto' }}>
+          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             Exploring the frontiers of Machine Learning and Image Processing through peer-reviewed research and practical applications.
           </p>
         </motion.div>
@@ -106,143 +106,56 @@ export default function Publications() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="publications-grid"
-          style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', 
-            gap: '30px' 
-          }}
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8"
         >
           {PUBLICATIONS.map((pub, idx) => (
             <TiltCard 
               key={idx} 
               variants={itemVariants}
-              className="pub-card-modern hover-target"
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: '24px',
-                padding: '32px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                position: 'relative',
-                overflow: 'hidden'
-              }}
+              className="group relative bg-white/5 border border-white/10 rounded-[32px] p-8 flex flex-col h-full transition-all duration-500 hover:border-primary-600/50 hover:bg-white/[0.07] hover:shadow-2xl hover:shadow-primary-600/10 overflow-hidden"
             >
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
-                  <div style={{
-                    width: '48px',
-                    height: '48px',
-                    borderRadius: '12px',
-                    backgroundColor: 'rgba(255, 119, 51, 0.1)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--primary)'
-                  }}>
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="w-12 h-12 rounded-2xl bg-primary-600/10 flex items-center justify-center text-primary-600 group-hover:bg-primary-600 group-hover:text-white transition-all duration-300">
                     <BookOpen size={24} />
                   </div>
-                  <span style={{ fontSize: '12px', color: '#71717a', fontWeight: '600', backgroundColor: 'rgba(255,255,255,0.05)', padding: '4px 12px', borderRadius: '100px' }}>
+                  <span className="text-[10px] sm:text-xs text-slate-400 font-bold bg-white/5 px-3 py-1.5 rounded-full border border-white/5">
                     {pub.date}
                   </span>
                 </div>
 
-                <h3 style={{ 
-                  fontSize: '20px', 
-                  marginBottom: '12px', 
-                  color: '#fff', 
-                  lineHeight: '1.4',
-                  fontWeight: '700'
-                }}>
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 leading-tight group-hover:text-primary-600 transition-colors">
                   {pub.title}
                 </h3>
                 
-                <p style={{ color: 'var(--primary)', fontSize: '14px', fontWeight: '600', marginBottom: '16px', opacity: 0.9 }}>
+                <p className="text-primary-600 text-xs sm:text-sm font-bold mb-4 opacity-80 uppercase tracking-wider">
                   {pub.journal}
                 </p>
 
-                <p style={{ 
-                  color: '#a1a1aa', 
-                  fontSize: '14px', 
-                  lineHeight: '1.6',
-                  marginBottom: '24px',
-                  display: '-webkit-box',
-                  WebkitLineClamp: '3',
-                  WebkitBoxOrient: 'vertical',
-                  overflow: 'hidden'
-                }}>
+                <p className="text-slate-400 text-sm leading-relaxed mb-8 line-clamp-4 group-hover:text-slate-300 transition-colors">
                   {pub.description}
                 </p>
+
+                <div className="mt-auto">
+                  <a 
+                    href={pub.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary-600/30 text-white text-sm font-bold hover:bg-primary-600 hover:border-primary-600 transition-all duration-300 group/link"
+                  >
+                    Read More
+                    <ExternalLink size={16} className="group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" />
+                  </a>
+                </div>
               </div>
 
-              <a 
-                href={pub.link} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="pub-link pill-btn-outline" 
-                style={{ 
-                  padding: '10px 24px', 
-                  fontSize: '14px',
-                  width: 'fit-content',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  border: '1px solid rgba(255, 119, 51, 0.3)',
-                  color: '#fff'
-                }}
-              >
-                Show publication <ExternalLink size={16} />
-              </a>
-
-              <div className="card-shine" />
+              {/* Decorative Gradient Overlay */}
+              <div className="absolute -right-20 -top-20 w-40 h-40 bg-primary-600/10 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
             </TiltCard>
           ))}
         </motion.div>
 
       </div>
-
-      <style dangerouslySetInnerHTML={{__html: `
-        .pub-card-modern:hover {
-          transform: translateY(-8px);
-          border-color: var(--primary) !important;
-          background-color: rgba(255, 119, 51, 0.05) !important;
-          box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .pub-card-modern::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: radial-gradient(circle at top right, rgba(255, 119, 51, 0.1), transparent 40%);
-          opacity: 0;
-          transition: opacity 0.4s ease;
-        }
-
-        .pub-card-modern:hover::before {
-          opacity: 1;
-        }
-
-        @media (max-width: 768px) {
-          .publications-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .pub-card-modern {
-            padding: 24px !important;
-          }
-        }
-
-        .pub-link:hover {
-          background-color: var(--primary) !important;
-          color: #fff !important;
-          border-color: var(--primary) !important;
-        }
-      `}} />
     </section>
   );
 }

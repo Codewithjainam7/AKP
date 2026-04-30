@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import GSAPTextReveal from './GSAPTextReveal';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
 
 export default function Projects() {
   const scrollRef = useRef(null);
@@ -22,7 +23,7 @@ export default function Projects() {
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = 400;
+      const scrollAmount = window.innerWidth < 768 ? 300 : 400;
       scrollRef.current.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
@@ -33,117 +34,69 @@ export default function Projects() {
   const tags = ['Research', 'Patents', 'Machine Learning', 'Data Science', 'Publications'];
 
   return (
-    <section id="project" className="section-padding" style={{ backgroundColor: '#FFFFFF', paddingBottom: '0' }}>
-      <div className="container">
+    <section id="project" className="py-24 bg-white">
+      <div className="container mx-auto px-6 lg:px-12">
         
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '80px' }}>
-          <div style={{ fontSize: '56px', color: '#1B1B3A', letterSpacing: '-1px', lineHeight: '1.1', maxWidth: '500px', fontWeight: 'bold' }}>
+        <div className="flex flex-col md:flex-row justify-between items-start mb-12 md:mb-20 gap-8">
+          <div className="text-4xl sm:text-5xl lg:text-6xl text-[#1B1B3A] font-bold tracking-tight leading-[1.1] max-w-2xl">
             <GSAPTextReveal text="Lets have a look at my Research" />
           </div>
           
-          <button style={{ backgroundColor: 'var(--primary)', color: 'var(--white)', borderRadius: '999px', padding: '12px 32px', fontWeight: '600', border: 'none', cursor: 'pointer' }}>
+          <button className="bg-primary-600 text-white rounded-full px-8 py-3 font-bold hover:bg-primary-700 transition-colors shadow-lg shadow-primary-600/20 whitespace-nowrap">
             See All
           </button>
         </div>
 
         {/* Carousel Container */}
-        <div style={{ position: 'relative' }}>
-          {/* Navigation Buttons */}
-          <div 
+        <div className="relative mb-16">
+          {/* Navigation Buttons - Hidden on small mobile */}
+          <button 
             onClick={() => scroll('left')}
-            style={{ 
-              position: 'absolute', 
-              left: '-20px', 
-              top: '50%', 
-              transform: 'translateY(-50%)',
-              width: '50px', 
-              height: '50px', 
-              borderRadius: '50%', 
-              backgroundColor: 'var(--primary)', 
-              color: 'var(--white)', 
-              display: 'flex', 
-              justifyContent: 'center', 
-              alignItems: 'center', 
-              zIndex: 20, 
-              boxShadow: '0 10px 20px rgba(255,119,51,0.3)', 
-              cursor: 'pointer',
-              border: 'none'
-            }}
+            className="absolute -left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-primary-600 text-white hidden md:flex items-center justify-center z-20 shadow-xl shadow-primary-600/30 hover:scale-110 transition-transform"
+            aria-label="Previous project"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          </div>
+            <ArrowLeft className="w-6 h-6" />
+          </button>
 
-          <div 
+          <button 
             onClick={() => scroll('right')}
-            style={{ 
-              position: 'absolute', 
-              right: '-20px', 
-              top: '50%', 
-              transform: 'translateY(-50%)',
-              width: '50px', 
-              height: '50px', 
-              borderRadius: '50%', 
-              backgroundColor: 'var(--primary)', 
-              color: 'var(--white)', 
-              display: 'flex', 
-              justifyContent: 'center', 
-              alignItems: 'center', 
-              zIndex: 20, 
-              boxShadow: '0 10px 20px rgba(255,119,51,0.3)', 
-              cursor: 'pointer',
-              border: 'none'
-            }}
+            className="absolute -right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-primary-600 text-white hidden md:flex items-center justify-center z-20 shadow-xl shadow-primary-600/30 hover:scale-110 transition-transform"
+            aria-label="Next project"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
+            <ArrowRight className="w-6 h-6" />
+          </button>
 
           <div 
             ref={scrollRef}
-            style={{ 
-              display: 'flex', 
-              gap: '30px', 
-              overflowX: 'auto', 
-              paddingBottom: '40px',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
-            }}
+            className="flex gap-6 md:gap-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {/* Hiding Scrollbar */}
-            <style>{`.container div::-webkit-scrollbar { display: none; }`}</style>
-            
             {portfolio.map((item, idx) => (
               <motion.div 
                 key={idx} 
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 viewport={{ once: true, margin: "-50px" }}
-                style={{ flex: '0 0 48%', position: 'relative', minWidth: '350px' }}
+                className="flex-none w-[85%] sm:w-[48%] min-w-[280px] snap-start"
               >
-                 <div style={{ borderRadius: '24px', overflow: 'hidden', backgroundColor: '#F8F9FA', position: 'relative' }}>
+                 <div className="group relative rounded-3xl overflow-hidden bg-slate-50 aspect-[4/5] sm:aspect-auto">
                     <motion.img 
                       whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.4 }}
+                      transition={{ duration: 0.6 }}
                       src={item.img} 
                       alt={item.title} 
-                      style={{ width: '100%', height: '400px', objectFit: 'cover' }} 
+                      className="w-full h-full sm:h-[400px] object-cover" 
                     />
                     
                     {/* Overlay Text inside Image */}
-                    <div style={{ 
-                      position: 'absolute', 
-                      bottom: '40px', 
-                      left: '40px', 
-                      right: '40px',
-                      backgroundColor: 'rgba(255,255,255,0.7)',
-                      backdropFilter: 'blur(20px)',
-                      WebkitBackdropFilter: 'blur(20px)',
-                      padding: '24px',
-                      borderRadius: '16px',
-                      border: '1px solid rgba(255,255,255,0.8)'
-                     }}>
-                       <h3 style={{ fontSize: '32px', color: '#1B1B3A', marginBottom: '8px' }}>{item.title.split(' ').slice(0,2).join(' ')}</h3>
-                       <div style={{ color: 'var(--primary)', fontWeight: '600', fontSize: '14px' }}>{item.category}</div>
+                    <div className="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 bg-white/80 backdrop-blur-xl p-6 rounded-2xl border border-white/50 shadow-2xl">
+                       <h3 className="text-xl sm:text-2xl font-bold text-[#1B1B3A] mb-2 leading-tight">
+                         {item.title}
+                       </h3>
+                       <div className="text-primary-600 font-bold text-xs sm:text-sm uppercase tracking-wider">
+                         {item.category}
+                       </div>
                     </div>
                  </div>
               </motion.div>
@@ -152,38 +105,31 @@ export default function Projects() {
         </div>
 
         {/* Carousel Pagination */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', margin: '40px 0 60px' }}>
-          <div style={{ width: '24px', height: '8px', borderRadius: '4px', backgroundColor: 'var(--primary)' }}></div>
-          <div style={{ width: '8px', height: '8px', borderRadius: '4px', backgroundColor: '#E5E5E5' }}></div>
-          <div style={{ width: '8px', height: '8px', borderRadius: '4px', backgroundColor: '#E5E5E5' }}></div>
-          <div style={{ width: '8px', height: '8px', borderRadius: '4px', backgroundColor: '#E5E5E5' }}></div>
+        <div className="flex justify-center gap-2 mb-16">
+          <div className="w-6 h-2 rounded-full bg-primary-600"></div>
+          <div className="w-2 h-2 rounded-full bg-slate-200"></div>
+          <div className="w-2 h-2 rounded-full bg-slate-200"></div>
+          <div className="w-2 h-2 rounded-full bg-slate-200"></div>
         </div>
 
         {/* Tags */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap', marginBottom: '60px' }}>
+        <div className="flex justify-center gap-3 sm:gap-4 flex-wrap mb-16">
           {tags.map((tag, idx) => (
-             <div key={idx} style={{ 
-               padding: '12px 24px', 
-               borderRadius: '999px',
-               backgroundColor: '#FFFFFF',
-               border: '1px solid #E5E5E5',
-               color: '#1B1B3A',
-               fontWeight: '500',
-               cursor: 'pointer',
-               boxShadow: '0 4px 10px rgba(0,0,0,0.02)'
-             }}>
+             <button key={idx} className="px-5 py-2.5 rounded-full bg-white border border-slate-200 text-[#1B1B3A] text-sm font-semibold hover:border-primary-600 hover:text-primary-600 transition-all shadow-sm">
                {tag}
-             </div>
+             </button>
           ))}
         </div>
 
         {/* Detailed Text */}
-        <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto', paddingBottom: '80px' }}>
-           <h3 style={{ fontSize: '32px', color: '#1B1B3A', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+        <div className="text-center max-w-3xl mx-auto pb-12">
+           <h3 className="text-2xl sm:text-3xl font-bold text-[#1B1B3A] mb-4 flex items-center justify-center gap-3 flex-wrap">
               Sea Surface Temperature Predicting Device
-              <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: 'var(--primary)', color: 'var(--white)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', cursor: 'pointer' }}>↗</div>
+              <button className="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center hover:scale-110 transition-transform">
+                <ArrowUpRight className="w-5 h-5" />
+              </button>
            </h3>
-           <p style={{ color: 'var(--text-muted)', lineHeight: '1.6' }}>
+           <p className="text-slate-500 text-base sm:text-lg leading-relaxed px-4">
              Designed and patented a sophisticated portable device for real-time monitoring and mapping of sea surface temperature and potential marine pollution anomalies, utilizing advanced neural architectures.
            </p>
         </div>

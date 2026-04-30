@@ -8,22 +8,13 @@ const SKILLS = [
 
 export default function SkillsMarquee() {
   return (
-    <section style={{ padding: '60px 0', backgroundColor: 'var(--primary)', overflow: 'hidden' }}>
-      <div style={{ display: 'flex', whiteSpace: 'nowrap', width: '200%' }} className="marquee-container">
+    <section className="py-12 sm:py-16 bg-primary-600 overflow-hidden">
+      <div className="flex whitespace-nowrap w-[200%]">
         
-        <div className="marquee-content" style={{ display: 'flex', gap: '40px', paddingRight: '40px' }}>
+        <div className="flex gap-8 sm:gap-12 md:gap-16 pr-10 animate-[slide_40s_linear_infinite]">
           {SKILLS.concat(SKILLS).map((skill, idx) => (
-            <div key={idx} style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '20px',
-              fontSize: '32px',
-              fontWeight: '700',
-              fontFamily: 'var(--font-display)',
-              color: 'var(--white)',
-              textTransform: 'uppercase'
-            }}>
-              <span style={{ color: 'var(--badge-yellow)' }}>✦</span>
+            <div key={idx} className="flex items-center gap-3 sm:gap-5 text-2xl sm:text-3xl md:text-4xl font-bold font-heading text-white uppercase select-none">
+              <span className="text-yellow-300">✦</span>
               {skill}
             </div>
           ))}
@@ -32,9 +23,6 @@ export default function SkillsMarquee() {
       </div>
 
       <style dangerouslySetInnerHTML={{__html: `
-        .marquee-content {
-          animation: slide 30s linear infinite;
-        }
         @keyframes slide {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }

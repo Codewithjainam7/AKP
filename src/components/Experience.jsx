@@ -60,133 +60,48 @@ function TimelineItem({ exp, idx, isLast }) {
       });
     }
   };
+
   return (
-    <div className="exp-item" style={{
-      display: 'flex',
-      alignItems: 'center',
-      marginBottom: isLast ? '0' : '60px',
-      position: 'relative',
-      zIndex: 1,
-      perspective: '800px'
-    }}>
+    <div className={`exp-item flex flex-col md:flex-row items-start md:items-center relative z-10 perspective-[800px] ${isLast ? '' : 'mb-16 md:mb-[60px]'}`}>
       
-      {/* Left Column */}
-      <div className="exp-left" style={{ 
-        flex: 1, 
-        paddingRight: '60px', 
-        textAlign: 'right' 
-      }}>
+      {/* Left Column (Desktop Only) / Top Column (Mobile) */}
+      <div className="exp-left w-full md:flex-1 md:pr-[60px] md:text-right pl-12 md:pl-0 mb-4 md:mb-0">
         <div
           ref={leftCardRef}
           onMouseMove={(e) => handleMouseMove(e, leftCardRef, leftGlowRef)}
           onMouseEnter={() => setIsHoveredLeft(true)}
           onMouseLeave={() => handleMouseLeave(leftCardRef, leftGlowRef, setIsHoveredLeft)}
-          style={{
-            padding: '24px 28px',
-            borderRadius: '16px',
-            backgroundColor: isHoveredLeft ? '#FAFAFA' : 'transparent',
-            border: isHoveredLeft ? '1px solid rgba(255,119,51,0.15)' : '1px solid transparent',
-            transition: 'background-color 0.3s, border-color 0.3s, box-shadow 0.3s',
-            boxShadow: isHoveredLeft ? '0 8px 30px rgba(0,0,0,0.06)' : 'none',
-            position: 'relative',
-            overflow: 'hidden',
-            transformStyle: 'preserve-3d',
-            cursor: 'default'
-          }}
+          className={`p-6 md:p-[24px_28px] rounded-2xl transition-all duration-300 relative overflow-hidden transform-style-3d cursor-default ${isHoveredLeft ? 'bg-[#FAFAFA] border border-primary-600/15 shadow-[0_8px_30px_rgba(0,0,0,0.06)]' : 'bg-transparent border border-transparent'}`}
         >
           {/* Glow Orb */}
-          <div ref={leftGlowRef} style={{
-            position: 'absolute',
-            width: '200px',
-            height: '200px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(255,119,51,0.5) 0%, transparent 70%)',
-            pointerEvents: 'none',
-            opacity: 0,
-            zIndex: 0,
-            filter: 'blur(20px)'
-          }}></div>
-          <h3 style={{ fontSize: '24px', color: '#1B1B3A', marginBottom: '8px', position: 'relative', zIndex: 1 }}>{exp.company}</h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', fontWeight: '500', position: 'relative', zIndex: 1 }}>{exp.date}</p>
+          <div ref={leftGlowRef} className="absolute w-[200px] h-[200px] rounded-full bg-gradient-radial from-primary-600/50 to-transparent pointer-events-none opacity-0 z-0 blur-[20px]"></div>
+          <h3 className="text-xl md:text-2xl font-bold text-[#1B1B3A] mb-2 relative z-10">{exp.company}</h3>
+          <p className="text-slate-400 text-xs md:text-sm font-medium relative z-10">{exp.date}</p>
         </div>
       </div>
 
-      {/* Center Dot */}
-      <div className="exp-dot" style={{
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '32px',
-        height: '32px',
-        borderRadius: '50%',
-        backgroundColor: '#FFFFFF',
-        border: '2px solid var(--primary)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 2,
-        boxShadow: exp.current ? '0 0 0 6px rgba(255, 119, 51, 0.12), 0 0 20px rgba(255, 119, 51, 0.15)' : 'none',
-        transition: 'box-shadow 0.3s ease'
-      }}>
-        <div style={{
-           width: '16px',
-           height: '16px',
-           borderRadius: '50%',
-           backgroundColor: exp.current ? 'var(--primary)' : 'transparent',
-        }}></div>
+      {/* Center/Left Dot */}
+      <div className="exp-dot absolute left-0 md:left-1/2 top-0 md:top-1/2 -translate-y-0 md:-translate-y-1/2 -translate-x-0 md:-ml-4 w-8 h-8 rounded-full bg-white border-2 border-primary-600 flex items-center justify-center z-20 transition-all duration-300 shadow-none">
+        <div className={`w-4 h-4 rounded-full ${exp.current ? 'bg-primary-600' : 'bg-transparent'}`}></div>
         {/* Pulse ring for current */}
         {exp.current && (
-          <div style={{
-            position: 'absolute',
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            border: '2px solid var(--primary)',
-            animation: 'dotPulse 2s ease-out infinite',
-            opacity: 0
-          }}></div>
+          <div className="absolute w-8 h-8 rounded-full border-2 border-primary-600 animate-[dotPulse_2s_ease-out_infinite] opacity-0"></div>
         )}
       </div>
 
       {/* Right Column */}
-      <div className="exp-right" style={{ 
-        flex: 1, 
-        paddingLeft: '60px',
-        textAlign: 'left'
-      }}>
+      <div className="exp-right w-full md:flex-1 md:pl-[60px] text-left pl-12 md:pl-0">
         <div
           ref={rightCardRef}
           onMouseMove={(e) => handleMouseMove(e, rightCardRef, rightGlowRef)}
           onMouseEnter={() => setIsHoveredRight(true)}
           onMouseLeave={() => handleMouseLeave(rightCardRef, rightGlowRef, setIsHoveredRight)}
-          style={{
-            padding: '24px 28px',
-            borderRadius: '16px',
-            backgroundColor: isHoveredRight ? '#FAFAFA' : 'transparent',
-            border: isHoveredRight ? '1px solid rgba(255,119,51,0.15)' : '1px solid transparent',
-            transition: 'background-color 0.3s, border-color 0.3s, box-shadow 0.3s',
-            boxShadow: isHoveredRight ? '0 8px 30px rgba(0,0,0,0.06)' : 'none',
-            position: 'relative',
-            overflow: 'hidden',
-            transformStyle: 'preserve-3d',
-            cursor: 'default'
-          }}
+          className={`p-6 md:p-[24px_28px] rounded-2xl transition-all duration-300 relative overflow-hidden transform-style-3d cursor-default ${isHoveredRight ? 'bg-[#FAFAFA] border border-primary-600/15 shadow-[0_8px_30px_rgba(0,0,0,0.06)]' : 'bg-transparent border border-transparent'}`}
         >
            {/* Glow Orb */}
-           <div ref={rightGlowRef} style={{
-            position: 'absolute',
-            width: '200px',
-            height: '200px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(255,119,51,0.5) 0%, transparent 70%)',
-            pointerEvents: 'none',
-            opacity: 0,
-            zIndex: 0,
-            filter: 'blur(20px)'
-          }}></div>
-          <h3 style={{ fontSize: '24px', color: '#1B1B3A', marginBottom: '8px', position: 'relative', zIndex: 1 }}>{exp.role}</h3>
-          <p style={{ color: 'var(--text-muted)', fontSize: '14px', lineHeight: '1.6', maxWidth: '300px', position: 'relative', zIndex: 1 }}>{exp.desc}</p>
+           <div ref={rightGlowRef} className="absolute w-[200px] h-[200px] rounded-full bg-gradient-radial from-primary-600/50 to-transparent pointer-events-none opacity-0 z-0 blur-[20px]"></div>
+          <h3 className="text-xl md:text-2xl font-bold text-[#1B1B3A] mb-2 relative z-10">{exp.role}</h3>
+          <p className="text-slate-400 text-xs md:text-sm leading-relaxed max-w-sm relative z-10">{exp.desc}</p>
         </div>
       </div>
 
@@ -287,27 +202,17 @@ export default function Experience() {
         </svg>
       </div>
 
-      <div className="relative pt-4 pb-16 bg-[#FAFAFA] section-padding">
-        <div className="container" style={{ maxWidth: '900px' }}>
+      <div className="relative pt-4 pb-16 bg-[#FAFAFA] py-24">
+        <div className="container mx-auto px-6 max-w-4xl">
           
-          <h2 className="exp-heading" style={{ fontSize: '48px', color: '#1B1B3A', textAlign: 'center', marginBottom: '80px', letterSpacing: '-1px' }}>
-            My <span style={{ color: 'var(--primary)' }}>Work Experience</span>
+          <h2 className="exp-heading text-4xl sm:text-5xl font-bold text-[#1B1B3A] text-center mb-16 md:mb-20 tracking-tight">
+            My <span className="text-primary-600">Work Experience</span>
           </h2>
 
-          <div style={{ position: 'relative' }}>
+          <div className="relative">
           
-          {/* Center Dashed Line — animated with scaleY */}
-          <div ref={lineRef} style={{
-            position: 'absolute',
-            left: '50%',
-            top: 0,
-            bottom: 0,
-            width: '2px',
-            borderLeft: '2px dashed #E5E5E5',
-            transform: 'translateX(-50%)',
-            transformOrigin: 'top center',
-            zIndex: 0
-          }}></div>
+          {/* Center/Left Dashed Line — animated with scaleY */}
+          <div ref={lineRef} className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 border-l-2 border-dashed border-slate-200 md:-ml-[1px] origin-top z-0"></div>
 
           {experiences.map((exp, idx) => (
             <TimelineItem key={exp.id} exp={exp} idx={idx} isLast={idx === experiences.length - 1} />
@@ -326,3 +231,4 @@ export default function Experience() {
     </section>
   );
 }
+

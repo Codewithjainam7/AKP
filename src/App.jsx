@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Chatbot from './components/Chatbot';
 
 import Home from './pages/Home';
 import Research from './pages/Research';
@@ -20,7 +21,7 @@ function App() {
     // Initialize Lenis
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
@@ -78,7 +79,7 @@ function AppContent() {
   }, [location.pathname]);
 
   return (
-    <div className="app-container">
+    <div className="app-container overflow-x-hidden max-w-[100vw]">
       <Navbar />
       <main>
         <AnimatePresence mode="wait">
@@ -88,6 +89,7 @@ function AppContent() {
           </Routes>
         </AnimatePresence>
       </main>
+      <Chatbot />
       <Footer />
     </div>
   );
