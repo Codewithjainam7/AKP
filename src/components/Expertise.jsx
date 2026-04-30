@@ -13,7 +13,7 @@ export default function Services() {
   return (
     <section 
       id="service" 
-      className="relative z-10 bg-[#FAFAFA]"
+      className="relative z-10 bg-[#0F0F11]"
     >
       <div className="relative py-24 bg-[#0F0F11] rounded-t-[48px] md:rounded-t-[64px] border-t border-white/10">
       <div className="container mx-auto px-6 lg:px-12">

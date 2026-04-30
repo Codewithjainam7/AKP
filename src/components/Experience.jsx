@@ -203,7 +203,7 @@ export default function Experience() {
         </svg>
       </div>
 
-      <div className="relative pt-4 pb-16 bg-[#FAFAFA] py-24 overflow-hidden">
+      <div className="relative bg-[#FAFAFA] py-24 overflow-hidden">
         <LiquidBackground />
         <div className="container mx-auto px-6 max-w-4xl relative z-10">
           
