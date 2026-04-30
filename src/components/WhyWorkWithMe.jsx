@@ -5,7 +5,7 @@ import LiquidBackground from './LiquidBackground';
 
 export default function WhyWorkWithMe() {
   return (
-    <section id="hire" className="py-24 bg-white overflow-hidden relative">
+    <section id="hire" className="py-24 bg-[#FAFAFA] overflow-hidden relative">
       <LiquidBackground />
       <div className="container mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-12 lg:gap-0 relative z-10">
         
