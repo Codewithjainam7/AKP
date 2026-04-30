@@ -93,11 +93,26 @@ const Navbar = () => {
         {isOpen && (
           <motion.div
             id="mobile-menu"
-            initial={{ clipPath: 'circle(0% at calc(100% - 3rem) 2.5rem)' }}
-            animate={{ clipPath: 'circle(150% at calc(100% - 3rem) 2.5rem)' }}
-            exit={{ clipPath: 'circle(0% at calc(100% - 3rem) 2.5rem)' }}
-            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-            className="fixed inset-0 z-[60] bg-[#0A0A0B] flex flex-col overflow-y-auto"
+            initial={{ 
+              clipPath: 'circle(0% at calc(100% - 3rem) 2.5rem)',
+              opacity: 0,
+              scale: 1.05
+            }}
+            animate={{ 
+              clipPath: 'circle(150% at calc(100% - 3rem) 2.5rem)',
+              opacity: 1,
+              scale: 1
+            }}
+            exit={{ 
+              clipPath: 'circle(0% at calc(100% - 3rem) 2.5rem)',
+              opacity: 0,
+              scale: 1.05
+            }}
+            transition={{ 
+              duration: 0.7, 
+              ease: [0.76, 0, 0.24, 1] 
+            }}
+            className="fixed inset-0 z-[60] bg-[#0A0A0B]/95 backdrop-blur-2xl flex flex-col overflow-y-auto"
           >
             {/* Header */}
             <div className="flex justify-between items-center px-8 py-6 shrink-0">
@@ -107,9 +122,9 @@ const Navbar = () => {
               </div>
               <motion.button 
                 id="close-menu"
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 0.2, duration: 0.5, type: 'spring', stiffness: 200 }}
+                initial={{ scale: 0, rotate: -90, opacity: 0 }}
+                animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.6, type: 'spring', damping: 15 }}
                 className="relative group w-12 h-12 flex items-center justify-center"
                 onClick={() => setIsOpen(false)}
               >
@@ -127,9 +142,9 @@ const Navbar = () => {
               {NAV_ITEMS.map((item, i) => (
                 <motion.li 
                   key={item.name}
-                  initial={{ x: -40, opacity: 0 }}
+                  initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.15 + i * 0.06, duration: 0.4, ease: 'easeOut' }}
+                  transition={{ delay: 0.3 + i * 0.05, duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
                 >
                   <Link 
                     to={item.href} 
