@@ -84,8 +84,8 @@ const Footer = () => {
             <div className="col-span-1 md:col-span-1">
               <h4 className="text-primary-600 font-bold mb-8 transition-colors">Contact</h4>
               <ul className="space-y-6 text-sm font-medium text-slate-100 break-all">
-                <li><span className="block">+91 83698 31270</span></li>
-                <li><span className="block opacity-90">amitpandey8089@gmail.com</span></li>
+                <li><a href="tel:+918369831270" className="block hover:text-primary-600 transition-colors">+91 83698 31270</a></li>
+                <li><a href="mailto:amitpandey8089@gmail.com" className="block opacity-90 hover:text-primary-600 transition-colors">amitpandey8089@gmail.com</a></li>
               </ul>
             </div>
 
