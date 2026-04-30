@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import LiquidBackground from './LiquidBackground';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -202,8 +203,9 @@ export default function Experience() {
         </svg>
       </div>
 
-      <div className="relative pt-4 pb-16 bg-[#FAFAFA] py-24">
-        <div className="container mx-auto px-6 max-w-4xl">
+      <div className="relative pt-4 pb-16 bg-[#FAFAFA] py-24 overflow-hidden">
+        <LiquidBackground />
+        <div className="container mx-auto px-6 max-w-4xl relative z-10">
           
           <h2 className="exp-heading text-4xl sm:text-5xl font-bold text-[#1B1B3A] text-center mb-16 md:mb-20 tracking-tight">
             My <span className="text-primary-600">Work Experience</span>
