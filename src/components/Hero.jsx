@@ -236,7 +236,7 @@ const Hero = () => {
     >
 
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10 h-full flex flex-col justify-center items-center pt-20 lg:pt-0">
+      <div className="container mx-auto px-6 lg:px-12 relative z-10 h-full flex flex-col justify-center items-center pt-32 lg:pt-0">
         
         <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
           
@@ -274,12 +274,12 @@ const Hero = () => {
                 </Link>
               </div>
 
-              <div className="hero-stats flex items-center gap-6 sm:border-l-2 sm:border-slate-200 sm:pl-6 h-12">
-                <div className="flex flex-col items-center sm:items-start">
+              <div className="hero-stats flex items-center justify-center lg:justify-start gap-6 sm:border-l-2 sm:border-slate-200 sm:pl-6 h-12">
+                <div className="flex flex-col items-center lg:items-start">
                   <span className="text-xl sm:text-2xl font-black text-[#1B1B3A] leading-none">10<span className="text-primary-600">+</span></span>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Publications</span>
                 </div>
-                <div className="flex flex-col items-center sm:items-start">
+                <div className="flex flex-col items-center lg:items-start">
                   <span className="text-xl sm:text-2xl font-black text-[#1B1B3A] leading-none">7<span className="text-primary-600">+</span></span>
                   <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Patents</span>
                 </div>
