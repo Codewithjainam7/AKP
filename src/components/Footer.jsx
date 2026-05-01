@@ -1,11 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Magnetic from './Magnetic';
 import { motion } from 'framer-motion';
 
 const Footer = () => {
+  const location = useLocation();
+  const wrapperBg = location.pathname === '/' ? 'bg-primary-600' : 'bg-[#0a0a0a]';
+
   return (
-    <footer id="contact" className="bg-dark-900 text-white pt-24 pb-12 mt-12 rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden border-t border-white/5 shadow-2xl">
+    <div className={`relative z-10 ${wrapperBg}`}>
+      <footer id="contact" className="bg-dark-900 text-white pt-24 pb-12 rounded-t-[3rem] md:rounded-t-[4rem] relative overflow-hidden border-t-2 border-white/20 shadow-2xl">
       {/* Orange Bottom Line Glow */}
       <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-primary-700 via-primary-500 to-primary-700 shadow-[0_0_20px_rgba(234,88,12,0.8)]"></div>
 
@@ -108,6 +112,7 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </div>
   );
 };
 

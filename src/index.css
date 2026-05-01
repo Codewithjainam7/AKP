@@ -268,3 +268,130 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(234, 88, 12, 0.2) transparent;
 }
+
+/* ══════════════════════════════════════════════════
+   Hero Frame — Premium Blob Hover Animations
+   GPU-accelerated: only transform, opacity, 
+   box-shadow, filter are transitioned.
+   ══════════════════════════════════════════════════ */
+
+/* ── Idle: Subtle floating so blobs feel alive ── */
+.hero-frame .frame-blob-1 {
+  will-change: transform, box-shadow;
+  animation: idleFloat1 6s ease-in-out infinite;
+  transition: transform 0.8s ease-out,
+              box-shadow 0.8s ease-out,
+              background-color 0.8s ease-out;
+}
+
+.hero-frame .frame-blob-2 {
+  will-change: transform, box-shadow, border-color;
+  animation: idleFloat2 7s ease-in-out infinite;
+  transition: transform 0.8s ease-out,
+              box-shadow 0.8s ease-out,
+              border-color 0.8s ease-out;
+}
+
+.hero-frame .frame-orbit {
+  will-change: transform, opacity;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.6s ease-out,
+              transform 0.6s ease-out;
+}
+
+.hero-frame .frame-photo {
+  will-change: transform, box-shadow;
+  transition: transform 0.8s ease-out,
+              box-shadow 0.8s ease-out;
+}
+
+.hero-frame .frame-photo img {
+  will-change: transform, filter;
+  transition: transform 0.8s ease-out,
+              filter 0.8s ease-out;
+}
+
+/* ── Idle Float Keyframes ── */
+@keyframes idleFloat1 {
+  0%, 100% { transform: rotate(0deg) scale(1) translate(0, 0); }
+  25%      { transform: rotate(1.5deg) scale(1.01) translate(2px, -3px); }
+  50%      { transform: rotate(-1deg) scale(1.005) translate(-1px, 2px); }
+  75%      { transform: rotate(0.5deg) scale(1.015) translate(1px, -1px); }
+}
+
+@keyframes idleFloat2 {
+  0%, 100% { transform: rotate(12deg) scale(1) translate(0, 0); }
+  25%      { transform: rotate(10deg) scale(1.01) translate(-2px, 2px); }
+  50%      { transform: rotate(14deg) scale(1.005) translate(3px, -2px); }
+  75%      { transform: rotate(11deg) scale(1.015) translate(-1px, 1px); }
+}
+
+/* ── Hover: Intensified animations ── */
+
+/* Blob 1 — expands, rotates, glows orange */
+.hero-frame:hover .frame-blob-1 {
+  background-color: rgba(234, 88, 12, 0.15);
+  box-shadow: 0 0 50px rgba(234, 88, 12, 0.15),
+              0 0 100px rgba(234, 88, 12, 0.06);
+  animation: hoverMorph1 4s ease-in-out infinite;
+}
+
+/* Blob 2 — counter-rotates, border brightens, subtle glow */
+.hero-frame:hover .frame-blob-2 {
+  border-color: rgba(234, 88, 12, 0.35);
+  box-shadow: 0 0 30px rgba(234, 88, 12, 0.08);
+  animation: hoverMorph2 5s ease-in-out infinite;
+}
+
+/* Orbit ring — fades in, slow continuous spin */
+.hero-frame:hover .frame-orbit {
+  opacity: 1;
+  transform: scale(1);
+  animation: orbitSpin 12s linear infinite;
+}
+
+/* Photo container — lifts up, warm glow */
+.hero-frame:hover .frame-photo {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 24px 48px rgba(234, 88, 12, 0.12),
+              0 8px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Photo image — very subtle warm tint */
+.hero-frame:hover .frame-photo img {
+  filter: brightness(1.04) saturate(1.05);
+  transform: scale(1.015);
+}
+
+/* ── Hover Morph Keyframes (smooth & organic) ── */
+@keyframes hoverMorph1 {
+  0%   { transform: rotate(0deg)  scale(1.04) translate(0, 0); 
+         border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25%  { transform: rotate(4deg)  scale(1.06) translate(3px, -4px); 
+         border-radius: 45% 55% 50% 50% / 50% 45% 55% 50%; }
+  50%  { transform: rotate(0deg)  scale(1.05) translate(-2px, 3px); 
+         border-radius: 50% 50% 40% 60% / 40% 55% 45% 60%; }
+  75%  { transform: rotate(-3deg) scale(1.07) translate(2px, -2px); 
+         border-radius: 55% 45% 55% 45% / 55% 40% 60% 40%; }
+  100% { transform: rotate(0deg)  scale(1.04) translate(0, 0); 
+         border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+@keyframes hoverMorph2 {
+  0%   { transform: rotate(-6deg)  scale(1.02) translate(0, 0); 
+         border-radius: 40% 60% 70% 30% / 40% 50% 60% 70%; }
+  25%  { transform: rotate(-3deg)  scale(1.04) translate(-3px, 3px); 
+         border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%; }
+  50%  { transform: rotate(-8deg)  scale(1.03) translate(2px, -2px); 
+         border-radius: 45% 55% 60% 40% / 55% 45% 50% 50%; }
+  75%  { transform: rotate(-4deg)  scale(1.05) translate(-1px, 2px); 
+         border-radius: 50% 50% 45% 55% / 45% 50% 55% 45%; }
+  100% { transform: rotate(-6deg)  scale(1.02) translate(0, 0); 
+         border-radius: 40% 60% 70% 30% / 40% 50% 60% 70%; }
+}
+
+@keyframes orbitSpin {
+  from { transform: scale(1) rotate(0deg); }
+  to   { transform: scale(1) rotate(360deg); }
+}

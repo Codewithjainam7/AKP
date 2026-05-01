@@ -289,29 +289,37 @@ const Hero = () => {
           </div>
 
           <div className="w-full lg:w-[45%] relative flex justify-center items-center order-1 lg:order-2 h-[350px] sm:h-[450px] lg:h-[550px] z-10 pointer-events-auto">
-            <div className="hero-image-wrapper relative z-10 w-64 h-64 sm:w-80 sm:h-80 lg:w-[28rem] lg:h-[28rem]">
+            <div className="hero-image-wrapper hero-frame relative z-10 w-64 h-64 sm:w-80 sm:h-80 lg:w-[28rem] lg:h-[28rem] cursor-pointer">
                
-               {/* Background Ghost Blob */}
-               <div className="absolute inset-[-15px] bg-primary-600/10 z-0 shadow-xl"
-                    style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}></div>
+               {/* Background Ghost Blob — morphs & pulses on hover */}
+               <div 
+                 className="frame-blob-1 absolute inset-[-15px] bg-primary-600/10 z-0 shadow-xl"
+                 style={{ borderRadius: '60% 40% 30% 70% / 60% 30% 70% 40%' }}
+               ></div>
                
-               {/* Secondary Tilted Blob */}
-               <div className="absolute inset-[-5px] border border-primary-600/20 rotate-12 z-0"
-                    style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 70%' }}></div>
+               {/* Secondary Tilted Blob — counter-rotates & glows on hover */}
+               <div 
+                 className="frame-blob-2 absolute inset-[-5px] border border-primary-600/20 rotate-12 z-0"
+                 style={{ borderRadius: '40% 60% 70% 30% / 40% 50% 60% 70%' }}
+               ></div>
 
-               {/* Main Organic Photo Container (Borderless) */}
-               <div className="absolute inset-0 overflow-hidden shadow-2xl z-10"
-                    style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }}>
-                 
-                 {/* The Photo */}
+               {/* Tertiary Orbit Ring — appears on hover */}
+               <div 
+                 className="frame-orbit absolute inset-[-28px] border-[1.5px] border-dashed border-primary-600/20 rounded-full z-0"
+               ></div>
+
+               {/* Main Organic Photo Container */}
+               <div 
+                 className="frame-photo absolute inset-0 overflow-hidden shadow-2xl z-10"
+                 style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }}
+               >
+                 {/* The Photo — no zoom */}
                  <img 
                     src="/amit_sir_photo.png" 
                     alt="Amit Kumar Pandey" 
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" 
+                    className="w-full h-full object-cover" 
                  />
                </div>
-
-
 
             </div>
           </div>
