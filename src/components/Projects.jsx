@@ -23,80 +23,96 @@ export default function Projects() {
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const scrollAmount = window.innerWidth < 768 ? 300 : 400;
-      scrollRef.current.scrollBy({
+      const container = scrollRef.current;
+      const scrollAmount = container.clientWidth * 0.8;
+      container.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth'
       });
     }
   };
 
+  const handleSeeAll = () => {
+    const patentsSection = document.getElementById('patents');
+    if (patentsSection) {
+      patentsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const tags = ['Research', 'Patents', 'Machine Learning', 'Data Science', 'Publications'];
 
   return (
-    <section id="project" className="py-24 bg-white">
+    <section id="project" className="py-24 bg-white" style={{ fontFamily: 'var(--font-body)' }}>
       <div className="container mx-auto px-6 lg:px-12">
         
         <div className="flex flex-col md:flex-row justify-between items-start mb-12 md:mb-20 gap-8">
-          <div className="text-4xl sm:text-5xl lg:text-6xl text-[#1B1B3A] font-bold tracking-tight leading-[1.1] max-w-2xl">
+          <div className="text-4xl sm:text-5xl lg:text-7xl text-[#1B1B3A] font-bold tracking-tighter leading-[1.05] max-w-3xl" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
             <GSAPTextReveal text="Lets have a look at my Research" />
           </div>
           
-          <button className="bg-primary-600 text-white rounded-full px-8 py-3 font-bold hover:bg-primary-700 transition-colors shadow-lg shadow-primary-600/20 whitespace-nowrap">
+          <button 
+            onClick={handleSeeAll}
+            className="bg-[#ea580c] text-white rounded-full px-10 py-4 font-bold hover:bg-[#f97316] transition-all duration-300 shadow-xl shadow-orange-600/20 whitespace-nowrap active:scale-95"
+          >
             See All
           </button>
         </div>
 
         {/* Carousel Container */}
-        <div className="relative mb-16">
-          {/* Navigation Buttons - Hidden on small mobile */}
+        <div className="relative mb-16 group">
+          {/* Navigation Buttons */}
           <button 
             onClick={() => scroll('left')}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-primary-600 text-white hidden md:flex items-center justify-center z-20 shadow-xl shadow-primary-600/30 hover:scale-110 transition-transform"
+            className="absolute -left-2 sm:-left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white text-[#ea580c] flex items-center justify-center z-20 shadow-2xl border border-orange-100 hover:bg-[#ea580c] hover:text-white transition-all duration-300 active:scale-90"
             aria-label="Previous project"
           >
-            <ArrowLeft className="w-6 h-6" />
+            <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <button 
             onClick={() => scroll('right')}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-primary-600 text-white hidden md:flex items-center justify-center z-20 shadow-xl shadow-primary-600/30 hover:scale-110 transition-transform"
+            className="absolute -right-2 sm:-right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white text-[#ea580c] flex items-center justify-center z-20 shadow-2xl border border-orange-100 hover:bg-[#ea580c] hover:text-white transition-all duration-300 active:scale-90"
             aria-label="Next project"
           >
-            <ArrowRight className="w-6 h-6" />
+            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <div 
             ref={scrollRef}
-            className="flex gap-6 md:gap-8 overflow-x-auto pb-8 scrollbar-hide snap-x snap-mandatory"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className="flex gap-6 md:gap-10 overflow-x-auto pb-10 scrollbar-hide snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollBehavior: 'smooth' }}
           >
             {portfolio.map((item, idx) => (
               <motion.div 
                 key={idx} 
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.23, 1, 0.32, 1] }}
                 viewport={{ once: true, margin: "-50px" }}
-                className="flex-none w-[85%] sm:w-[48%] min-w-[280px] snap-start"
+                className="flex-none w-[90%] sm:w-[48%] min-w-[300px] snap-center lg:snap-start"
               >
-                 <div className="group relative rounded-3xl overflow-hidden bg-slate-50 aspect-[4/5] sm:aspect-auto">
+                 <div className="group/card relative rounded-[40px] overflow-hidden bg-slate-50 aspect-[4/5] sm:aspect-auto shadow-2xl shadow-slate-200 transition-transform duration-500 hover:-translate-y-2">
                     <motion.img 
                       whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.6 }}
+                      transition={{ duration: 0.8 }}
                       src={item.img} 
                       alt={item.title} 
-                      className="w-full h-full sm:h-[400px] object-cover" 
+                      className="w-full h-full sm:h-[500px] object-cover" 
                     />
                     
-                    {/* Overlay Text inside Image */}
-                    <div className="absolute bottom-4 left-4 right-4 sm:bottom-8 sm:left-8 sm:right-8 bg-white/80 backdrop-blur-xl p-6 rounded-2xl border border-white/50 shadow-2xl">
-                       <h3 className="text-xl sm:text-2xl font-bold text-[#1B1B3A] mb-2 leading-tight">
-                         {item.title}
-                       </h3>
-                       <div className="text-primary-600 font-bold text-xs sm:text-sm uppercase tracking-wider">
+                    {/* Floating Info Card */}
+                    <div className="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10 bg-white/90 backdrop-blur-2xl p-8 rounded-[32px] border border-white/50 shadow-2xl transition-all duration-500 group-hover/card:bg-white group-hover/card:shadow-orange-600/10">
+                       <div className="text-[#ea580c] font-black text-[10px] sm:text-xs uppercase tracking-[0.25em] mb-3" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
                          {item.category}
                        </div>
+                       <h3 className="text-2xl sm:text-3xl font-bold text-[#1B1B3A] leading-tight" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
+                         {item.title}
+                       </h3>
+                    </div>
+
+                    {/* Quick View Icon */}
+                    <div className="absolute top-6 right-6 w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
+                      <ArrowUpRight className="w-6 h-6" />
                     </div>
                  </div>
               </motion.div>
@@ -105,31 +121,34 @@ export default function Projects() {
         </div>
 
         {/* Carousel Pagination */}
-        <div className="flex justify-center gap-2 mb-16">
-          <div className="w-6 h-2 rounded-full bg-primary-600"></div>
-          <div className="w-2 h-2 rounded-full bg-slate-200"></div>
-          <div className="w-2 h-2 rounded-full bg-slate-200"></div>
-          <div className="w-2 h-2 rounded-full bg-slate-200"></div>
+        <div className="flex justify-center gap-3 mb-20">
+          <div className="w-10 h-1.5 rounded-full bg-[#ea580c]"></div>
+          <div className="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+          <div className="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+          <div className="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
         </div>
 
         {/* Tags */}
-        <div className="flex justify-center gap-3 sm:gap-4 flex-wrap mb-16">
+        <div className="flex justify-center gap-3 sm:gap-4 flex-wrap mb-24">
           {tags.map((tag, idx) => (
-             <button key={idx} className="px-5 py-2.5 rounded-full bg-white border border-slate-200 text-[#1B1B3A] text-sm font-semibold hover:border-primary-600 hover:text-primary-600 transition-all shadow-sm">
+             <button key={idx} className="px-7 py-3 rounded-full bg-white border border-slate-100 text-[#1B1B3A] text-sm font-bold hover:border-[#ea580c] hover:text-[#ea580c] hover:shadow-lg hover:shadow-orange-600/5 transition-all duration-300 active:scale-95">
                {tag}
              </button>
           ))}
         </div>
 
-        {/* Detailed Text */}
-        <div className="text-center max-w-3xl mx-auto pb-12">
-           <h3 className="text-2xl sm:text-3xl font-bold text-[#1B1B3A] mb-4 flex items-center justify-center gap-3 flex-wrap">
+        {/* Highlight Section */}
+        <div className="text-center max-w-4xl mx-auto pb-20 relative">
+           {/* Decorative Element */}
+           <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-orange-600/5 blur-3xl rounded-full"></div>
+
+           <h3 className="text-3xl sm:text-4xl font-bold text-[#1B1B3A] mb-6 flex items-center justify-center gap-4 flex-wrap" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
               Sea Surface Temperature Predicting Device
-              <button className="w-10 h-10 rounded-full bg-primary-600 text-white flex items-center justify-center hover:scale-110 transition-transform">
-                <ArrowUpRight className="w-5 h-5" />
+              <button className="w-12 h-12 rounded-full bg-[#ea580c] text-white flex items-center justify-center hover:scale-110 hover:rotate-45 transition-all duration-500 shadow-xl shadow-orange-600/20">
+                <ArrowUpRight className="w-6 h-6" />
               </button>
            </h3>
-           <p className="text-slate-500 text-base sm:text-lg leading-relaxed px-4">
+           <p className="text-slate-500 text-lg sm:text-xl leading-relaxed px-6 max-w-3xl mx-auto">
              Designed and patented a sophisticated portable device for real-time monitoring and mapping of sea surface temperature and potential marine pollution anomalies, utilizing advanced neural architectures.
            </p>
         </div>
@@ -138,4 +157,3 @@ export default function Projects() {
     </section>
   );
 }
-

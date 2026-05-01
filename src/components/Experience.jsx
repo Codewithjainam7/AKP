@@ -135,7 +135,7 @@ function TimelineCard({ children, align }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       style={{
-        padding: '28px 32px',
+        padding: '24px 20px',
         borderRadius: '20px',
         background: isHovered
           ? 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(250,245,240,0.95))'
@@ -169,16 +169,11 @@ function TimelineCard({ children, align }) {
 /* ─── Timeline Item Row ─── */
 function TimelineItem({ exp, idx, isLast }) {
   return (
-    <div className="exp-item" style={{
-      display: 'flex', alignItems: 'center',
-      marginBottom: isLast ? '0' : '80px',
-      position: 'relative', zIndex: 1, perspective: '1000px',
-    }}>
+    <div className="exp-item flex lg:items-center relative z-10 perspective-[1000px] mb-12 lg:mb-20">
 
-      {/* Left Column */}
-      <div className="exp-left" style={{ flex: 1, paddingRight: '56px', textAlign: 'right' }}>
+      {/* Left Column (Desktop) / Date (Mobile) */}
+      <div className="exp-left hidden lg:block flex-1 pr-14 text-right">
         <TimelineCard align="right">
-          {/* Date badge */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             padding: '4px 14px', borderRadius: '999px', marginBottom: '12px',
@@ -207,37 +202,33 @@ function TimelineItem({ exp, idx, isLast }) {
         </TimelineCard>
       </div>
 
-      {/* Center Dot */}
-      <MagneticDot isCurrent={exp.current} idx={idx} />
+      {/* Center Dot / Timeline Node */}
+      <div className="relative flex-shrink-0 w-16 lg:w-0 flex items-center justify-center">
+        <MagneticDot isCurrent={exp.current} idx={idx} />
+      </div>
 
-      {/* Connecting Arms */}
-      <div className="exp-arm-left" style={{
-        position: 'absolute', left: 'calc(50% - 40px)', top: '50%',
-        width: '40px', height: '2px',
-        background: exp.current
-          ? 'linear-gradient(to left, rgba(234,88,12,0.4), transparent)'
-          : 'linear-gradient(to left, rgba(0,0,0,0.08), transparent)',
-        transformOrigin: 'right center', zIndex: 3,
-      }}></div>
-      <div className="exp-arm-right" style={{
-        position: 'absolute', left: 'calc(50% + 0px)', top: '50%',
-        width: '40px', height: '2px',
-        background: exp.current
-          ? 'linear-gradient(to right, rgba(234,88,12,0.4), transparent)'
-          : 'linear-gradient(to right, rgba(0,0,0,0.08), transparent)',
-        transformOrigin: 'left center', zIndex: 3,
-      }}></div>
+      {/* Connecting Arms (Desktop only) */}
+      <div className="exp-arm-left hidden lg:block absolute left-[calc(50%-40px)] top-1/2 w-10 h-[2px] bg-gradient-to-l from-[rgba(234,88,12,0.4)] to-transparent origin-right z-[3]"></div>
+      <div className="exp-arm-right hidden lg:block absolute left-[calc(50%)] top-1/2 w-10 h-[2px] bg-gradient-to-r from-[rgba(234,88,12,0.4)] to-transparent origin-left z-[3]"></div>
 
-      {/* Right Column */}
-      <div className="exp-right" style={{ flex: 1, paddingLeft: '56px', textAlign: 'left' }}>
+      {/* Right Column (Content) */}
+      <div className="exp-right flex-1 pl-6 lg:pl-14 text-left">
         <TimelineCard align="left">
+          {/* Mobile Date Display */}
+          <div className="lg:hidden inline-flex items-center gap-2 mb-3">
+             <span style={{ fontSize: '11px', fontWeight: 700, color: '#ea580c', textTransform: 'uppercase', letterSpacing: '1px' }}>{exp.date}</span>
+             {exp.current && <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>}
+          </div>
+          
+          <h3 className="lg:hidden text-lg font-bold text-[#1B1B3A] mb-1">{exp.company}</h3>
+          
           <h3 style={{
-            fontSize: '22px', fontWeight: 700, color: '#1B1B3A',
+            fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 700, color: '#1B1B3A',
             marginBottom: '10px', lineHeight: 1.3,
           }}>{exp.role}</h3>
           <p style={{
             color: '#666', fontSize: '14px', lineHeight: '1.7',
-            maxWidth: '320px',
+            maxWidth: '420px',
           }}>{exp.desc}</p>
         </TimelineCard>
       </div>
@@ -259,6 +250,7 @@ export default function Experience() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      const isMobile = window.innerWidth < 1024;
 
       /* ── Gradient fill scrub on the center line ── */
       gsap.fromTo(lineFillRef.current,
@@ -312,19 +304,26 @@ export default function Experience() {
           tl.from(stepNum, { y: 10, opacity: 0, duration: 0.4, ease: 'power2.out' }, 0.15);
         }
 
-        // Arms grow outward
-        tl.from(armL, { scaleX: 0, duration: 0.4, ease: 'power2.out' }, 0.2);
-        tl.from(armR, { scaleX: 0, duration: 0.4, ease: 'power2.out' }, 0.2);
+        // Arms grow outward (Desktop only)
+        if (armL) tl.from(armL, { scaleX: 0, duration: 0.4, ease: 'power2.out' }, 0.2);
+        if (armR) tl.from(armR, { scaleX: 0, duration: 0.4, ease: 'power2.out' }, 0.2);
 
         // Cards slide + fade
-        tl.from(leftCard, {
-          x: -70, opacity: 0, rotateY: 8,
-          duration: 0.7, ease: 'power3.out',
-        }, 0.25);
-        tl.from(rightCard, {
-          x: 70, opacity: 0, rotateY: -8,
-          duration: 0.7, ease: 'power3.out',
-        }, 0.25);
+        if (isMobile) {
+          tl.from(rightCard, {
+            x: 40, opacity: 0,
+            duration: 0.7, ease: 'power3.out',
+          }, 0.25);
+        } else {
+          tl.from(leftCard, {
+            x: -70, opacity: 0, rotateY: 8,
+            duration: 0.7, ease: 'power3.out',
+          }, 0.25);
+          tl.from(rightCard, {
+            x: 70, opacity: 0, rotateY: -8,
+            duration: 0.7, ease: 'power3.out',
+          }, 0.25);
+        }
       });
 
       /* ── Parallax dots (background decoration) ── */
@@ -341,7 +340,7 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" ref={sectionRef} className="relative z-20 bg-[#0F0F11]">
+    <section id="experience" ref={sectionRef} className="relative z-20 bg-[#0F0F11] overflow-x-hidden">
 
       {/* Dynamic SVG Wave Divider */}
       <div className="w-full overflow-hidden leading-[0] bg-[#0F0F11]">
@@ -366,7 +365,7 @@ export default function Experience() {
             textAlign: 'center', marginBottom: '20px',
             overflow: 'hidden',
           }}>
-            <h2 className="text-5xl lg:text-6xl font-bold tracking-tight text-[#1B1B3A]">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#1B1B3A]">
               My <span className="text-[#ea580c]">Work Experience</span>
             </h2>
           </div>
@@ -380,23 +379,13 @@ export default function Experience() {
           </p>
 
           {/* Timeline */}
-          <div style={{ position: 'relative' }}>
+          <div className="relative">
 
             {/* Center Track Line */}
-            <div ref={lineTrackRef} style={{
-              position: 'absolute', left: '50%', top: 0, bottom: 0,
-              width: '3px', transform: 'translateX(-50%)',
-              backgroundColor: '#ECECEC', borderRadius: '4px', zIndex: 0,
-            }}></div>
+            <div ref={lineTrackRef} className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-[#ECECEC] rounded-full z-0"></div>
 
             {/* Center Gradient Fill Line — scrubbed by scroll */}
-            <div ref={lineFillRef} style={{
-              position: 'absolute', left: '50%', top: 0, bottom: 0,
-              width: '3px', transform: 'translateX(-50%)',
-              background: 'linear-gradient(180deg, #ea580c, #f97316, #fdba74)',
-              borderRadius: '4px', zIndex: 1,
-              transformOrigin: 'top center',
-            }}></div>
+            <div ref={lineFillRef} className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-gradient-to-b from-[#ea580c] via-[#f97316] to-[#fdba74] rounded-full z-[1] origin-top"></div>
 
             {experiences.map((exp, idx) => (
               <TimelineItem key={exp.id} exp={exp} idx={idx} isLast={idx === experiences.length - 1} />

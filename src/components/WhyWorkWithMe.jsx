@@ -44,7 +44,7 @@ function StatItem({ target, suffix = '+', label }) {
   }, [target, suffix, hasAnimated]);
 
   return (
-    <div style={{ flex: 1 }}>
+    <div className="flex flex-col items-center lg:items-start" style={{ flex: 1 }}>
       {/* Tiny accent bar */}
       <div ref={barRef} style={{
         width: '0px', height: '3px', borderRadius: '2px',
@@ -261,7 +261,7 @@ export default function WhyWorkWithMe() {
 
   return (
     <section id="hire" ref={sectionRef} className="section-padding" style={{ backgroundColor: '#FFFFFF', overflow: 'hidden' }}>
-      <div className="container" style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '20px' }}>
+      <div className="container flex flex-col lg:flex-row items-center gap-12 lg:gap-10" style={{ position: 'relative' }}>
 
         {/* ─── Left Side: Photo Block ─── */}
         <motion.div
@@ -269,7 +269,7 @@ export default function WhyWorkWithMe() {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true, margin: '-100px' }}
-          style={{ flex: '0 0 46%', position: 'relative', height: '600px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          className="w-full lg:w-[46%] flex items-center justify-center relative min-h-[450px] lg:h-[600px]"
         >
           {/* Floating accent circles */}
           <div className="why-float-circle" style={{
@@ -289,7 +289,7 @@ export default function WhyWorkWithMe() {
           }}></div>
 
           {/* Vertical Name — NOW ORANGE */}
-          <div className="why-vert-name" style={{
+          <div className="why-vert-name hidden sm:block" style={{
             position: 'absolute', left: '-5px', top: '50%',
             transform: 'translateY(-50%) rotate(-90deg)',
             fontSize: '11px', fontWeight: 500, letterSpacing: '8px',
@@ -301,7 +301,7 @@ export default function WhyWorkWithMe() {
           {/* Large "01" */}
           <div className="why-big-num" style={{
             position: 'absolute', right: '5px', top: '15px',
-            fontSize: '200px', fontWeight: 300, lineHeight: 1,
+            fontSize: 'clamp(120px, 20vw, 200px)', fontWeight: 300, lineHeight: 1,
             background: 'linear-gradient(180deg, rgba(234,88,12,0.08), rgba(234,88,12,0.02))',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             zIndex: 0, userSelect: 'none',
@@ -309,7 +309,7 @@ export default function WhyWorkWithMe() {
           }}>01</div>
 
           {/* L-Border — thinner */}
-          <div className="why-l-border" style={{
+          <div className="why-l-border hidden lg:block" style={{
             position: 'absolute', width: '370px', height: '450px',
             right: '35px', top: '60px', zIndex: 0,
             borderTop: '2px solid rgba(234,88,12,0.5)',
@@ -338,7 +338,7 @@ export default function WhyWorkWithMe() {
             onMouseMove={handlePhotoMouseMove}
             onMouseLeave={handlePhotoMouseLeave}
             style={{
-              width: '350px', height: '430px',
+              width: 'min(350px, 85vw)', height: 'min(430px, 105vw)',
               position: 'relative', zIndex: 1,
               overflow: 'hidden',
               boxShadow: '0 25px 60px rgba(0,0,0,0.08)',
@@ -379,6 +379,7 @@ export default function WhyWorkWithMe() {
             border: '1px solid rgba(234,88,12,0.15)',
             boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
             zIndex: 3,
+            whiteSpace: 'nowrap',
           }}>
             <span style={{
               width: '8px', height: '8px', borderRadius: '50%',
@@ -393,7 +394,7 @@ export default function WhyWorkWithMe() {
           </div>
 
           {/* Caption Line Below */}
-          <div className="why-caption" style={{
+          <div className="why-caption hidden sm:flex" style={{
             position: 'absolute', bottom: '35px', left: '70px', right: '70px',
             display: 'flex', alignItems: 'center', gap: '14px', zIndex: 2,
           }}>
@@ -408,7 +409,7 @@ export default function WhyWorkWithMe() {
         </motion.div>
 
         {/* ─── Right Side: Content ─── */}
-        <div className="why-content-area" style={{ flex: 1, paddingLeft: '40px' }}>
+        <div className="why-content-area w-full lg:flex-1 lg:pl-10 text-center lg:text-left">
 
           {/* Eyebrow label */}
           <div className="why-content-item" style={{
@@ -428,7 +429,7 @@ export default function WhyWorkWithMe() {
 
           {/* Heading — lighter weight */}
           <h2 className="why-content-item" style={{
-            fontSize: '48px', fontWeight: 600, color: '#1B1B3A',
+            fontSize: 'clamp(32px, 8vw, 48px)', fontWeight: 600, color: '#1B1B3A',
             marginBottom: '20px', letterSpacing: '-1px', lineHeight: 1.15,
           }}>
             Why <span style={{
@@ -438,7 +439,7 @@ export default function WhyWorkWithMe() {
           </h2>
 
           {/* Description — lighter */}
-          <p className="why-content-item" style={{
+          <p className="why-content-item mx-auto lg:mx-0" style={{
             color: '#777', fontSize: '15px', lineHeight: 1.8,
             maxWidth: '420px', marginBottom: '24px', fontWeight: 400,
           }}>
@@ -446,30 +447,24 @@ export default function WhyWorkWithMe() {
           </p>
 
           {/* Skill Tags */}
-          <div className="why-content-item" style={{
-            display: 'flex', flexWrap: 'wrap', gap: '8px',
-            marginBottom: '32px',
-          }}>
+          <div className="why-content-item flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
             {skills.map((s, i) => (
               <SkillTag key={s} text={s} delay={i * 0.08} />
             ))}
           </div>
 
           {/* Stats — editorial style with vertical dividers */}
-          <div className="why-content-item" style={{
-            display: 'flex', alignItems: 'flex-start', gap: '0',
-            marginBottom: '36px', padding: '4px 0',
-          }}>
+          <div className="why-content-item flex flex-col sm:flex-row items-center lg:items-start gap-8 sm:gap-0 mb-10 py-1">
             <StatItem target={7} suffix="+" label="Patents Issued" />
-            <div style={{ width: '1px', alignSelf: 'stretch', background: 'linear-gradient(to bottom, transparent, #E5E5E5, transparent)', margin: '0 20px', flexShrink: 0 }}></div>
+            <div className="hidden sm:block" style={{ width: '1px', alignSelf: 'stretch', background: 'linear-gradient(to bottom, transparent, #E5E5E5, transparent)', margin: '0 20px', flexShrink: 0 }}></div>
             <StatItem target={16} suffix="+" label="Research Publications" />
-            <div style={{ width: '1px', alignSelf: 'stretch', background: 'linear-gradient(to bottom, transparent, #E5E5E5, transparent)', margin: '0 20px', flexShrink: 0 }}></div>
+            <div className="hidden sm:block" style={{ width: '1px', alignSelf: 'stretch', background: 'linear-gradient(to bottom, transparent, #E5E5E5, transparent)', margin: '0 20px', flexShrink: 0 }}></div>
             <StatItem target={3} suffix="+" label="Years Teaching" />
           </div>
 
           {/* CTA */}
           <div className="why-content-item">
-            <MagneticButton href="#contact">
+            <MagneticButton href="https://wa.me/918369831270">
               Let's Connect
             </MagneticButton>
           </div>

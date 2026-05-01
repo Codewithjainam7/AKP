@@ -86,17 +86,19 @@ export default function Publications() {
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 md:mb-20"
+          transition={{ duration: 0.8 }}
+          className="text-center mb-20 md:mb-24"
         >
-          <div className="inline-flex items-center gap-2.5 text-primary-600 mb-4 font-bold uppercase tracking-[0.2em] text-xs sm:text-sm">
-            <GraduationCap size={18} />
+          <div className="inline-flex items-center gap-2.5 text-[#ea580c] mb-6 font-black uppercase tracking-[0.3em] text-xs sm:text-sm" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
+            <div className="w-10 h-[1px] bg-[#ea580c]"></div>
+            <GraduationCap size={20} />
             Research Work
+            <div className="w-10 h-[1px] bg-[#ea580c]"></div>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            International <span className="text-primary-600">Publications</span>
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-8 tracking-tighter" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
+            International <span className="text-[#ea580c]">Publications</span>
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-400 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
             Exploring the frontiers of Machine Learning and Image Processing through peer-reviewed research and practical applications.
           </p>
         </motion.div>
