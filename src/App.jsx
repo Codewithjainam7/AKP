@@ -5,7 +5,6 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
-import CustomCursor from './components/CustomCursor';
 
 import Home from './pages/Home';
 import Research from './pages/Research';
@@ -81,7 +80,6 @@ function AppContent() {
 
   return (
     <div className="app-container overflow-x-hidden max-w-[100vw]">
-      <CustomCursor />
       <Navbar />
       <main>
         <AnimatePresence mode="wait">
