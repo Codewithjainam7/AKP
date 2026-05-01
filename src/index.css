@@ -107,6 +107,15 @@
   ul {
     list-style: none;
   }
+
+  @media (min-width: 768px) {
+    body {
+      cursor: none !important;
+    }
+    a, button, [role="button"] {
+      cursor: none !important;
+    }
+  }
 }
 
 @layer components {
