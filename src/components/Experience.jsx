@@ -1,417 +1,216 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
+import { Briefcase, GraduationCap, Calendar, ChevronRight, Sparkles } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ─── Magnetic Dot ─── */
-function MagneticDot({ isCurrent, idx }) {
-  const dotRef = useRef(null);
-  const magnetStrength = 0.4;
+const EXPERIENCES = [
+  {
+    id: 1,
+    type: 'work',
+    company: 'Thakur College of Science and Commerce',
+    role: 'Assistant Professor',
+    date: '2024 – Present',
+    desc: 'Specializing in the Department of AI & ML. Leading courses on Artificial Intelligence, Machine Learning (ML), and Deep Learning (DL). Mentoring students in advanced neural architectures.',
+    current: true,
+    tags: ['AI', 'ML', 'Deep Learning', 'Teaching']
+  },
+  {
+    id: 2,
+    type: 'edu',
+    company: 'Mumbai University',
+    role: 'M.Sc Information Technology',
+    date: '2022 – 2024',
+    desc: 'Advanced studies in IT with a focus on data science and intelligent systems. Conducted research in sea surface temperature prediction models.',
+    current: false,
+    tags: ['Master\'s', 'Research', 'Data Science']
+  },
+  {
+    id: 3,
+    type: 'edu',
+    company: 'Mumbai University',
+    role: 'B.Sc Information Technology',
+    date: '2014 – 2017',
+    desc: 'Foundational degree in Information Technology, focusing on software development, algorithms, and database management systems.',
+    current: false,
+    tags: ['Bachelor\'s', 'Software Dev']
+  }
+];
 
-  const handleMouseMove = useCallback((e) => {
-    const dot = dotRef.current;
-    if (!dot) return;
-    const rect = dot.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = (e.clientX - cx) * magnetStrength;
-    const dy = (e.clientY - cy) * magnetStrength;
-    gsap.to(dot, { x: dx, y: dy, duration: 0.4, ease: 'power3.out' });
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    gsap.to(dotRef.current, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1,0.4)' });
-  }, []);
-
-  return (
-    <div
-      className="exp-dot"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 5,
-        cursor: 'pointer',
-      }}
-    >
-      <div
-        ref={dotRef}
-        style={{
-          width: isCurrent ? '44px' : '36px',
-          height: isCurrent ? '44px' : '36px',
-          borderRadius: '50%',
-          background: isCurrent
-            ? 'linear-gradient(135deg, #ea580c, #f97316)'
-            : '#FFFFFF',
-          border: isCurrent ? 'none' : '3px solid #E5E5E5',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          transition: 'border-color 0.3s, background 0.3s',
-          boxShadow: isCurrent
-            ? '0 0 0 8px rgba(234,88,12,0.12), 0 0 30px rgba(234,88,12,0.2), 0 4px 20px rgba(0,0,0,0.1)'
-            : '0 2px 10px rgba(0,0,0,0.06)',
-          position: 'relative',
-        }}
-      >
-        {/* Inner icon */}
-        {isCurrent ? (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        ) : (
-          <div style={{
-            width: '10px', height: '10px', borderRadius: '50%',
-            backgroundColor: '#D4D4D4',
-          }}></div>
-        )}
-        {/* Pulse rings for current */}
-        {isCurrent && (
-          <>
-            <span className="exp-pulse-1" style={{
-              position: 'absolute', inset: '-6px', borderRadius: '50%',
-              border: '2px solid rgba(234,88,12,0.4)', opacity: 0,
-            }}></span>
-            <span className="exp-pulse-2" style={{
-              position: 'absolute', inset: '-6px', borderRadius: '50%',
-              border: '2px solid rgba(234,88,12,0.3)', opacity: 0,
-            }}></span>
-          </>
-        )}
-      </div>
-      {/* Step number badge */}
-      <div className="exp-step-num" style={{
-        position: 'absolute', top: '-30px', left: '50%', transform: 'translateX(-50%)',
-        fontSize: '11px', fontWeight: 700, color: isCurrent ? '#ea580c' : '#BABABA',
-        fontFamily: 'var(--font-mono, monospace)', letterSpacing: '1px',
-        whiteSpace: 'nowrap',
-        backgroundColor: '#FAFAFA',
-        padding: '2px 8px',
-        borderRadius: '4px',
-        zIndex: 6,
-      }}>
-        0{idx + 1}
-      </div>
-    </div>
-  );
-}
-
-/* ─── Timeline Card ─── */
-function TimelineCard({ children, align }) {
+function TimelineCard({ exp, idx }) {
   const cardRef = useRef(null);
-  const glowRef = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const isEven = idx % 2 === 0;
 
-  const handleMouseMove = (e) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const rX = ((y - cy) / cy) * -6;
-    const rY = ((x - cx) / cx) * 6;
-    gsap.to(card, { rotateX: rX, rotateY: rY, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
-    if (glowRef.current) {
-      gsap.to(glowRef.current, { x: x - 120, y: y - 120, opacity: 1, duration: 0.3, ease: 'power2.out' });
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    gsap.to(cardRef.current, { rotateX: 0, rotateY: 0, duration: 0.7, ease: 'elastic.out(1,0.4)', overwrite: 'auto' });
-    if (glowRef.current) gsap.to(glowRef.current, { opacity: 0, duration: 0.4 });
-  };
+  useEffect(() => {
+    const el = cardRef.current;
+    
+    gsap.fromTo(el,
+      { 
+        opacity: 0, 
+        x: isEven ? -50 : 50, 
+        scale: 0.9,
+        rotateY: isEven ? 10 : -10 
+      },
+      {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        rotateY: 0,
+        duration: 1,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  }, [isEven]);
 
   return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        padding: '24px 20px',
-        borderRadius: '20px',
-        background: isHovered
-          ? 'linear-gradient(135deg, rgba(255,255,255,0.98), rgba(250,245,240,0.95))'
-          : 'rgba(255,255,255,0.6)',
-        backdropFilter: 'blur(12px)',
-        border: isHovered ? '1px solid rgba(234,88,12,0.2)' : '1px solid rgba(0,0,0,0.05)',
-        boxShadow: isHovered
-          ? '0 20px 50px rgba(234,88,12,0.08), 0 8px 20px rgba(0,0,0,0.04)'
-          : '0 2px 10px rgba(0,0,0,0.02)',
-        transition: 'background 0.4s, border-color 0.4s, box-shadow 0.4s',
-        position: 'relative',
-        overflow: 'hidden',
-        transformStyle: 'preserve-3d',
-        cursor: 'default',
-        willChange: 'transform',
-      }}
-    >
-      {/* Cursor glow orb */}
-      <div ref={glowRef} style={{
-        position: 'absolute', width: '240px', height: '240px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(234,88,12,0.12) 0%, transparent 70%)',
-        pointerEvents: 'none', opacity: 0, zIndex: 0, filter: 'blur(20px)',
-      }}></div>
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        {children}
+    <div className={`relative flex items-center justify-between w-full mb-20 lg:mb-32 ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+      {/* Timeline Node */}
+      <div className="absolute left-8 lg:left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 z-20">
+        <div className={`w-6 h-6 rounded-full border-4 border-[#0F0F11] shadow-[0_0_20px_rgba(234,88,12,0.5)] flex items-center justify-center transition-all duration-500 ${exp.current ? 'bg-primary-500 scale-125' : 'bg-slate-700 scale-100'}`}>
+          {exp.current && <div className="absolute inset-0 rounded-full bg-primary-500 animate-ping opacity-25" />}
+        </div>
       </div>
+
+      {/* Card Content */}
+      <div ref={cardRef} className="w-full lg:w-[45%] ml-16 lg:ml-0">
+        <div className="group relative p-8 rounded-[40px] bg-white/[0.03] backdrop-blur-xl border border-white/10 hover:border-primary-500/30 transition-all duration-700 hover:bg-white/[0.05] hover:shadow-[0_40px_80px_rgba(0,0,0,0.3)] overflow-hidden">
+          {/* Animated Gradient Border Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+          
+          <div className="relative z-10">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className={`p-3 rounded-2xl ${exp.type === 'work' ? 'bg-primary-500/10 text-primary-500' : 'bg-blue-500/10 text-blue-500'}`}>
+                  {exp.type === 'work' ? <Briefcase size={20} /> : <GraduationCap size={20} />}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                    {exp.date}
+                  </span>
+                  {exp.current && (
+                    <span className="text-[9px] font-bold text-primary-500 uppercase tracking-tighter animate-pulse">
+                      Currently Active
+                    </span>
+                  )}
+                </div>
+              </div>
+              <Sparkles size={16} className="text-white/10 group-hover:text-primary-500/40 transition-colors duration-700" />
+            </div>
+
+            <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2 leading-tight group-hover:text-primary-400 transition-colors duration-500" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
+              {exp.role}
+            </h3>
+            <p className="text-primary-500/80 font-bold text-sm mb-6 flex items-center gap-2">
+              <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              {exp.company}
+            </p>
+            
+            <p className="text-slate-400 leading-relaxed mb-8 text-sm sm:text-base">
+              {exp.desc}
+            </p>
+
+            <div className="flex flex-wrap gap-2">
+              {exp.tags.map(tag => (
+                <span key={tag} className="px-4 py-1.5 rounded-full bg-white/5 border border-white/5 text-slate-500 text-[10px] font-bold uppercase tracking-wider group-hover:border-primary-500/20 group-hover:text-slate-300 transition-all duration-500">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Spacer for desktop layout */}
+      <div className="hidden lg:block lg:w-[45%]" />
     </div>
   );
 }
 
-/* ─── Timeline Item Row ─── */
-function TimelineItem({ exp, idx, isLast }) {
-  return (
-    <div className="exp-item flex lg:items-center relative z-10 perspective-[1000px] mb-12 lg:mb-20">
-
-      {/* Left Column (Desktop) / Date (Mobile) */}
-      <div className="exp-left hidden lg:block flex-1 pr-14 text-right">
-        <TimelineCard align="right">
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: '6px',
-            padding: '4px 14px', borderRadius: '999px', marginBottom: '12px',
-            background: exp.current
-              ? 'linear-gradient(135deg, rgba(234,88,12,0.12), rgba(249,115,22,0.08))'
-              : 'rgba(0,0,0,0.04)',
-            border: exp.current ? '1px solid rgba(234,88,12,0.2)' : '1px solid transparent',
-          }}>
-            {exp.current && (
-              <span style={{
-                width: '6px', height: '6px', borderRadius: '50%',
-                backgroundColor: '#ea580c', display: 'inline-block',
-                animation: 'blink 1.5s ease-in-out infinite',
-              }}></span>
-            )}
-            <span style={{
-              fontSize: '12px', fontWeight: 600,
-              color: exp.current ? '#ea580c' : '#999',
-              fontFamily: 'var(--font-mono, monospace)', letterSpacing: '0.5px',
-            }}>{exp.date}</span>
-          </div>
-          <h3 style={{
-            fontSize: '22px', fontWeight: 700, color: '#1B1B3A',
-            marginBottom: '4px', lineHeight: 1.3,
-          }}>{exp.company}</h3>
-        </TimelineCard>
-      </div>
-
-      {/* Center Dot / Timeline Node */}
-      <div className="relative flex-shrink-0 w-16 lg:w-0 flex items-center justify-center">
-        <MagneticDot isCurrent={exp.current} idx={idx} />
-      </div>
-
-      {/* Connecting Arms (Desktop only) */}
-      <div className="exp-arm-left hidden lg:block absolute left-[calc(50%-40px)] top-1/2 w-10 h-[2px] bg-gradient-to-l from-[rgba(234,88,12,0.4)] to-transparent origin-right z-[3]"></div>
-      <div className="exp-arm-right hidden lg:block absolute left-[calc(50%)] top-1/2 w-10 h-[2px] bg-gradient-to-r from-[rgba(234,88,12,0.4)] to-transparent origin-left z-[3]"></div>
-
-      {/* Right Column (Content) */}
-      <div className="exp-right flex-1 pl-6 lg:pl-14 text-left">
-        <TimelineCard align="left">
-          {/* Mobile Date Display */}
-          <div className="lg:hidden inline-flex items-center gap-2 mb-3">
-             <span style={{ fontSize: '11px', fontWeight: 700, color: '#ea580c', textTransform: 'uppercase', letterSpacing: '1px' }}>{exp.date}</span>
-             {exp.current && <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>}
-          </div>
-          
-          <h3 className="lg:hidden text-lg font-bold text-[#1B1B3A] mb-1">{exp.company}</h3>
-          
-          <h3 style={{
-            fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 700, color: '#1B1B3A',
-            marginBottom: '10px', lineHeight: 1.3,
-          }}>{exp.role}</h3>
-          <p style={{
-            color: '#666', fontSize: '14px', lineHeight: '1.7',
-            maxWidth: '420px',
-          }}>{exp.desc}</p>
-        </TimelineCard>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Main Section ─── */
 export default function Experience() {
-  const sectionRef = useRef(null);
-  const lineTrackRef = useRef(null);
+  const containerRef = useRef(null);
   const lineFillRef = useRef(null);
-
-  const experiences = [
-    { id: 1, company: 'Assistant Professor', date: '2024 – Present', role: 'Thakur College of Science and Commerce', desc: 'Department of AI & ML. Courses Taught: Artificial Intelligence, Machine Learning (ML), Deep Learning (DL).', current: true },
-    { id: 2, company: 'M.Sc Information Technology', date: '2022 – 2024', role: 'Mumbai University', desc: 'Completed Master\'s from Thakur College of Science and Commerce, Mumbai.', current: false },
-    { id: 3, company: 'B.Sc Information Technology', date: '2014 – 2017', role: 'Mumbai University', desc: 'Completed Bachelor\'s from Thakur College of Science and Commerce, Mumbai.', current: false },
-  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const isMobile = window.innerWidth < 1024;
-
-      /* ── Gradient fill scrub on the center line ── */
+      // Timeline Line Progress
       gsap.fromTo(lineFillRef.current,
         { scaleY: 0 },
         {
           scaleY: 1,
-          ease: 'none',
+          ease: "none",
           scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 55%',
-            end: 'bottom 75%',
-            scrub: 0.6,
-          },
+            trigger: containerRef.current,
+            start: "top 60%",
+            end: "bottom 80%",
+            scrub: true,
+          }
         }
       );
 
-      /* ── Heading reveal ── */
-      gsap.from('.exp-heading h2', {
-        y: 50, opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: '.exp-heading', start: 'top 85%' },
-      });
-
-      /* ── Subtitle ── */
-      gsap.from('.exp-subtitle', {
-        y: 20, opacity: 0, duration: 0.7, delay: 0.4,
-        ease: 'power2.out',
-        scrollTrigger: { trigger: '.exp-heading', start: 'top 85%' },
-      });
-
-      /* ── Staggered timeline items ── */
-      const items = document.querySelectorAll('.exp-item');
-      items.forEach((item, i) => {
-        const leftCard = item.querySelector('.exp-left');
-        const rightCard = item.querySelector('.exp-right');
-        const dot = item.querySelector('.exp-dot');
-        const armL = item.querySelector('.exp-arm-left');
-        const armR = item.querySelector('.exp-arm-right');
-        const stepNum = item.querySelector('.exp-step-num');
-
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: item, start: 'top 82%' },
-        });
-
-        // Dot scale-in
-        tl.from(dot, { scale: 0, duration: 0.5, ease: 'back.out(3)' }, 0);
-
-        // Step number
-        if (stepNum) {
-          tl.from(stepNum, { y: 10, opacity: 0, duration: 0.4, ease: 'power2.out' }, 0.15);
-        }
-
-        // Arms grow outward (Desktop only)
-        if (armL) tl.from(armL, { scaleX: 0, duration: 0.4, ease: 'power2.out' }, 0.2);
-        if (armR) tl.from(armR, { scaleX: 0, duration: 0.4, ease: 'power2.out' }, 0.2);
-
-        // Cards slide + fade
-        if (isMobile) {
-          tl.from(rightCard, {
-            x: 40, opacity: 0,
-            duration: 0.7, ease: 'power3.out',
-          }, 0.25);
-        } else {
-          tl.from(leftCard, {
-            x: -70, opacity: 0, rotateY: 8,
-            duration: 0.7, ease: 'power3.out',
-          }, 0.25);
-          tl.from(rightCard, {
-            x: 70, opacity: 0, rotateY: -8,
-            duration: 0.7, ease: 'power3.out',
-          }, 0.25);
+      // Header Animation
+      gsap.from(".exp-header", {
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
         }
       });
+    }, containerRef);
 
-      /* ── Parallax dots (background decoration) ── */
-      const decos = document.querySelectorAll('.exp-deco-dot');
-      decos.forEach((d) => {
-        gsap.to(d, {
-          y: () => gsap.utils.random(-40, 40),
-          scrollTrigger: { trigger: sectionRef.current, start: 'top bottom', end: 'bottom top', scrub: 1 },
-        });
-      });
-
-    }, sectionRef);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section id="experience" ref={sectionRef} className="relative z-20 bg-[#0F0F11] overflow-x-hidden">
+    <section id="career" className="relative bg-[#0F0F11] py-32 overflow-hidden" ref={containerRef}>
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-500/5 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+      
+      {/* Texture Overlay */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
 
-      {/* Dynamic SVG Wave Divider */}
-      <div className="w-full overflow-hidden leading-[0] bg-[#0F0F11]">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none" className="w-full h-[60px] md:h-[120px] block" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#FAFAFA" d="M0,60L48,65.3C96,71,192,82,288,78.2C384,75,480,57,576,50C672,43,768,46,864,56.3C960,67,1056,84,1152,82.2C1248,80,1344,60,1392,50L1440,40L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z"></path>
-        </svg>
-      </div>
-
-      <div className="relative pt-8 pb-24 bg-[#FAFAFA] section-padding overflow-hidden">
-
-        {/* Decorative floating dots */}
-        <div className="exp-deco-dot" style={{ position: 'absolute', top: '15%', left: '8%', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'rgba(234,88,12,0.15)' }}></div>
-        <div className="exp-deco-dot" style={{ position: 'absolute', top: '40%', right: '6%', width: '12px', height: '12px', borderRadius: '50%', border: '2px solid rgba(234,88,12,0.15)' }}></div>
-        <div className="exp-deco-dot" style={{ position: 'absolute', top: '65%', left: '5%', width: '6px', height: '6px', borderRadius: '50%', backgroundColor: 'rgba(234,88,12,0.1)' }}></div>
-        <div className="exp-deco-dot" style={{ position: 'absolute', top: '80%', right: '10%', width: '10px', height: '10px', borderRadius: '50%', border: '2px solid rgba(0,0,0,0.06)' }}></div>
-        <div className="exp-deco-dot" style={{ position: 'absolute', top: '25%', right: '15%', width: '5px', height: '5px', borderRadius: '50%', backgroundColor: 'rgba(0,0,0,0.06)' }}></div>
-
-        <div className="container" style={{ maxWidth: '960px' }}>
-
-          {/* Heading */}
-          <div className="exp-heading" style={{
-            textAlign: 'center', marginBottom: '20px',
-            overflow: 'hidden',
-          }}>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[#1B1B3A]">
-              My <span className="text-[#ea580c]">Work Experience</span>
-            </h2>
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <div className="text-center mb-32 exp-header">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-500 text-xs font-black uppercase tracking-[0.2em] mb-8">
+            <Calendar size={14} />
+            Career Journey
           </div>
-
-          {/* Subtitle */}
-          <p className="exp-subtitle" style={{
-            textAlign: 'center', color: '#888', fontSize: '15px',
-            maxWidth: '420px', margin: '0 auto 72px', lineHeight: 1.7,
-          }}>
-            A timeline of academic milestones and professional growth in AI & Machine Learning.
+          <h2 className="text-5xl sm:text-7xl font-bold text-white mb-8 tracking-tighter" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
+            Experience & <span className="text-primary-500 relative">Education</span>
+          </h2>
+          <p className="text-slate-500 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed">
+            A track record of academic excellence and professional innovation in the field of <span className="text-white">Artificial Intelligence</span>.
           </p>
+        </div>
 
-          {/* Timeline */}
-          <div className="relative">
+        <div className="relative max-w-6xl mx-auto">
+          {/* Main Timeline Line */}
+          <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-white/5" />
+          
+          {/* Animated Progress Line */}
+          <div 
+            ref={lineFillRef}
+            className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-gradient-to-b from-primary-500 via-primary-600 to-blue-500 origin-top z-10"
+          />
 
-            {/* Center Track Line */}
-            <div ref={lineTrackRef} className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-[#ECECEC] rounded-full z-0"></div>
-
-            {/* Center Gradient Fill Line — scrubbed by scroll */}
-            <div ref={lineFillRef} className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-[3px] -translate-x-1/2 bg-gradient-to-b from-[#ea580c] via-[#f97316] to-[#fdba74] rounded-full z-[1] origin-top"></div>
-
-            {experiences.map((exp, idx) => (
-              <TimelineItem key={exp.id} exp={exp} idx={idx} isLast={idx === experiences.length - 1} />
+          <div className="flex flex-col">
+            {EXPERIENCES.map((exp, idx) => (
+              <TimelineCard key={exp.id} exp={exp} idx={idx} />
             ))}
           </div>
-
         </div>
       </div>
 
-      {/* Inline keyframes */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes dotPulse {
-          0% { transform: scale(1); opacity: 0.6; }
-          100% { transform: scale(2.8); opacity: 0; }
-        }
-        @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.3; }
-        }
-        .exp-pulse-1 {
-          animation: dotPulse 2s ease-out infinite;
-        }
-        .exp-pulse-2 {
-          animation: dotPulse 2s ease-out infinite 0.7s;
-        }
-      `}} />
     </section>
   );
 }

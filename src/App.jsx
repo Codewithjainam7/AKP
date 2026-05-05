@@ -8,6 +8,7 @@ import Chatbot from './components/Chatbot';
 
 import Home from './pages/Home';
 import Research from './pages/Research';
+import Career from './pages/Career';
 
 
 import gsap from 'gsap';
@@ -86,6 +87,7 @@ function AppContent() {
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/research" element={<Research />} />
+            <Route path="/career" element={<Career />} />
           </Routes>
         </AnimatePresence>
       </main>

@@ -9,7 +9,7 @@ const NAV_ITEMS = [
   { name: 'About', href: '/#about' },
   { name: 'Research', href: '/research' },
   { name: 'Patents', href: '/research#patents' },
-  { name: 'Career', href: '/#experience' },
+  { name: 'Career', href: '/career' },
   { name: 'Contact', href: '/#contact' },
 ];
 
@@ -74,7 +74,7 @@ const Navbar = () => {
           <div className="md:w-1/3 flex justify-end">
             <ul className="hidden md:flex items-center space-x-8">
               <li><Magnetic><Link to="/research#patents" className="text-white hover:text-primary-600 transition-colors inline-block">Patents</Link></Magnetic></li>
-              <li><Magnetic><Link to="/#experience" className="text-white hover:text-primary-600 transition-colors inline-block">Career</Link></Magnetic></li>
+              <li><Magnetic><Link to="/career" className="text-white hover:text-primary-600 transition-colors inline-block">Career</Link></Magnetic></li>
               <li><Magnetic><Link to="/#contact" className="text-white hover:text-primary-600 transition-colors inline-block">Contact</Link></Magnetic></li>
             </ul>
             <button 
