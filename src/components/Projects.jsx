@@ -1,11 +1,22 @@
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef, useEffect } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import GSAPTextReveal from './GSAPTextReveal';
-import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Sparkles, BookOpen } from 'lucide-react';
+import Magnetic from './Magnetic';
+import gsap from 'gsap';
 
 export default function Projects() {
   const scrollRef = useRef(null);
+  const sectionRef = useRef(null);
   
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
   const portfolio = [
     { 
       title: 'Sea Surface Temperature Device', 
@@ -42,77 +53,109 @@ export default function Projects() {
   const tags = ['Research', 'Patents', 'Machine Learning', 'Data Science', 'Publications'];
 
   return (
-    <section id="project" className="py-24 bg-white" style={{ fontFamily: 'var(--font-body)' }}>
-      <div className="container mx-auto px-6 lg:px-12">
+    <section id="project" className="py-32 bg-white relative overflow-hidden" style={{ fontFamily: 'var(--font-body)' }} ref={sectionRef}>
+      {/* Subtle Background Elements */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-500/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-orange-500/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+
+      <div className="container mx-auto px-6 lg:px-12 relative z-10">
         
-        <div className="flex flex-col md:flex-row justify-between items-start mb-12 md:mb-20 gap-8">
-          <div className="text-4xl sm:text-5xl lg:text-7xl text-[#1B1B3A] font-bold tracking-tighter leading-[1.05] max-w-3xl" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
-            <GSAPTextReveal text="Lets have a look at my Research" />
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 md:mb-28 gap-10">
+          <div className="space-y-6 max-w-4xl">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-50 border border-slate-100 text-slate-500 text-[10px] font-black uppercase tracking-[0.2em]"
+            >
+              <BookOpen size={14} className="text-primary-600" />
+              Academic Journey
+            </motion.div>
+            
+            <div className="text-5xl sm:text-7xl lg:text-8xl text-[#1B1B3A] font-bold tracking-tighter leading-[0.95]" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
+              <GSAPTextReveal text="Let's have a look at my Research" />
+            </div>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-slate-400 text-lg sm:text-xl max-w-2xl font-medium leading-relaxed"
+            >
+              Exploring the intersection of <span className="text-slate-900">Machine Learning</span> and <span className="text-slate-900">Environmental Science</span> through innovative patents and software models.
+            </motion.p>
           </div>
           
-          <button 
-            onClick={handleSeeAll}
-            className="bg-[#ea580c] text-white rounded-full px-10 py-4 font-bold hover:bg-[#f97316] transition-all duration-300 shadow-xl shadow-orange-600/20 whitespace-nowrap active:scale-95"
-          >
-            See All
-          </button>
+          <Magnetic>
+            <button 
+              onClick={handleSeeAll}
+              className="group relative bg-[#ea580c] text-white rounded-full px-12 py-5 font-bold transition-all duration-500 shadow-2xl shadow-orange-600/20 whitespace-nowrap active:scale-95 overflow-hidden"
+            >
+              <span className="relative z-10">Explore All</span>
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+            </button>
+          </Magnetic>
         </div>
 
         {/* Carousel Container */}
-        <div className="relative mb-16 group">
-          {/* Navigation Buttons */}
-          <button 
-            onClick={() => scroll('left')}
-            className="absolute -left-2 sm:-left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white text-[#ea580c] flex items-center justify-center z-20 shadow-2xl border border-orange-100 hover:bg-[#ea580c] hover:text-white transition-all duration-300 active:scale-90"
-            aria-label="Previous project"
-          >
-            <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
-
-          <button 
-            onClick={() => scroll('right')}
-            className="absolute -right-2 sm:-right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-white text-[#ea580c] flex items-center justify-center z-20 shadow-2xl border border-orange-100 hover:bg-[#ea580c] hover:text-white transition-all duration-300 active:scale-90"
-            aria-label="Next project"
-          >
-            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
-          </button>
+        <div className="relative mb-24 group/carousel">
+          {/* Custom Navigation */}
+          <div className="absolute -top-12 right-0 flex gap-4 z-20">
+            <button 
+              onClick={() => scroll('left')}
+              className="w-12 h-12 rounded-full bg-slate-50 text-slate-400 flex items-center justify-center border border-slate-100 hover:bg-primary-50 hover:text-primary-600 hover:border-primary-200 transition-all duration-300"
+            >
+              <ArrowLeft size={20} />
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              className="w-12 h-12 rounded-full bg-slate-50 text-slate-400 flex items-center justify-center border border-slate-100 hover:bg-primary-50 hover:text-primary-600 hover:border-primary-200 transition-all duration-300"
+            >
+              <ArrowRight size={20} />
+            </button>
+          </div>
 
           <div 
             ref={scrollRef}
-            className="flex gap-6 md:gap-10 overflow-x-auto pb-10 scrollbar-hide snap-x snap-mandatory"
+            className="flex gap-8 md:gap-12 overflow-x-auto pb-10 scrollbar-hide snap-x snap-mandatory pr-[10%]"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', scrollBehavior: 'smooth' }}
           >
             {portfolio.map((item, idx) => (
               <motion.div 
                 key={idx} 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.23, 1, 0.32, 1] }}
-                viewport={{ once: true, margin: "-50px" }}
-                className="flex-none w-[90%] sm:w-[48%] min-w-[300px] snap-center lg:snap-start"
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: idx * 0.1 }}
+                viewport={{ once: true }}
+                className="flex-none w-[90%] sm:w-[550px] snap-center lg:snap-start"
               >
-                 <div className="group/card relative rounded-[40px] overflow-hidden bg-slate-50 aspect-[4/5] sm:aspect-auto shadow-2xl shadow-slate-200 transition-transform duration-500 hover:-translate-y-2">
+                 <div className="group/card relative rounded-[48px] overflow-hidden bg-slate-100 aspect-[4/5] sm:aspect-[1.2/1] shadow-2xl shadow-slate-200/50 transition-all duration-700 hover:shadow-orange-600/10">
                     <motion.img 
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.8 }}
+                      whileHover={{ scale: 1.1 }}
+                      transition={{ duration: 1.2, ease: [0.33, 1, 0.68, 1] }}
                       src={item.img} 
                       alt={item.title} 
-                      className="w-full h-full sm:h-[500px] object-cover" 
+                      className="w-full h-full object-cover grayscale-[0.2] group-hover/card:grayscale-0 transition-all duration-700" 
                     />
                     
-                    {/* Floating Info Card */}
-                    <div className="absolute bottom-6 left-6 right-6 sm:bottom-10 sm:left-10 sm:right-10 bg-white/90 backdrop-blur-2xl p-8 rounded-[32px] border border-white/50 shadow-2xl transition-all duration-500 group-hover/card:bg-white group-hover/card:shadow-orange-600/10">
-                       <div className="text-[#ea580c] font-black text-[10px] sm:text-xs uppercase tracking-[0.25em] mb-3" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
+                    {/* Glassmorphism Info Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1B1B3A]/80 via-transparent to-transparent opacity-60 group-hover/card:opacity-80 transition-opacity duration-700" />
+                    
+                    <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-12 transform translate-y-4 group-hover/card:translate-y-0 transition-transform duration-700">
+                       <div className="flex items-center gap-3 text-primary-400 font-black text-[10px] uppercase tracking-[0.3em] mb-4" style={{ fontFamily: 'var(--font-mono, monospace)' }}>
+                         <Sparkles size={14} />
                          {item.category}
                        </div>
-                       <h3 className="text-2xl sm:text-3xl font-bold text-[#1B1B3A] leading-tight" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
+                       <h3 className="text-3xl sm:text-4xl font-bold text-white leading-tight mb-4" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
                          {item.title}
                        </h3>
+                       <p className="text-white/60 text-sm sm:text-base leading-relaxed line-clamp-2 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 delay-100">
+                         {item.desc}
+                       </p>
                     </div>
 
-                    {/* Quick View Icon */}
-                    <div className="absolute top-6 right-6 w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white opacity-0 group-hover/card:opacity-100 transition-opacity duration-300">
-                      <ArrowUpRight className="w-6 h-6" />
+                    <div className="absolute top-8 right-8 w-14 h-14 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full flex items-center justify-center text-white scale-0 group-hover/card:scale-100 transition-transform duration-500 delay-200">
+                      <ArrowUpRight className="w-7 h-7" />
                     </div>
                  </div>
               </motion.div>
@@ -120,38 +163,45 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Carousel Pagination */}
-        <div className="flex justify-center gap-3 mb-20">
-          <div className="w-10 h-1.5 rounded-full bg-[#ea580c]"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
-          <div className="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
-        </div>
-
         {/* Tags */}
-        <div className="flex justify-center gap-3 sm:gap-4 flex-wrap mb-24">
+        <div className="flex justify-center gap-3 sm:gap-5 flex-wrap mb-32">
           {tags.map((tag, idx) => (
-             <button key={idx} className="px-7 py-3 rounded-full bg-white border border-slate-100 text-[#1B1B3A] text-sm font-bold hover:border-[#ea580c] hover:text-[#ea580c] hover:shadow-lg hover:shadow-orange-600/5 transition-all duration-300 active:scale-95">
-               {tag}
+             <button key={idx} className="group relative px-8 py-3.5 rounded-full bg-slate-50 border border-slate-100 text-[#1B1B3A] text-sm font-bold transition-all duration-500 hover:text-white hover:border-primary-600 active:scale-95 overflow-hidden">
+               <span className="relative z-10">{tag}</span>
+               <div className="absolute inset-0 bg-primary-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
              </button>
           ))}
         </div>
 
-        {/* Highlight Section */}
-        <div className="text-center max-w-4xl mx-auto pb-20 relative">
-           {/* Decorative Element */}
-           <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-orange-600/5 blur-3xl rounded-full"></div>
-
-           <h3 className="text-3xl sm:text-4xl font-bold text-[#1B1B3A] mb-6 flex items-center justify-center gap-4 flex-wrap" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
-              Sea Surface Temperature Predicting Device
-              <button className="w-12 h-12 rounded-full bg-[#ea580c] text-white flex items-center justify-center hover:scale-110 hover:rotate-45 transition-all duration-500 shadow-xl shadow-orange-600/20">
-                <ArrowUpRight className="w-6 h-6" />
-              </button>
-           </h3>
-           <p className="text-slate-500 text-lg sm:text-xl leading-relaxed px-6 max-w-3xl mx-auto">
-             Designed and patented a sophisticated portable device for real-time monitoring and mapping of sea surface temperature and potential marine pollution anomalies, utilizing advanced neural architectures.
-           </p>
-        </div>
+        {/* Bottom Highlight */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="bg-slate-50 rounded-[60px] p-12 sm:p-20 text-center relative overflow-hidden border border-slate-100"
+        >
+           <div className="absolute top-0 right-0 w-64 h-64 bg-primary-500/5 blur-[80px] rounded-full -translate-y-1/2 translate-x-1/2" />
+           
+           <div className="relative z-10 max-w-4xl mx-auto">
+             <div className="w-16 h-16 rounded-2xl bg-primary-600/10 flex items-center justify-center text-primary-600 mx-auto mb-10">
+               <Sparkles size={32} />
+             </div>
+             
+             <h3 className="text-4xl sm:text-5xl font-bold text-[#1B1B3A] mb-8 leading-tight" style={{ fontFamily: 'var(--font-display, Syne, sans-serif)' }}>
+                Sea Surface Temperature <br className="hidden sm:block" /> Predicting Device
+             </h3>
+             <p className="text-slate-500 text-lg sm:text-xl leading-relaxed mb-12">
+               Designed and patented a sophisticated portable device for real-time monitoring and mapping of sea surface temperature and potential marine pollution anomalies.
+             </p>
+             
+             <Magnetic>
+               <button className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-[#1B1B3A] text-white font-bold hover:bg-primary-600 transition-all duration-500 group shadow-2xl shadow-slate-900/10">
+                 View Technical Details
+                 <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+               </button>
+             </Magnetic>
+           </div>
+        </motion.div>
 
       </div>
     </section>
