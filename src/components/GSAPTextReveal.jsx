@@ -46,7 +46,7 @@ export default function GSAPTextReveal({ text, className = "", delay = 0 }) {
       <span 
         className="reveal-word-inner" 
         style={{ display: 'inline-block', transformOrigin: 'top left' }}
-        dangerouslySetInnerHTML={{ __html: word === 'my' || word === 'My' || word.includes('Research') || word.includes('Services') || word.includes('Hire') ? `<span class="text-primary-600">${word}</span>` : word }}
+        dangerouslySetInnerHTML={{ __html: word === 'my' || word === 'My' || word.includes('Research') || word.includes('Services') || word.includes('Hire') || word.includes('Copyright') || word.includes('Patents') ? `<span class="text-primary-600">${word}</span>` : word }}
       />
     </span>
   ));

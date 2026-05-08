@@ -9,6 +9,8 @@ import Chatbot from './components/Chatbot';
 import Home from './pages/Home';
 import Research from './pages/Research';
 import Career from './pages/Career';
+import CopyrightPage from './pages/CopyrightPage';
+import PatentsPage from './pages/PatentsPage';
 
 
 import gsap from 'gsap';
@@ -88,6 +90,8 @@ function AppContent() {
             <Route path="/" element={<Home />} />
             <Route path="/research" element={<Research />} />
             <Route path="/career" element={<Career />} />
+            <Route path="/copyright" element={<CopyrightPage />} />
+            <Route path="/patents" element={<PatentsPage />} />
           </Routes>
         </AnimatePresence>
       </main>
