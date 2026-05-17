@@ -233,17 +233,17 @@ const Hero = () => {
     <section 
       id="hero" 
       ref={heroRef} 
-      className="hero relative w-full h-screen min-h-[650px] flex flex-col justify-center items-center overflow-hidden bg-[#FAFAFA] will-change-transform"
+      className="hero relative w-full min-h-screen flex flex-col justify-center items-center overflow-hidden bg-[#FAFAFA] will-change-transform"
     >
 
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10 h-full flex flex-col justify-center items-center pt-32 lg:pt-0">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10 h-full flex flex-col justify-center items-center pt-24 sm:pt-28 lg:pt-0 pb-20 sm:pb-24 lg:pb-0">
         
-        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+        <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-10 lg:gap-8">
           
           <div className="w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 z-20 pointer-events-auto will-change-transform">
             
-            <h1 className="text-4xl sm:text-6xl lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.1] tracking-tight text-[#1B1B3A] will-change-transform">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.1] tracking-tight text-[#1B1B3A] will-change-transform">
               <div className="overflow-hidden pb-1"><div className="hero-title will-change-transform">I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-orange-400">Amit,</span></div></div>
               <div className="overflow-hidden pb-4">
                 <div className="hero-title will-change-transform">
@@ -258,11 +258,11 @@ const Hero = () => {
               </div>
             </h1>
             
-            <p className="hero-subtitle mt-4 sm:mt-8 text-base sm:text-xl text-slate-500 max-w-xl font-medium leading-relaxed will-change-transform">
+            <p className="hero-subtitle mt-3 sm:mt-6 text-sm sm:text-base md:text-xl text-slate-500 max-w-xl font-medium leading-relaxed will-change-transform">
               Bridging the gap between cutting-edge <strong className="text-[#1B1B3A]">Machine Learning</strong> research and scalable practical solutions.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 mt-10 w-full justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 mt-6 sm:mt-10 w-full justify-center lg:justify-start">
               
               <div className="hero-cta">
                 <Link to="/research" className="group flex items-center gap-4 px-8 py-4 bg-[#1B1B3A] hover:bg-primary-600 text-white rounded-full shadow-lg hover:shadow-primary-600/30 transition-all duration-300 transform hover:-translate-y-1">
@@ -288,8 +288,8 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className="w-full lg:w-[45%] relative flex justify-center items-center order-1 lg:order-2 h-[350px] sm:h-[450px] lg:h-[550px] z-10 pointer-events-auto">
-            <div className="hero-image-wrapper hero-frame relative z-10 w-64 h-64 sm:w-80 sm:h-80 lg:w-[28rem] lg:h-[28rem] cursor-pointer">
+          <div className="w-full lg:w-[45%] relative flex justify-center items-center order-1 lg:order-2 h-[240px] sm:h-[350px] md:h-[450px] lg:h-[550px] z-10 pointer-events-auto">
+            <div className="hero-image-wrapper hero-frame relative z-10 w-48 h-48 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-[28rem] lg:h-[28rem] cursor-pointer">
                
                {/* Background Ghost Blob — morphs & pulses on hover */}
                <div 
