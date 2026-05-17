@@ -6,11 +6,11 @@ import Magnetic from './Magnetic';
 
 const NAV_ITEMS = [
   { name: 'Home', href: '/' },
-  { name: 'About', href: '/#about' },
+  { name: 'Certifications', href: '/#certifications' },
   { name: 'Research', href: '/research' },
-  { name: 'Patents', href: '/research#patents' },
+  { name: 'Patents', href: '/patents' },
+  { name: 'Copyright', href: '/copyright' },
   { name: 'Career', href: '/career' },
-  { name: 'Contact', href: '/#contact' },
 ];
 
 const Navbar = () => {
@@ -56,7 +56,7 @@ const Navbar = () => {
           {/* Left Links (Desktop only) */}
           <ul className="hidden md:flex items-center space-x-8 w-1/3 justify-start">
             <li><Magnetic><Link to="/" className="text-white hover:text-primary-600 transition-colors inline-block">Home</Link></Magnetic></li>
-            <li><Magnetic><Link to="/#about" className="text-white hover:text-primary-600 transition-colors inline-block">About</Link></Magnetic></li>
+            <li><Magnetic><Link to="/#certifications" className="text-white hover:text-primary-600 transition-colors inline-block">Certifications</Link></Magnetic></li>
             <li><Magnetic><Link to="/research" className="text-white hover:text-primary-600 transition-colors inline-block">Research</Link></Magnetic></li>
           </ul>
           
@@ -73,9 +73,9 @@ const Navbar = () => {
           {/* Right Links (Desktop) / Mobile Toggle */}
           <div className="md:w-1/3 flex justify-end">
             <ul className="hidden md:flex items-center space-x-8">
-              <li><Magnetic><Link to="/research#patents" className="text-white hover:text-primary-600 transition-colors inline-block">Patents</Link></Magnetic></li>
+              <li><Magnetic><Link to="/patents" className="text-white hover:text-primary-600 transition-colors inline-block">Patents</Link></Magnetic></li>
+              <li><Magnetic><Link to="/copyright" className="text-white hover:text-primary-600 transition-colors inline-block">Copyright</Link></Magnetic></li>
               <li><Magnetic><Link to="/career" className="text-white hover:text-primary-600 transition-colors inline-block">Career</Link></Magnetic></li>
-              <li><Magnetic><Link to="/#contact" className="text-white hover:text-primary-600 transition-colors inline-block">Contact</Link></Magnetic></li>
             </ul>
             <button 
               id="hamburger" 

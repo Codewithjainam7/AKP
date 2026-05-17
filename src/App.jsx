@@ -11,6 +11,7 @@ import Research from './pages/Research';
 import Career from './pages/Career';
 import CopyrightPage from './pages/CopyrightPage';
 import PatentsPage from './pages/PatentsPage';
+import ResearchPapersPage from './pages/ResearchPapersPage';
 
 
 import gsap from 'gsap';
@@ -92,6 +93,7 @@ function AppContent() {
             <Route path="/career" element={<Career />} />
             <Route path="/copyright" element={<CopyrightPage />} />
             <Route path="/patents" element={<PatentsPage />} />
+            <Route path="/research-papers" element={<ResearchPapersPage />} />
           </Routes>
         </AnimatePresence>
       </main>

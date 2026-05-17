@@ -123,6 +123,14 @@ export default function CopyrightDetails() {
         { scaleX: 1, duration: 0.8, stagger: 0.15, ease: 'power2.out', scrollTrigger: { trigger: '.cr-cards-grid', start: 'top 85%' } }
       );
 
+      // Right panel reveal
+      document.querySelectorAll('.cr-card').forEach((card) => {
+        const rightPanel = card.querySelector('.cr-card-right');
+        if (rightPanel) {
+          gsap.fromTo(rightPanel, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: card, start: 'top 85%' } });
+        }
+      });
+
       // Hover micro-animations
       document.querySelectorAll('.cr-card').forEach((card) => {
         const number = card.querySelector('.cr-card-number span');
@@ -236,7 +244,7 @@ export default function CopyrightDetails() {
               </div>
             </div>
 
-            <div className="cr-cards-grid flex flex-col max-w-5xl">
+            <div className="cr-cards-grid flex flex-col">
               {filteredCopyrights.length === 0 && (
                 <div className="py-16 text-center">
                   <p className="text-slate-400 text-lg" style={{ fontFamily: 'Inter, sans-serif' }}>No copyrights found for "{searchQuery}"</p>
@@ -247,28 +255,19 @@ export default function CopyrightDetails() {
                   <div className="cr-card-divider h-px bg-slate-200 origin-left"></div>
 
                   <div className="cr-card group py-7 sm:py-8 cursor-default relative">
-                    {/* Number — absolute watermark */}
                     <div className="cr-card-number absolute left-0 top-6 sm:top-7 pointer-events-none">
                       <span className="text-7xl sm:text-8xl font-black text-slate-50 select-none block leading-none" style={{ fontFamily: 'Syne, sans-serif' }}>
                         {String(idx + 1).padStart(2, '0')}
                       </span>
                     </div>
 
-                    {/* Content — consistent left padding to clear number */}
-                    <div className="relative z-10 pl-20 sm:pl-28">
+                    <div className="relative z-10 pl-20 sm:pl-28 flex flex-col lg:flex-row lg:items-start lg:gap-10">
+                      <div className="flex-1 min-w-0">
                         <div className="cr-card-meta flex flex-wrap items-center gap-3 sm:gap-4 mb-3">
                           <span className="text-[12px] font-extrabold text-primary-600 uppercase tracking-[0.15em]" style={{ fontFamily: 'Syne, sans-serif' }}>
                             {item.category}
                           </span>
                           <span className="w-1 h-1 rounded-full bg-slate-300"></span>
-                          <span className="text-[12px] font-semibold text-slate-400" style={{ fontFamily: 'monospace' }}>
-                            {item.regNo}
-                          </span>
-                          <span className="w-1 h-1 rounded-full bg-slate-300 hidden sm:block"></span>
-                          <span className="text-[12px] font-medium text-slate-400 hidden sm:inline">
-                            {item.date}
-                          </span>
-                          <span className="w-1 h-1 rounded-full bg-slate-300 hidden sm:block"></span>
                           <span className="text-[12px] font-bold text-emerald-600 uppercase tracking-wider" style={{ fontFamily: 'Syne, sans-serif' }}>
                             ✓ Registered
                           </span>
@@ -280,11 +279,10 @@ export default function CopyrightDetails() {
                           </h3>
                         </div>
 
-                        <p className="cr-card-body text-slate-500 text-sm sm:text-base leading-relaxed mt-2.5 group-hover:text-slate-700 transition-colors duration-500 max-w-2xl" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <p className="cr-card-body text-slate-500 text-sm sm:text-base leading-relaxed mt-2.5 group-hover:text-slate-700 transition-colors duration-500" style={{ fontFamily: 'Inter, sans-serif' }}>
                           {item.description}
                         </p>
 
-                        {/* ── Redesigned action buttons ── */}
                         <div className="cr-card-actions flex flex-wrap items-center gap-3 mt-5">
                           <a
                             href={item.pdf}
@@ -305,9 +303,33 @@ export default function CopyrightDetails() {
                           >
                             <Download size={14} className="group-hover/dl:translate-y-0.5 transition-transform duration-300" />
                             Download PDF
-                            <ArrowUpRight size={13} className="text-slate-300 group-hover/dl:text-slate-900 group-hover/dl:translate-x-0.5 group-hover/dl:-translate-y-0.5 transition-all duration-300" />
                           </a>
                         </div>
+                      </div>
+
+                      {/* Right panel */}
+                      <div className="cr-card-right hidden lg:flex flex-col items-end gap-5 w-[280px] shrink-0 pt-1">
+                        <div className="grid grid-cols-2 gap-3 w-full">
+                          <div className="bg-slate-50/80 rounded-xl px-4 py-3 border border-slate-100 group-hover:border-slate-200 transition-colors duration-300">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1" style={{ fontFamily: 'monospace' }}>Reg No</div>
+                            <div className="text-sm font-bold text-slate-700" style={{ fontFamily: 'Syne, sans-serif' }}>{item.regNo}</div>
+                          </div>
+                          <div className="bg-slate-50/80 rounded-xl px-4 py-3 border border-slate-100 group-hover:border-slate-200 transition-colors duration-300">
+                            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1" style={{ fontFamily: 'monospace' }}>Category</div>
+                            <div className="text-sm font-bold text-slate-700" style={{ fontFamily: 'Syne, sans-serif' }}>{item.category}</div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/[0.03] border border-slate-100">
+                          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                          <span className="text-[11px] font-bold text-slate-500 tracking-wide" style={{ fontFamily: 'Inter, sans-serif' }}>Registered: {item.date}</span>
+                        </div>
+
+                        <div className="text-[10px] font-black text-slate-300 uppercase tracking-[0.25em] text-right leading-tight" style={{ fontFamily: 'monospace' }}>
+                          Software Copyright<br/>
+                          <span className="text-slate-200">Govt. of India</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
