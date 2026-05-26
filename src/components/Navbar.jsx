@@ -6,7 +6,7 @@ import Magnetic from './Magnetic';
 
 const NAV_ITEMS = [
   { name: 'Home', href: '/' },
-  { name: 'Certifications', href: '/#certifications' },
+  { name: 'Certifications', href: '/certifications' },
   { name: 'Research', href: '/research' },
   { name: 'Patents', href: '/patents' },
   { name: 'Copyright', href: '/copyright' },
@@ -56,7 +56,7 @@ const Navbar = () => {
           {/* Left Links (Desktop only) */}
           <ul className="hidden md:flex items-center space-x-8 w-1/3 justify-start">
             <li><Magnetic><Link to="/" className="text-white hover:text-primary-600 transition-colors inline-block">Home</Link></Magnetic></li>
-            <li><Magnetic><Link to="/#certifications" className="text-white hover:text-primary-600 transition-colors inline-block">Certifications</Link></Magnetic></li>
+            <li><Magnetic><Link to="/certifications" className="text-white hover:text-primary-600 transition-colors inline-block">Certifications</Link></Magnetic></li>
             <li><Magnetic><Link to="/research" className="text-white hover:text-primary-600 transition-colors inline-block">Research</Link></Magnetic></li>
           </ul>
           
