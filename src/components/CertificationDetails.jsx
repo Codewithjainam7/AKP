@@ -693,7 +693,7 @@ export default function CertificationDetails() {
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, scale: 0.5 }}
               transition={{ delay: 0.15, duration: 0.4, type: 'spring', damping: 15 }}
-              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 z-10"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-12 h-12 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 z-50"
               onClick={closeLightbox}
             >
               <X size={20} />
@@ -731,7 +731,7 @@ export default function CertificationDetails() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 30, scale: 0.97 }}
               transition={{ delay: 0.05, duration: 0.45, ease: [0.33, 1, 0.68, 1] }}
-              className="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-10 max-w-6xl w-full mx-4 sm:mx-8 max-h-[90vh] overflow-y-auto overflow-x-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              className="flex flex-col lg:flex-row items-center lg:items-start gap-6 lg:gap-10 max-w-6xl w-full mx-4 sm:mx-8 mt-12 lg:mt-0 max-h-[80vh] lg:max-h-[90vh] overflow-y-auto overflow-x-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Image */}
