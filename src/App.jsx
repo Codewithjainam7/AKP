@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
@@ -22,8 +22,16 @@ import Lenis from 'lenis';
 
 gsap.registerPlugin(ScrollTrigger);
 
+import { fetchDatabase } from './data/dbHelper';
+
 function App() {
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
   useEffect(() => {
+    // Fetch fresh data from Supabase
+    fetchDatabase().then(() => {
+      setIsDataLoaded(true);
+    });
     // Initialize Lenis
     const lenis = new Lenis({
       duration: 1.4,
@@ -68,6 +76,14 @@ function App() {
       gsap.ticker.remove(lenis.raf);
     };
   }, []);
+
+  if (!isDataLoaded) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-[#1a1a2e]">
+        <div className="text-white text-xl animate-pulse">Loading amazing things...</div>
+      </div>
+    );
+  }
 
   return (
     <Router>

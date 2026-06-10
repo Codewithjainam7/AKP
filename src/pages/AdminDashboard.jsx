@@ -481,7 +481,7 @@ export default function AdminDashboard() {
       if (result.method === 'disk') {
         setSaveStatus({ 
           type: 'success', 
-          message: 'Changes published successfully! Saved directly to db.json.' 
+          message: 'Changes published successfully! Saved directly to Supabase.' 
         });
       } else {
         setSaveStatus({ 

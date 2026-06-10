@@ -1,4 +1,5 @@
 import defaultDb from './db.json';
+import { supabase } from './supabaseClient';
 
 const STORAGE_KEY = 'portfolio_db';
 
@@ -26,33 +27,50 @@ export function getDatabase() {
 }
 
 /**
+ * Fetches the latest database from Supabase and updates localStorage.
+ */
+export async function fetchDatabase() {
+  try {
+    const { data, error } = await supabase
+      .from('portfolio_data')
+      .select('data')
+      .eq('id', 1)
+      .single();
+
+    if (error) throw error;
+
+    if (data && data.data && Object.keys(data.data).length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data.data));
+      return data.data;
+    }
+  } catch (err) {
+    console.error('Error fetching from Supabase, falling back to local storage:', err);
+  }
+  
+  return getDatabase();
+}
+
+/**
  * Saves the database state.
- * Always saves to localStorage so the UI displays it immediately in production.
- * In local development, also sends a POST request to Vite backend to write to src/data/db.json.
+ * Always saves to localStorage and Supabase.
  */
 export async function saveDatabase(data) {
-  // Save to localStorage
+  // Save to localStorage immediately for quick UI updates
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 
-  // If in development mode, save to disk using our custom Vite endpoint
-  if (import.meta.env.DEV) {
-    try {
-      const response = await fetch('/api/save-db', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) {
-        throw new Error(`Failed to save database to disk: ${response.statusText}`);
-      }
-      return { success: true, method: 'disk' };
-    } catch (err) {
-      console.warn('Vite custom endpoint failed, fell back to local storage only:', err);
-      return { success: true, method: 'localStorage', error: err.message };
-    }
-  }
+  // Save to Supabase
+  try {
+    const { error } = await supabase
+      .from('portfolio_data')
+      .update({ data: data })
+      .eq('id', 1);
 
-  return { success: true, method: 'localStorage' };
+    if (error) {
+      throw error;
+    }
+    return { success: true, method: 'supabase' };
+  } catch (err) {
+    console.error('Supabase update failed, fell back to local storage only:', err);
+    return { success: false, method: 'localStorage', error: err.message };
+  }
 }
