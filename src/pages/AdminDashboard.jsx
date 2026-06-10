@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { 
   Lock, LogIn, Save, LogOut, Download, Plus, Trash2, Edit2, Check, X,
   FileText, Award, Briefcase, GraduationCap, BookOpen, ShieldCheck, RefreshCw, AlertTriangle,
-  ChevronLeft, ChevronRight, ChevronDown, User, Image, Type, Link2, BarChart2
+  ChevronLeft, ChevronRight, ChevronDown, ChevronUp, User, Image, Type, Link2, BarChart2, ArrowUp, ArrowDown
 } from 'lucide-react';
 import { getDatabase, saveDatabase } from '../data/dbHelper';
 
@@ -436,6 +436,28 @@ export default function AdminDashboard() {
       setTimeout(() => setSaveStatus({ type: '', message: '' }), 4000);
     } catch (err) {
       setSaveStatus({ type: 'error', message: `Delete failed to save: ${err.message}` });
+    }
+  };
+
+  // Reorder item (move up or down) and auto-save
+  const handleReorderItem = async (index, direction) => {
+    if (!database) return;
+    const list = [...(database[activeTab] || [])];
+    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+    if (targetIndex < 0 || targetIndex >= list.length) return;
+
+    // Swap
+    [list[index], list[targetIndex]] = [list[targetIndex], list[index]];
+
+    const updatedDb = { ...database, [activeTab]: list };
+    setDatabase(updatedDb);
+
+    try {
+      await saveDatabase(updatedDb);
+      setSaveStatus({ type: 'success', message: 'Order updated!' });
+      setTimeout(() => setSaveStatus({ type: '', message: '' }), 2500);
+    } catch (err) {
+      setSaveStatus({ type: 'error', message: `Reorder failed: ${err.message}` });
     }
   };
 
@@ -1725,6 +1747,27 @@ export default function AdminDashboard() {
 
 
                             <div className="flex items-center gap-2 self-end md:self-center shrink-0">
+                              {/* Up / Down reorder — only for Experiences tab */}
+                              {activeTab === 'experiences' && (
+                                <div className="flex flex-col gap-1">
+                                  <button
+                                    onClick={() => handleReorderItem(originalIndex, 'up')}
+                                    disabled={originalIndex === 0}
+                                    className="p-1.5 bg-white/[0.03] hover:bg-white/[0.08] text-slate-500 hover:text-white rounded-lg border border-white/[0.05] hover:border-white/[0.12] transition-all active:scale-95 disabled:opacity-20 disabled:pointer-events-none"
+                                    title="Move up"
+                                  >
+                                    <ChevronUp size={13} />
+                                  </button>
+                                  <button
+                                    onClick={() => handleReorderItem(originalIndex, 'down')}
+                                    disabled={originalIndex === (database[activeTab] || []).length - 1}
+                                    className="p-1.5 bg-white/[0.03] hover:bg-white/[0.08] text-slate-500 hover:text-white rounded-lg border border-white/[0.05] hover:border-white/[0.12] transition-all active:scale-95 disabled:opacity-20 disabled:pointer-events-none"
+                                    title="Move down"
+                                  >
+                                    <ChevronDown size={13} />
+                                  </button>
+                                </div>
+                              )}
                               <button
                                 onClick={() => handleStartEdit(item, originalIndex)}
                                 className="p-2.5 bg-white/[0.03] hover:bg-white/[0.08] text-slate-400 hover:text-white rounded-xl border border-white/[0.06] hover:border-white/[0.12] transition-all active:scale-95 shadow-sm"
