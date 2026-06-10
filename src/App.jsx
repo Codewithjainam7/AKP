@@ -5,6 +5,7 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
+import SkeletonLoader from './components/SkeletonLoader';
 
 import Home from './pages/Home';
 import Research from './pages/Research';
@@ -78,67 +79,7 @@ function App() {
   }, []);
 
   if (!isDataLoaded) {
-    return (
-      <div className="flex flex-col h-screen bg-[#FAFAFA] overflow-hidden">
-        {/* Skeleton Navbar */}
-        <div className="w-full h-16 bg-white border-b border-gray-100 flex items-center px-8 gap-6 shrink-0">
-          <div className="h-8 w-28 rounded-lg skeleton-shimmer" />
-          <div className="flex-1" />
-          <div className="h-5 w-16 rounded-md skeleton-shimmer" />
-          <div className="h-5 w-16 rounded-md skeleton-shimmer" />
-          <div className="h-5 w-20 rounded-md skeleton-shimmer" />
-          <div className="h-9 w-24 rounded-full skeleton-shimmer" />
-        </div>
-
-        {/* Skeleton Hero */}
-        <div className="flex flex-1 items-center justify-center px-8 lg:px-20 gap-16">
-          {/* Left content */}
-          <div className="flex-1 flex flex-col gap-5 max-w-xl">
-            <div className="h-4 w-24 rounded-full skeleton-shimmer" />
-            <div className="h-14 w-full rounded-2xl skeleton-shimmer" />
-            <div className="h-14 w-3/4 rounded-2xl skeleton-shimmer" />
-            <div className="h-5 w-full rounded-lg skeleton-shimmer" />
-            <div className="h-5 w-5/6 rounded-lg skeleton-shimmer" />
-            <div className="h-5 w-2/3 rounded-lg skeleton-shimmer" />
-            <div className="flex gap-4 mt-4 items-center">
-              <div className="h-12 w-40 rounded-full skeleton-shimmer" />
-              <div className="h-8 w-px bg-gray-200" />
-              <div className="flex gap-6">
-                <div className="flex flex-col gap-2">
-                  <div className="h-6 w-12 rounded-md skeleton-shimmer" />
-                  <div className="h-3 w-16 rounded-md skeleton-shimmer" />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <div className="h-6 w-10 rounded-md skeleton-shimmer" />
-                  <div className="h-3 w-12 rounded-md skeleton-shimmer" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right image blob */}
-          <div className="hidden lg:flex items-center justify-center w-[420px] h-[420px] shrink-0">
-            <div
-              className="w-80 h-80 skeleton-shimmer"
-              style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }}
-            />
-          </div>
-        </div>
-
-        {/* Shimmer keyframes injected inline */}
-        <style>{`
-          @keyframes shimmer {
-            0% { background-position: -600px 0; }
-            100% { background-position: 600px 0; }
-          }
-          .skeleton-shimmer {
-            background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
-            background-size: 600px 100%;
-            animation: shimmer 1.4s infinite linear;
-          }
-        `}</style>
-      </div>
-    );
+    return <SkeletonLoader />;
   }
 
 
