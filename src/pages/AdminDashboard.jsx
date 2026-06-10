@@ -478,7 +478,7 @@ export default function AdminDashboard() {
       const result = await saveDatabase(database);
       setHasUnsavedChanges(false);
       
-      if (result.method === 'disk') {
+      if (result.method === 'supabase') {
         setSaveStatus({ 
           type: 'success', 
           message: 'Changes published successfully! Saved directly to Supabase.' 
