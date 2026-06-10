@@ -183,27 +183,40 @@ const DEFAULT_HERO = {
   subtitle: 'Bridging the gap between cutting-edge <strong>Machine Learning</strong> research and scalable practical solutions.',
   profileImage: '/amit_sir_photo.png',
   ctaLabel: 'View Research',
-  ctaLink: '/research',
-  stats: [
-    { value: '10', suffix: '+', label: 'Publications' },
-    { value: '7', suffix: '+', label: 'Patents' }
-  ]
+  ctaLink: '/research'
 };
 
 const Hero = () => {
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
   const [heroData, setHeroData] = useState(DEFAULT_HERO);
+  const [stats, setStats] = useState([]);
 
-  // Load hero data from db on mount
+  // Load hero data and compute dynamic stats from db on mount
   useEffect(() => {
     try {
       const db = getDatabase();
       if (db && db.hero) {
         setHeroData({ ...DEFAULT_HERO, ...db.hero });
       }
+      // Compute stats dynamically from data counts
+      const publicationsCount = (db?.researchPapers || []).length;
+      const patentsCount = (db?.patents || []).length;
+      const certCount = (db?.certifications || []).length;
+      const dynamicStats = [];
+      if (publicationsCount > 0) dynamicStats.push({ value: publicationsCount.toString(), suffix: '+', label: 'Publications' });
+      if (patentsCount > 0) dynamicStats.push({ value: patentsCount.toString(), suffix: '+', label: 'Patents' });
+      if (certCount > 0) dynamicStats.push({ value: certCount.toString(), suffix: '+', label: 'Certifications' });
+      setStats(dynamicStats.length > 0 ? dynamicStats : [
+        { value: '10', suffix: '+', label: 'Publications' },
+        { value: '7', suffix: '+', label: 'Patents' }
+      ]);
     } catch (e) {
       // fallback to defaults
+      setStats([
+        { value: '10', suffix: '+', label: 'Publications' },
+        { value: '7', suffix: '+', label: 'Patents' }
+      ]);
     }
   }, []);
 
@@ -255,8 +268,6 @@ const Hero = () => {
     }, heroRef);
     return () => ctx.revert();
   }, [heroData]);
-
-  const stats = heroData.stats || DEFAULT_HERO.stats;
 
   return (
     <section 

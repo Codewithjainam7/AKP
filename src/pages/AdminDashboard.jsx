@@ -911,78 +911,34 @@ export default function AdminDashboard() {
                     />
                   </div>
 
-                  {/* Stats */}
+                  {/* Auto Stats Info */}
                   <div className="md:col-span-2">
-                    <div className="flex items-center justify-between mb-3">
-                      <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
-                        <BarChart2 size={12} /> Stats Counters
-                      </label>
-                      <button
-                        type="button"
-                        onClick={() => setHeroData(prev => ({ ...prev, stats: [...(prev.stats || []), { value: '0', suffix: '+', label: 'New Stat' }] }))}
-                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-600/10 border border-primary-500/20 text-primary-400 hover:bg-primary-600/20 text-xs font-bold transition-all"
-                      >
-                        <Plus size={12} /> Add Stat
-                      </button>
+                    <div className="flex items-center gap-2 mb-3">
+                      <BarChart2 size={12} className="text-slate-400" />
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-400">Stats Counters</label>
+                      <span className="ml-auto text-[10px] px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-bold">Auto-Computed</span>
                     </div>
-                    <div className="space-y-3">
-                      {(heroData.stats || []).map((stat, i) => (
-                        <div key={i} className="flex gap-3 items-center p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-                          <div className="flex gap-2 flex-1">
-                            <input
-                              type="text"
-                              value={stat.value}
-                              onChange={(e) => {
-                                const newStats = [...heroData.stats];
-                                newStats[i] = { ...newStats[i], value: e.target.value };
-                                setHeroData(prev => ({ ...prev, stats: newStats }));
-                              }}
-                              placeholder="10"
-                              className="w-16 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm"
-                            />
-                            <input
-                              type="text"
-                              value={stat.suffix}
-                              onChange={(e) => {
-                                const newStats = [...heroData.stats];
-                                newStats[i] = { ...newStats[i], suffix: e.target.value };
-                                setHeroData(prev => ({ ...prev, stats: newStats }));
-                              }}
-                              placeholder="+"
-                              className="w-14 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm"
-                            />
-                            <input
-                              type="text"
-                              value={stat.label}
-                              onChange={(e) => {
-                                const newStats = [...heroData.stats];
-                                newStats[i] = { ...newStats[i], label: e.target.value };
-                                setHeroData(prev => ({ ...prev, stats: newStats }));
-                              }}
-                              placeholder="Publications"
-                              className="flex-1 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm"
-                            />
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              const newStats = heroData.stats.filter((_, idx) => idx !== i);
-                              setHeroData(prev => ({ ...prev, stats: newStats }));
-                            }}
-                            className="p-2 rounded-lg text-red-400 hover:bg-red-500/10 transition-all shrink-0"
-                          >
-                            <Trash2 size={14} />
-                          </button>
-                        </div>
-                      ))}
-                      {(heroData.stats || []).length === 0 && (
-                        <p className="text-slate-500 text-xs text-center py-4">No stats yet. Click "Add Stat" to add one.</p>
-                      )}
+                    <div className="p-4 rounded-xl bg-white/[0.02] border border-white/[0.05] space-y-3">
+                      <div className="flex items-center justify-between py-2 border-b border-white/[0.05]">
+                        <span className="text-slate-400 text-sm">Publications</span>
+                        <span className="text-white font-bold text-sm">{(database?.researchPapers || []).length}+</span>
+                      </div>
+                      <div className="flex items-center justify-between py-2 border-b border-white/[0.05]">
+                        <span className="text-slate-400 text-sm">Patents</span>
+                        <span className="text-white font-bold text-sm">{(database?.patents || []).length}+</span>
+                      </div>
+                      <div className="flex items-center justify-between py-2">
+                        <span className="text-slate-400 text-sm">Certifications</span>
+                        <span className="text-white font-bold text-sm">{(database?.certifications || []).length}+</span>
+                      </div>
                     </div>
-                    <p className="text-slate-500 text-[11px] mt-2">Each stat shows as: value + suffix (e.g. 10+) with a label below.</p>
+                    <p className="text-slate-500 text-[11px] mt-2">
+                      These numbers update automatically when you add or remove research papers, patents, or certifications — no manual editing needed.
+                    </p>
                   </div>
 
                 </div>
+
 
                 {/* Save Hero Button */}
                 <div className="mt-8 flex justify-end">
