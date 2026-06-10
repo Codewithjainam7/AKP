@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
@@ -86,7 +86,7 @@ function TimelineCard({ exp, idx }) {
             </p>
 
             <div className="flex flex-wrap gap-2">
-              {exp.tags.map(tag => (
+              {(exp.tags || []).map(tag => (
                 <span key={tag} className="px-4 py-1.5 rounded-full bg-white/5 border border-white/5 text-slate-500 text-[10px] font-bold uppercase tracking-wider group-hover:border-primary-500/20 group-hover:text-slate-300 transition-all duration-500">
                   {tag}
                 </span>
@@ -103,12 +103,19 @@ function TimelineCard({ exp, idx }) {
 }
 
 export default function Experience() {
-  const database = getDatabase();
-  const EXPERIENCES = database.experiences || [];
+  const [experiences, setExperiences] = useState([]);
   const containerRef = useRef(null);
   const lineFillRef = useRef(null);
 
+  // Load experiences from db reactively
   useEffect(() => {
+    const db = getDatabase();
+    setExperiences(db?.experiences || []);
+  }, []);
+
+  useEffect(() => {
+    if (experiences.length === 0) return;
+
     const ctx = gsap.context(() => {
       // Timeline Line Progress
       gsap.fromTo(lineFillRef.current,
@@ -139,7 +146,7 @@ export default function Experience() {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [experiences]);
 
   return (
     <section id="career" className="relative bg-[#0F0F11] py-32 overflow-hidden" ref={containerRef}>
@@ -175,9 +182,15 @@ export default function Experience() {
           />
 
           <div className="flex flex-col">
-            {EXPERIENCES.map((exp, idx) => (
-              <TimelineCard key={exp.id} exp={exp} idx={idx} />
-            ))}
+            {experiences.length > 0 ? (
+              experiences.map((exp, idx) => (
+                <TimelineCard key={exp.id || idx} exp={exp} idx={idx} />
+              ))
+            ) : (
+              <div className="text-center py-20 text-slate-600 text-sm">
+                No experience entries yet. Add them from the Admin Dashboard.
+              </div>
+            )}
           </div>
         </div>
       </div>

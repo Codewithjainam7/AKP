@@ -1669,9 +1669,21 @@ export default function AdminDashboard() {
                           >
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2.5 mb-1.5 flex-wrap">
-                                <span className="px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-widest bg-primary-500/10 text-primary-400 border border-primary-500/20 rounded-lg">
-                                  {item.category || (item.type === 'work' ? 'Work' : 'Education')}
+                                {/* Type / Category badge */}
+                                <span className={`px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-widest border rounded-lg ${
+                                  item.type === 'work'
+                                    ? 'bg-primary-500/10 text-primary-400 border-primary-500/20'
+                                    : item.type === 'edu'
+                                    ? 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+                                    : 'bg-primary-500/10 text-primary-400 border-primary-500/20'
+                                }`}>
+                                  {item.category || (item.type === 'work' ? '💼 Work' : item.type === 'edu' ? '🎓 Education' : 'Item')}
                                 </span>
+                                {item.current && (
+                                  <span className="px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg animate-pulse">
+                                    ● Active
+                                  </span>
+                                )}
                                 {item.patentNo && (
                                   <span className="px-2 py-0.5 text-[9px] font-semibold text-slate-400 bg-slate-900/60 rounded-md border border-white/[0.04] font-mono">
                                     Patent: {item.patentNo}
@@ -1687,16 +1699,30 @@ export default function AdminDashboard() {
                                     {item.issuer}
                                   </span>
                                 )}
+                                {/* Date for experiences */}
+                                {item.date && (item.type === 'work' || item.type === 'edu') && (
+                                  <span className="px-2 py-0.5 text-[9px] font-semibold text-slate-500 bg-slate-900/40 rounded-md border border-white/[0.04]">
+                                    {item.date}
+                                  </span>
+                                )}
                               </div>
                               
                               <h3 className="text-base font-bold text-white group-hover:text-primary-400 transition-colors line-clamp-1" style={{ fontFamily: 'Syne, sans-serif' }}>
                                 {item.title || item.role || 'Untitled'}
                               </h3>
                               
+                              {/* Company / Institution for experiences */}
+                              {item.company && (
+                                <p className="text-xs text-primary-500/70 font-semibold mt-0.5 line-clamp-1">
+                                  {item.company}
+                                </p>
+                              )}
+                              
                               <p className="text-xs text-slate-400 line-clamp-2 mt-1 max-w-2xl leading-relaxed">
                                 {item.description || item.desc || 'No description provided.'}
                               </p>
                             </div>
+
 
                             <div className="flex items-center gap-2 self-end md:self-center shrink-0">
                               <button
