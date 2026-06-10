@@ -215,6 +215,98 @@ export function CertificationsSkeleton() {
   );
 }
 
+/* ─── ADMIN DASHBOARD SKELETON ──────────────────────────────────── */
+export function AdminDashboardSkeleton() {
+  const tabs = [1, 2, 3, 4, 5, 6];
+  return (
+    <div className="flex flex-col min-h-screen bg-[#070709] overflow-hidden">
+      <ShimmerStyles />
+
+      {/* Top Navbar */}
+      <div className="w-full h-16 bg-[#0a0a0f]/80 border-b border-white/[0.04] flex items-center px-8 gap-6 shrink-0">
+        <div className="sk-dark h-8 w-28" />
+        <div className="flex-1" />
+        <div className="sk-dark h-4 w-14" />
+        <div className="sk-dark h-4 w-16" />
+        <div className="sk-dark h-9 w-24 rounded-full" />
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8 max-w-7xl pt-10 pb-20">
+
+        {/* Header Bar */}
+        <div className="bg-[#111115]/50 border border-white/[0.05] rounded-[28px] p-6 mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="flex flex-col gap-3">
+            <div className="sk-dark h-4 w-24 rounded-full" />
+            <div className="sk-dark h-8 w-56 rounded-2xl" />
+            <div className="sk-dark h-4 w-80 rounded-lg" />
+          </div>
+          <div className="flex gap-3">
+            <div className="sk-dark h-11 w-36 rounded-xl" />
+            <div className="sk-dark h-11 w-36 rounded-xl" />
+            <div className="sk-dark h-11 w-24 rounded-xl" />
+          </div>
+        </div>
+
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+          {/* Sidebar Tabs */}
+          <div className="flex flex-col gap-2">
+            {tabs.map(i => (
+              <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-[#121216]/40 border border-white/[0.04]">
+                <div className="flex items-center gap-3">
+                  <div className="sk-dark h-5 w-5 rounded-full" />
+                  <div className="sk-dark h-4 rounded-lg" style={{ width: `${60 + (i % 3) * 25}px` }} />
+                </div>
+                <div className="sk-dark h-5 w-6 rounded-full" />
+              </div>
+            ))}
+          </div>
+
+          {/* Main Content Area */}
+          <div className="lg:col-span-3 space-y-6">
+            {/* Content card header */}
+            <div className="bg-[#121216]/50 border border-white/[0.05] rounded-[32px] p-8">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="sk-dark h-10 w-10 rounded-2xl" />
+                <div className="flex flex-col gap-2">
+                  <div className="sk-dark h-6 w-40 rounded-xl" />
+                  <div className="sk-dark h-3 w-56 rounded-lg" />
+                </div>
+              </div>
+
+              {/* Form fields grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Profile image block */}
+                <div className="md:col-span-2 flex gap-4 items-start">
+                  <div className="sk-dark w-24 h-24 rounded-2xl shrink-0" />
+                  <div className="flex-1 flex flex-col gap-3">
+                    <div className="sk-dark h-11 w-full rounded-xl" />
+                    <div className="sk-dark h-11 w-full rounded-xl" />
+                  </div>
+                </div>
+                {/* Text fields */}
+                {[1, 2, 3, 4, 5, 6].map(i => (
+                  <div key={i} className="flex flex-col gap-2">
+                    <div className="sk-dark h-3 w-24 rounded-full" />
+                    <div className="sk-dark h-11 w-full rounded-xl" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex justify-end gap-3 mt-8">
+                <div className="sk-dark h-11 w-28 rounded-xl" />
+                <div className="sk-dark h-11 w-32 rounded-xl" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Route-Based Selector ───────────────────────────────────────── */
 export default function SkeletonLoader() {
   const path = window.location.pathname;
@@ -224,5 +316,6 @@ export default function SkeletonLoader() {
   if (path === '/patents')             return <PatentsSkeleton />;
   if (path === '/copyright')           return <CopyrightSkeleton />;
   if (path === '/certifications')      return <CertificationsSkeleton />;
+  if (path === '/admin')               return <AdminDashboardSkeleton />;
   return <HomeSkeleton />;
 }
