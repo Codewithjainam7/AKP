@@ -1,0 +1,572 @@
+{
+  "certifications": [
+    {
+      "title": "Professional Certificate in Computer Vision",
+      "issuer": "Google",
+      "date": "2024",
+      "category": "Computer Vision",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in image processing and object detection, including real-world projects and assessments.",
+      "image": "/images/certifications/1744011295356.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Advanced Specialization: Data Science",
+      "issuer": "DeepLearning.AI",
+      "date": "2023",
+      "category": "Data Science",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in data analysis, visualization and statistical modeling, including real-world projects and assessments.",
+      "image": "/images/certifications/1744011599257.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Cloud Computing",
+      "issuer": "Microsoft",
+      "date": "2024",
+      "category": "Cloud Computing",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in scalable cloud infrastructure and deployment, including real-world projects and assessments.",
+      "image": "/images/certifications/1744338970485.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Computer Vision Practitioner Certification",
+      "issuer": "Microsoft",
+      "date": "2024",
+      "category": "Computer Vision",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in image processing and object detection, including real-world projects and assessments.",
+      "image": "/images/certifications/1744339405563.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Advanced Specialization: Machine Learning",
+      "issuer": "Microsoft",
+      "date": "2024",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "/images/certifications/1744339622057.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Cloud Computing",
+      "issuer": "Stanford University",
+      "date": "2021",
+      "category": "Cloud Computing",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in scalable cloud infrastructure and deployment, including real-world projects and assessments.",
+      "image": "/images/certifications/1744340773101.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Data Science",
+      "issuer": "Google",
+      "date": "2023",
+      "category": "Data Science",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in data analysis, visualization and statistical modeling, including real-world projects and assessments.",
+      "image": "/images/certifications/1744341192628.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Programming Practitioner Certification",
+      "issuer": "IBM",
+      "date": "2024",
+      "category": "Programming",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in advanced software engineering and data structures, including real-world projects and assessments.",
+      "image": "/images/certifications/1744341463297.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Programming",
+      "issuer": "IBM",
+      "date": "2024",
+      "category": "Programming",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in advanced software engineering and data structures, including real-world projects and assessments.",
+      "image": "/images/certifications/1745295456421.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Machine Learning",
+      "issuer": "Amazon Web Services",
+      "date": "2021",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "/images/certifications/1745775647681.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Advanced Specialization: Data Science",
+      "issuer": "Stanford University",
+      "date": "2021",
+      "category": "Data Science",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in data analysis, visualization and statistical modeling, including real-world projects and assessments.",
+      "image": "https://placehold.co/800x600/1e293b/f97316?font=montserrat&text=PDF\\nDocument",
+      "pdf": "/images/certifications/1746273504694.pdf"
+    },
+    {
+      "title": "NLP Practitioner Certification",
+      "issuer": "Amazon Web Services",
+      "date": "2023",
+      "category": "NLP",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in natural language processing and transformer models, including real-world projects and assessments.",
+      "image": "https://placehold.co/800x600/1e293b/f97316?font=montserrat&text=PDF\\nDocument",
+      "pdf": "/images/certifications/1746630939977.pdf"
+    },
+    {
+      "title": "Professional Certificate in Cloud Computing",
+      "issuer": "Microsoft",
+      "date": "2022",
+      "category": "Cloud Computing",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in scalable cloud infrastructure and deployment, including real-world projects and assessments.",
+      "image": "/images/certifications/1747246259046.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Advanced Specialization: Cloud Computing",
+      "issuer": "IBM",
+      "date": "2021",
+      "category": "Cloud Computing",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in scalable cloud infrastructure and deployment, including real-world projects and assessments.",
+      "image": "https://placehold.co/800x600/1e293b/f97316?font=montserrat&text=PDF\\nDocument",
+      "pdf": "/images/certifications/1753363941179.pdf"
+    },
+    {
+      "title": "Professional Certificate in NLP",
+      "issuer": "GeeksforGeeks",
+      "date": "2022",
+      "category": "NLP",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in natural language processing and transformer models, including real-world projects and assessments.",
+      "image": "/images/certifications/1754139540860.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Machine Learning Practitioner Certification",
+      "issuer": "Amazon Web Services",
+      "date": "2021",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "https://placehold.co/800x600/1e293b/f97316?font=montserrat&text=PDF\\nDocument",
+      "pdf": "/images/certifications/1756224335287.pdf"
+    },
+    {
+      "title": "Advanced Specialization: Machine Learning",
+      "issuer": "Microsoft",
+      "date": "2021",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "/images/certifications/1757519899578.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Cloud Computing",
+      "issuer": "DeepLearning.AI",
+      "date": "2023",
+      "category": "Cloud Computing",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in scalable cloud infrastructure and deployment, including real-world projects and assessments.",
+      "image": "/images/certifications/1763997691357.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Data Science",
+      "issuer": "IBM",
+      "date": "2021",
+      "category": "Data Science",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in data analysis, visualization and statistical modeling, including real-world projects and assessments.",
+      "image": "https://placehold.co/800x600/1e293b/f97316?font=montserrat&text=PDF\\nDocument",
+      "pdf": "/images/certifications/1764698172020.pdf"
+    },
+    {
+      "title": "Computer Vision Practitioner Certification",
+      "issuer": "DeepLearning.AI",
+      "date": "2023",
+      "category": "Computer Vision",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in image processing and object detection, including real-world projects and assessments.",
+      "image": "/images/certifications/1767239766812.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Deep Learning",
+      "issuer": "Google",
+      "date": "2024",
+      "category": "Deep Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in neural networks and advanced AI architectures, including real-world projects and assessments.",
+      "image": "/images/certifications/1770105629632.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Programming",
+      "issuer": "Google",
+      "date": "2022",
+      "category": "Programming",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in advanced software engineering and data structures, including real-world projects and assessments.",
+      "image": "/images/certifications/1771152896683.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Advanced Specialization: NLP",
+      "issuer": "GeeksforGeeks",
+      "date": "2024",
+      "category": "NLP",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in natural language processing and transformer models, including real-world projects and assessments.",
+      "image": "/images/certifications/1771472115057.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Cloud Computing Practitioner Certification",
+      "issuer": "DeepLearning.AI",
+      "date": "2023",
+      "category": "Cloud Computing",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in scalable cloud infrastructure and deployment, including real-world projects and assessments.",
+      "image": "/images/certifications/1771472938875.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Computer Vision",
+      "issuer": "Coursera",
+      "date": "2023",
+      "category": "Computer Vision",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in image processing and object detection, including real-world projects and assessments.",
+      "image": "/images/certifications/1771604056286.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Advanced Specialization: Data Science",
+      "issuer": "Microsoft",
+      "date": "2021",
+      "category": "Data Science",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in data analysis, visualization and statistical modeling, including real-world projects and assessments.",
+      "image": "/images/certifications/1773684409922.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Machine Learning",
+      "issuer": "Amazon Web Services",
+      "date": "2022",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "/images/certifications/1775279933776.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Machine Learning Practitioner Certification",
+      "issuer": "GeeksforGeeks",
+      "date": "2022",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "/images/certifications/1775281337278.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Advanced Specialization: Machine Learning",
+      "issuer": "Stanford University",
+      "date": "2021",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "https://placehold.co/800x600/1e293b/f97316?font=montserrat&text=PDF\\nDocument",
+      "pdf": "/images/certifications/1775492341014.pdf"
+    },
+    {
+      "title": "Professional Certificate in Machine Learning",
+      "issuer": "Stanford University",
+      "date": "2024",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "https://placehold.co/800x600/1e293b/f97316?font=montserrat&text=PDF\\nDocument",
+      "pdf": "/images/certifications/1775492502145.pdf"
+    },
+    {
+      "title": "Professional Certificate in Deep Learning",
+      "issuer": "IBM",
+      "date": "2024",
+      "category": "Deep Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in neural networks and advanced AI architectures, including real-world projects and assessments.",
+      "image": "/images/certifications/1775739610048.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Machine Learning Practitioner Certification",
+      "issuer": "Amazon Web Services",
+      "date": "2022",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "/images/certifications/1775740545681.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Programming",
+      "issuer": "Stanford University",
+      "date": "2021",
+      "category": "Programming",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in advanced software engineering and data structures, including real-world projects and assessments.",
+      "image": "/images/certifications/1776340704316.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Data Science",
+      "issuer": "GeeksforGeeks",
+      "date": "2024",
+      "category": "Data Science",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in data analysis, visualization and statistical modeling, including real-world projects and assessments.",
+      "image": "/images/certifications/1778256253971.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Advanced Specialization: Machine Learning",
+      "issuer": "GeeksforGeeks",
+      "date": "2024",
+      "category": "Machine Learning",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in supervised and unsupervised learning algorithms, including real-world projects and assessments.",
+      "image": "/images/certifications/1778256422711.jpg",
+      "pdf": null
+    },
+    {
+      "title": "NLP Practitioner Certification",
+      "issuer": "IBM",
+      "date": "2024",
+      "category": "NLP",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in natural language processing and transformer models, including real-world projects and assessments.",
+      "image": "/images/certifications/1778256857279.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Professional Certificate in Cloud Computing",
+      "issuer": "Coursera",
+      "date": "2021",
+      "category": "Cloud Computing",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in scalable cloud infrastructure and deployment, including real-world projects and assessments.",
+      "image": "/images/certifications/1779120715500.jpg",
+      "pdf": null
+    },
+    {
+      "title": "Advanced Specialization: NLP",
+      "issuer": "GeeksforGeeks",
+      "date": "2023",
+      "category": "NLP",
+      "description": "A comprehensive certification demonstrating advanced proficiency and practical application in natural language processing and transformer models, including real-world projects and assessments.",
+      "image": "/images/certifications/1779735936307.jpg",
+      "pdf": null
+    }
+  ],
+  "patents": [
+    {
+      "title": "Sea Surface Temperature Predicting Device",
+      "patentNo": "435594-001",
+      "date": "2025",
+      "status": "Granted",
+      "category": "Hardware / IoT",
+      "description": "A novel hardware device designed and patented for real-time monitoring, detection, and mapping of sea surface temperature using advanced neural architectures and sensor fusion technology.",
+      "pdf": "/pdfs/patents/435594-001 - Certificate.pdf"
+    },
+    {
+      "title": "Marine Pollution Detection Device",
+      "patentNo": "435595-001",
+      "date": "2025",
+      "status": "Granted",
+      "category": "Computer Vision",
+      "description": "An innovative device for detecting and monitoring underwater pollution levels using CNN-based deep learning techniques, contributing to marine environmental protection and monitoring.",
+      "pdf": "/pdfs/patents/435595-001 - Certificate.pdf"
+    },
+    {
+      "title": "Cognitive State Analysis Apparatus",
+      "patentNo": "409609-001",
+      "date": "2024",
+      "status": "Granted",
+      "category": "Audio AI",
+      "description": "An apparatus for cognitive state analysis via AI-generated acoustics, enabling real-time monitoring and assessment of mental states through advanced audio signal processing and neural networks.",
+      "pdf": "/pdfs/patents/CERTIFICATE - 409609-001.pdf"
+    },
+    {
+      "title": "Deep Learning SST Prediction System",
+      "patentNo": "409608-001",
+      "date": "2024",
+      "status": "Granted",
+      "category": "Deep Learning",
+      "description": "A deep learning apparatus specifically designed for sea surface temperature prediction with high accuracy, utilizing multi-layer neural network architectures for climate monitoring.",
+      "pdf": "/pdfs/patents/CERTIFICATE 409608-001.pdf"
+    }
+  ],
+  "copyrights": [
+    {
+      "title": "Computer Software for Oil Spill Data Analysis",
+      "regNo": "SW-18870/2024",
+      "date": "2024",
+      "category": "Environmental AI",
+      "description": "A sophisticated computer software model for comprehensive oil spill data analysis using advanced machine learning and remote sensing techniques for environmental monitoring and response.",
+      "pdf": "/pdfs/copyright/MyRegRoc Copyright Oil spill data.pdf"
+    },
+    {
+      "title": "Ocean Wave Prediction System",
+      "regNo": "SW-18871/2024",
+      "date": "2024",
+      "category": "Marine Science",
+      "description": "An innovative computer software model for predicting ocean wave patterns and behaviors using hybrid machine learning techniques, aiding in maritime safety and coastal engineering.",
+      "pdf": "/pdfs/copyright/MyRegRoc Ocean Wave Prediction.pdf"
+    },
+    {
+      "title": "Coral Bleaching Detection & Monitoring",
+      "regNo": "SW-18872/2024",
+      "date": "2024",
+      "category": "Deep Learning",
+      "description": "Computer software for detection and monitoring of coral bleaching events using image processing and deep learning, contributing to marine ecosystem conservation and climate research.",
+      "pdf": "/pdfs/copyright/MyRegRoc certificate corel bleaching.pdf"
+    },
+    {
+      "title": "Zonal Global Temperature Prediction Model",
+      "regNo": "SW-18873/2024",
+      "date": "2024",
+      "category": "Machine Learning",
+      "description": "A computer software model for zonal global temperature prediction using hybrid machine learning techniques, enabling accurate climate forecasting and environmental planning.",
+      "pdf": "/pdfs/copyright/MyRegRoc3.pdf"
+    }
+  ],
+  "researchPapers": [
+    {
+      "title": "Facial Emotion Recognition of Human Species by Using Deep Learning Techniques",
+      "paperId": "1705299",
+      "authors": "Amit Kumar Pandey, Dr. Santosh Singh, Ankush Sushil Singh, Ashwani Kumar Mishra",
+      "date": "December 2023",
+      "category": "Deep Learning",
+      "volume": "Vol. 7, Issue 6",
+      "pages": "147–152",
+      "description": "A CNN-based model for accurately identifying diverse human facial expressions including anger, happiness, neutrality, sadness, and surprise, leveraging TensorFlow and Keras for emotion analysis and human-computer interaction.",
+      "pdf": "https://www.irejournals.com/formatedpaper/1705299.pdf",
+      "link": "https://www.irejournals.com/paper-details/1705299"
+    },
+    {
+      "title": "Integrated Approach for Crab Species Classification: Comparative Analysis of SVM and CNN",
+      "paperId": "1705315",
+      "authors": "Amit Kumar Pandey, Dr. Santosh Singh, Kalash Seetharam Shetty, Ashwani Kumar Mishra, Bipin Yadav",
+      "date": "December 2023",
+      "category": "Computer Vision",
+      "volume": "Vol. 7, Issue 6",
+      "pages": "228–234",
+      "description": "An integrated approach using SVM and CNN for accurate crab species classification, leveraging pre-trained models like MobileNetV2 and VGG16 for feature extraction across three crab species.",
+      "pdf": "https://www.irejournals.com/formatedpaper/17053151.pdf",
+      "link": "https://www.irejournals.com/paper-details/1705315"
+    },
+    {
+      "title": "News Summarization Articles by Using NLP",
+      "paperId": "1705416",
+      "authors": "Amit Kumar Pandey, Pradeep Tripathi",
+      "date": "January 2024",
+      "category": "NLP",
+      "volume": "Vol. 7, Issue 7",
+      "pages": "339–343",
+      "description": "Harnessing advanced natural language processing techniques for automated condensation of BBC articles across five diverse categories, utilizing the Hugging Face Transformers library for efficient news summarization.",
+      "pdf": "https://www.irejournals.com/formatedpaper/1705416.pdf",
+      "link": "https://www.irejournals.com/paper-details/1705416"
+    },
+    {
+      "title": "Facial Emotion Recognition of Cat Breeds by Using Convolution Neural Network",
+      "paperId": "1705255",
+      "authors": "Amit Kumar Pandey, Poonam Jain, Bipin Yadav, Vikas Pandey",
+      "date": "December 2023",
+      "category": "Animal AI",
+      "volume": "Vol. 7, Issue 6",
+      "pages": "58–63",
+      "description": "Exploring cat facial emotion recognition using CNN algorithms, detecting and classifying emotional expressions in cats with a diverse dataset encompassing various cat breeds and emotional states.",
+      "pdf": "https://www.irejournals.com/formatedpaper/1705255.pdf",
+      "link": "https://www.irejournals.com/paper-details/1705255"
+    },
+    {
+      "title": "Butterfly Species Recognition Using Convolutional Neural Network",
+      "paperId": "1705260",
+      "authors": "Amit Kumar Pandey, Dr. Santosh Singh, Ankush Sushil Singh, Ashwani Kumar Mishra, Bipin Yadav",
+      "date": "December 2023",
+      "category": "Biodiversity",
+      "volume": "Vol. 7, Issue 6",
+      "pages": "70–74",
+      "description": "An innovative CNN-based Butterfly Species Recognition System designed to automatically extract and analyze intricate features within butterfly images for accurate species classification and biodiversity monitoring.",
+      "pdf": "https://www.irejournals.com/formatedpaper/17052601.pdf",
+      "link": "https://www.irejournals.com/paper-details/1705260"
+    },
+    {
+      "title": "Polarimetric SAR Data Denoising using SOFM",
+      "paperId": "1705252",
+      "authors": "Amit Kumar Pandey, Mithilesh Vishwakarma, Bipin Yadav, Gopal Rajbhar",
+      "date": "December 2023",
+      "category": "Remote Sensing",
+      "volume": "Vol. 7, Issue 6",
+      "pages": "42–48",
+      "description": "Addressing the problem of denoising polarimetric SAR data using Self-Organizing Feature Maps (SOFM), a neural network-based approach for enhancing remote sensing data quality and accuracy.",
+      "pdf": "https://www.irejournals.com/formatedpaper/1705252.pdf",
+      "link": "https://www.irejournals.com/paper-details/1705252"
+    },
+    {
+      "title": "T20 Cricket Score Prediction Using Machine Learning",
+      "paperId": "1705253",
+      "authors": "Amit Kumar Pandey, Sherilyn Kevin, Bipin Yadav, Gopal Rajbhar",
+      "date": "December 2023",
+      "category": "Sports Analytics",
+      "volume": "Vol. 7, Issue 6",
+      "pages": "49–57",
+      "description": "A T20 Cricket Score Predictor powered by XGBoost machine learning, enabling real-time final score prediction based on team strength, venue conditions, and recent performance metrics.",
+      "pdf": "https://www.irejournals.com/formatedpaper/1705253.pdf",
+      "link": "https://www.irejournals.com/paper-details/1705253"
+    },
+    {
+      "title": "Cat Family Recognition by Using Convolution Neural Network",
+      "paperId": "1705257",
+      "authors": "Amit Kumar Pandey, Dr. Santosh Singh, Bipin Yadav",
+      "date": "December 2023",
+      "category": "Image Classification",
+      "volume": "Vol. 7, Issue 6",
+      "pages": "64–69",
+      "description": "An automated CNN solution for recognizing various species within the cat family — Cheetahs, Leopards, Lions, Pumas, and Tigers — with implications for wildlife monitoring and conservation initiatives.",
+      "pdf": "https://www.irejournals.com/formatedpaper/17052571.pdf",
+      "link": "https://www.irejournals.com/paper-details/1705257"
+    },
+    {
+      "title": "Fish Species Recognition using Convolutional Neural Networks for Biodiversity Monitoring",
+      "paperId": "1705306",
+      "authors": "Amit Kumar Pandey, Dr. Santosh Singh, Ankush Sushil Singh, Shravan Shivanand Kamat",
+      "date": "December 2023",
+      "category": "Marine Biology",
+      "volume": "Vol. 7, Issue 6",
+      "pages": "223–227",
+      "description": "An automated CNN system for recognizing fish species to enhance biodiversity monitoring, offering a scalable solution for precise fish species recognition in aquatic ecosystem management.",
+      "pdf": "https://www.irejournals.com/formatedpaper/1705306.pdf",
+      "link": "https://www.irejournals.com/paper-details/1705306"
+    }
+  ],
+  "experiences": [
+    {
+      "id": 1,
+      "type": "work",
+      "company": "Thakur College of Science and Commerce",
+      "role": "Assistant Professor",
+      "date": "2024 – Present",
+      "desc": "Specializing in the Department of AI & ML. Leading courses on Artificial Intelligence, Machine Learning (ML), and Deep Learning (DL). Mentoring students in advanced neural architectures.",
+      "current": true,
+      "tags": [
+        "AI",
+        "ML",
+        "Deep Learning",
+        "Teaching"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "edu",
+      "company": "Mumbai University",
+      "role": "M.Sc Information Technology",
+      "date": "2022 – 2024",
+      "desc": "Advanced studies in IT with a focus on data science and intelligent systems. Conducted research in sea surface temperature prediction models.",
+      "current": false,
+      "tags": [
+        "Master's",
+        "Research",
+        "Data Science"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "edu",
+      "company": "Mumbai University",
+      "role": "B.Sc Information Technology",
+      "date": "2014 – 2017",
+      "desc": "Foundational degree in Information Technology, focusing on software development, algorithms, and database management systems.",
+      "current": false,
+      "tags": [
+        "Bachelor's",
+        "Software Dev"
+      ]
+    }
+  ]
+}

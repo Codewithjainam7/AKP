@@ -6,128 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const RESEARCH_PAPERS = [
-  {
-    title: 'Sea Surface Temperature Prediction by Using EDA and Exponential Smoothening Algorithm',
-    paperId: '1705276',
-    authors: 'Amit Kumar Pandey, Dr. Santosh Singh, Nishant Varma',
-    date: 'December 2023',
-    category: 'Climate Science',
-    volume: 'Vol. 7, Issue 6',
-    pages: '159–163',
-    description: 'An integrated approach for sea surface temperature prediction combining Exploratory Data Analysis and Exponential Smoothing techniques, developing a robust predictive model for climate monitoring and oceanic condition forecasting.',
-    pdf: 'https://www.irejournals.com/formatedpaper/1705276.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705276',
-  },
-  {
-    title: 'Facial Emotion Recognition of Human Species by Using Deep Learning Techniques',
-    paperId: '1705299',
-    authors: 'Amit Kumar Pandey, Dr. Santosh Singh, Ankush Sushil Singh, Ashwani Kumar Mishra',
-    date: 'December 2023',
-    category: 'Deep Learning',
-    volume: 'Vol. 7, Issue 6',
-    pages: '147–152',
-    description: 'A CNN-based model for accurately identifying diverse human facial expressions including anger, happiness, neutrality, sadness, and surprise, leveraging TensorFlow and Keras for emotion analysis and human-computer interaction.',
-    pdf: 'https://www.irejournals.com/formatedpaper/1705299.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705299',
-  },
-  {
-    title: 'Integrated Approach for Crab Species Classification: Comparative Analysis of SVM and CNN',
-    paperId: '1705315',
-    authors: 'Amit Kumar Pandey, Dr. Santosh Singh, Kalash Seetharam Shetty, Ashwani Kumar Mishra, Bipin Yadav',
-    date: 'December 2023',
-    category: 'Computer Vision',
-    volume: 'Vol. 7, Issue 6',
-    pages: '228–234',
-    description: 'An integrated approach using SVM and CNN for accurate crab species classification, leveraging pre-trained models like MobileNetV2 and VGG16 for feature extraction across three crab species.',
-    pdf: 'https://www.irejournals.com/formatedpaper/17053151.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705315',
-  },
-  {
-    title: 'News Summarization Articles by Using NLP',
-    paperId: '1705416',
-    authors: 'Amit Kumar Pandey, Pradeep Tripathi',
-    date: 'January 2024',
-    category: 'NLP',
-    volume: 'Vol. 7, Issue 7',
-    pages: '339–343',
-    description: 'Harnessing advanced natural language processing techniques for automated condensation of BBC articles across five diverse categories, utilizing the Hugging Face Transformers library for efficient news summarization.',
-    pdf: 'https://www.irejournals.com/formatedpaper/1705416.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705416',
-  },
-  {
-    title: 'Facial Emotion Recognition of Cat Breeds by Using Convolution Neural Network',
-    paperId: '1705255',
-    authors: 'Amit Kumar Pandey, Poonam Jain, Bipin Yadav, Vikas Pandey',
-    date: 'December 2023',
-    category: 'Animal AI',
-    volume: 'Vol. 7, Issue 6',
-    pages: '58–63',
-    description: 'Exploring cat facial emotion recognition using CNN algorithms, detecting and classifying emotional expressions in cats with a diverse dataset encompassing various cat breeds and emotional states.',
-    pdf: 'https://www.irejournals.com/formatedpaper/1705255.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705255',
-  },
-  {
-    title: 'Butterfly Species Recognition Using Convolutional Neural Network',
-    paperId: '1705260',
-    authors: 'Amit Kumar Pandey, Dr. Santosh Singh, Ankush Sushil Singh, Ashwani Kumar Mishra, Bipin Yadav',
-    date: 'December 2023',
-    category: 'Biodiversity',
-    volume: 'Vol. 7, Issue 6',
-    pages: '70–74',
-    description: 'An innovative CNN-based Butterfly Species Recognition System designed to automatically extract and analyze intricate features within butterfly images for accurate species classification and biodiversity monitoring.',
-    pdf: 'https://www.irejournals.com/formatedpaper/17052601.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705260',
-  },
-  {
-    title: 'Polarimetric SAR Data Denoising using SOFM',
-    paperId: '1705252',
-    authors: 'Amit Kumar Pandey, Mithilesh Vishwakarma, Bipin Yadav, Gopal Rajbhar',
-    date: 'December 2023',
-    category: 'Remote Sensing',
-    volume: 'Vol. 7, Issue 6',
-    pages: '42–48',
-    description: 'Addressing the problem of denoising polarimetric SAR data using Self-Organizing Feature Maps (SOFM), a neural network-based approach for enhancing remote sensing data quality and accuracy.',
-    pdf: 'https://www.irejournals.com/formatedpaper/1705252.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705252',
-  },
-  {
-    title: 'T20 Cricket Score Prediction Using Machine Learning',
-    paperId: '1705253',
-    authors: 'Amit Kumar Pandey, Sherilyn Kevin, Bipin Yadav, Gopal Rajbhar',
-    date: 'December 2023',
-    category: 'Sports Analytics',
-    volume: 'Vol. 7, Issue 6',
-    pages: '49–57',
-    description: 'A T20 Cricket Score Predictor powered by XGBoost machine learning, enabling real-time final score prediction based on team strength, venue conditions, and recent performance metrics.',
-    pdf: 'https://www.irejournals.com/formatedpaper/1705253.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705253',
-  },
-  {
-    title: 'Cat Family Recognition by Using Convolution Neural Network',
-    paperId: '1705257',
-    authors: 'Amit Kumar Pandey, Dr. Santosh Singh, Bipin Yadav',
-    date: 'December 2023',
-    category: 'Image Classification',
-    volume: 'Vol. 7, Issue 6',
-    pages: '64–69',
-    description: 'An automated CNN solution for recognizing various species within the cat family — Cheetahs, Leopards, Lions, Pumas, and Tigers — with implications for wildlife monitoring and conservation initiatives.',
-    pdf: 'https://www.irejournals.com/formatedpaper/17052571.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705257',
-  },
-  {
-    title: 'Fish Species Recognition using Convolutional Neural Networks for Biodiversity Monitoring',
-    paperId: '1705306',
-    authors: 'Amit Kumar Pandey, Dr. Santosh Singh, Ankush Sushil Singh, Shravan Shivanand Kamat',
-    date: 'December 2023',
-    category: 'Marine Biology',
-    volume: 'Vol. 7, Issue 6',
-    pages: '223–227',
-    description: 'An automated CNN system for recognizing fish species to enhance biodiversity monitoring, offering a scalable solution for precise fish species recognition in aquatic ecosystem management.',
-    pdf: 'https://www.irejournals.com/formatedpaper/1705306.pdf',
-    link: 'https://www.irejournals.com/paper-details/1705306',
-  },
-];
+import { getDatabase } from '../data/dbHelper';
 
 const CATEGORY_ICONS = {
   'Climate Science': FlaskConical,
@@ -143,6 +22,9 @@ const CATEGORY_ICONS = {
 };
 
 export default function ResearchDetails() {
+  const database = getDatabase();
+  const RESEARCH_PAPERS = database.researchPapers || [];
+
   const containerRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
 

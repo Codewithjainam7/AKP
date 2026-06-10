@@ -6,46 +6,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PATENTS = [
-  {
-    title: 'Sea Surface Temperature Predicting Device',
-    patentNo: '435594-001',
-    date: '2025',
-    status: 'Granted',
-    category: 'Hardware / IoT',
-    description: 'A novel hardware device designed and patented for real-time monitoring, detection, and mapping of sea surface temperature using advanced neural architectures and sensor fusion technology.',
-    pdf: '/pdfs/patents/435594-001 - Certificate.pdf'
-  },
-  {
-    title: 'Marine Pollution Detection Device',
-    patentNo: '435595-001',
-    date: '2025',
-    status: 'Granted',
-    category: 'Computer Vision',
-    description: 'An innovative device for detecting and monitoring underwater pollution levels using CNN-based deep learning techniques, contributing to marine environmental protection and monitoring.',
-    pdf: '/pdfs/patents/435595-001 - Certificate.pdf'
-  },
-  {
-    title: 'Cognitive State Analysis Apparatus',
-    patentNo: '409609-001',
-    date: '2024',
-    status: 'Granted',
-    category: 'Audio AI',
-    description: 'An apparatus for cognitive state analysis via AI-generated acoustics, enabling real-time monitoring and assessment of mental states through advanced audio signal processing and neural networks.',
-    pdf: '/pdfs/patents/CERTIFICATE - 409609-001.pdf'
-  },
-  {
-    title: 'Deep Learning SST Prediction System',
-    patentNo: '409608-001',
-    date: '2024',
-    status: 'Granted',
-    category: 'Deep Learning',
-    description: 'A deep learning apparatus specifically designed for sea surface temperature prediction with high accuracy, utilizing multi-layer neural network architectures for climate monitoring.',
-    pdf: '/pdfs/patents/CERTIFICATE 409608-001.pdf'
-  }
-];
+import { getDatabase } from '../data/dbHelper';
 
 export default function PatentDetails() {
+  const database = getDatabase();
+  const PATENTS = database.patents || [];
+
   const containerRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
 

@@ -6,38 +6,7 @@ import { Briefcase, GraduationCap, Calendar, ChevronRight, Sparkles } from 'luci
 
 gsap.registerPlugin(ScrollTrigger);
 
-const EXPERIENCES = [
-  {
-    id: 1,
-    type: 'work',
-    company: 'Thakur College of Science and Commerce',
-    role: 'Assistant Professor',
-    date: '2024 – Present',
-    desc: 'Specializing in the Department of AI & ML. Leading courses on Artificial Intelligence, Machine Learning (ML), and Deep Learning (DL). Mentoring students in advanced neural architectures.',
-    current: true,
-    tags: ['AI', 'ML', 'Deep Learning', 'Teaching']
-  },
-  {
-    id: 2,
-    type: 'edu',
-    company: 'Mumbai University',
-    role: 'M.Sc Information Technology',
-    date: '2022 – 2024',
-    desc: 'Advanced studies in IT with a focus on data science and intelligent systems. Conducted research in sea surface temperature prediction models.',
-    current: false,
-    tags: ['Master\'s', 'Research', 'Data Science']
-  },
-  {
-    id: 3,
-    type: 'edu',
-    company: 'Mumbai University',
-    role: 'B.Sc Information Technology',
-    date: '2014 – 2017',
-    desc: 'Foundational degree in Information Technology, focusing on software development, algorithms, and database management systems.',
-    current: false,
-    tags: ['Bachelor\'s', 'Software Dev']
-  }
-];
+import { getDatabase } from '../data/dbHelper';
 
 function TimelineCard({ exp, idx }) {
   const cardRef = useRef(null);
@@ -134,6 +103,8 @@ function TimelineCard({ exp, idx }) {
 }
 
 export default function Experience() {
+  const database = getDatabase();
+  const EXPERIENCES = database.experiences || [];
   const containerRef = useRef(null);
   const lineFillRef = useRef(null);
 

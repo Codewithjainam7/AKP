@@ -13,6 +13,7 @@ import CopyrightPage from './pages/CopyrightPage';
 import PatentsPage from './pages/PatentsPage';
 import ResearchPapersPage from './pages/ResearchPapersPage';
 import CertificationsPage from './pages/CertificationsPage';
+import AdminDashboard from './pages/AdminDashboard';
 
 
 import gsap from 'gsap';
@@ -96,6 +97,7 @@ function AppContent() {
             <Route path="/patents" element={<PatentsPage />} />
             <Route path="/research-papers" element={<ResearchPapersPage />} />
             <Route path="/certifications" element={<CertificationsPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
         </AnimatePresence>
       </main>

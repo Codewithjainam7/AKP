@@ -6,42 +6,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const COPYRIGHTS = [
-  {
-    title: 'Computer Software for Oil Spill Data Analysis',
-    regNo: 'SW-18870/2024',
-    date: '2024',
-    category: 'Environmental AI',
-    description: 'A sophisticated computer software model for comprehensive oil spill data analysis using advanced machine learning and remote sensing techniques for environmental monitoring and response.',
-    pdf: '/pdfs/copyright/MyRegRoc Copyright Oil spill data.pdf',
-  },
-  {
-    title: 'Ocean Wave Prediction System',
-    regNo: 'SW-18871/2024',
-    date: '2024',
-    category: 'Marine Science',
-    description: 'An innovative computer software model for predicting ocean wave patterns and behaviors using hybrid machine learning techniques, aiding in maritime safety and coastal engineering.',
-    pdf: '/pdfs/copyright/MyRegRoc Ocean Wave Prediction.pdf',
-  },
-  {
-    title: 'Coral Bleaching Detection & Monitoring',
-    regNo: 'SW-18872/2024',
-    date: '2024',
-    category: 'Deep Learning',
-    description: 'Computer software for detection and monitoring of coral bleaching events using image processing and deep learning, contributing to marine ecosystem conservation and climate research.',
-    pdf: '/pdfs/copyright/MyRegRoc certificate corel bleaching.pdf'
-  },
-  {
-    title: 'Zonal Global Temperature Prediction Model',
-    regNo: 'SW-18873/2024',
-    date: '2024',
-    category: 'Machine Learning',
-    description: 'A computer software model for zonal global temperature prediction using hybrid machine learning techniques, enabling accurate climate forecasting and environmental planning.',
-    pdf: '/pdfs/copyright/MyRegRoc3.pdf',
-  }
-];
+import { getDatabase } from '../data/dbHelper';
 
 export default function CopyrightDetails() {
+  const database = getDatabase();
+  const COPYRIGHTS = database.copyrights || [];
+
   const containerRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState('');
 
