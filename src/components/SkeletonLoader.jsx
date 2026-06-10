@@ -7,14 +7,34 @@ const ShimmerStyles = () => (
       0%   { background-position: -700px 0; }
       100% { background-position:  700px 0; }
     }
+
+    /* HOME (#FAFAFA) — warm light gray */
     .sk {
-      background: linear-gradient(90deg, #e8e8e8 25%, #f0f0f0 50%, #e8e8e8 75%);
+      background: linear-gradient(90deg, #ebebeb 25%, #f5f5f5 50%, #ebebeb 75%);
       background-size: 700px 100%;
       animation: shimmer 1.4s infinite linear;
       border-radius: 8px;
     }
+
+    /* CAREER / RESEARCH pages (#0F0F11) — cool dark charcoal */
+    .sk-navy {
+      background: linear-gradient(90deg, #191920 25%, #22222b 50%, #191920 75%);
+      background-size: 700px 100%;
+      animation: shimmer 1.4s infinite linear;
+      border-radius: 8px;
+    }
+
+    /* RESEARCH PAPERS / PATENTS / COPYRIGHT / CERTS (#0a0a0a) — near-black */
     .sk-dark {
-      background: linear-gradient(90deg, #1e1e2a 25%, #252535 50%, #1e1e2a 75%);
+      background: linear-gradient(90deg, #141414 25%, #1c1c1c 50%, #141414 75%);
+      background-size: 700px 100%;
+      animation: shimmer 1.4s infinite linear;
+      border-radius: 8px;
+    }
+
+    /* ADMIN (#070709) — deepest dark */
+    .sk-admin {
+      background: linear-gradient(90deg, #0f0f12 25%, #17171b 50%, #0f0f12 75%);
       background-size: 700px 100%;
       animation: shimmer 1.4s infinite linear;
       border-radius: 8px;
@@ -23,9 +43,13 @@ const ShimmerStyles = () => (
 );
 
 /* ─── Shared Navbar Skeleton ─────────────────────────────────────── */
-const NavbarSkeleton = ({ dark = false }) => {
-  const S = dark ? 'sk-dark' : 'sk';
-  const bg = dark ? 'bg-[#0F0F11] border-white/5' : 'bg-white border-gray-100';
+const NavbarSkeleton = ({ variant = 'light' }) => {
+  const S = variant === 'light' ? 'sk' : variant === 'navy' ? 'sk-navy' : variant === 'admin' ? 'sk-admin' : 'sk-dark';
+  const bg =
+    variant === 'light' ? 'bg-white border-gray-100' :
+    variant === 'navy'  ? 'bg-[#0F0F11] border-white/5' :
+    variant === 'admin' ? 'bg-[#070709] border-white/[0.04]' :
+                          'bg-[#0a0a0a] border-white/5';
   return (
     <div className={`w-full h-16 ${bg} border-b flex items-center px-8 gap-6 shrink-0`}>
       <div className={`h-8 w-28 ${S}`} />
@@ -76,13 +100,14 @@ export function HomeSkeleton() {
 }
 
 /* ─── CARD LIST SKELETON (Research Papers, Patents, Copyrights, Certs) */
-function CardListSkeleton({ dark = true, cardCount = 6, title = true }) {
-  const S = dark ? 'sk-dark' : 'sk';
-  const bg = dark ? 'bg-[#0F0F11]' : 'bg-[#FAFAFA]';
+function CardListSkeleton({ variant = 'dark', cardCount = 6, title = true }) {
+  const S = variant === 'navy' ? 'sk-navy' : variant === 'dark' ? 'sk-dark' : 'sk';
+  const bg = variant === 'dark' ? 'bg-[#0a0a0a]' : variant === 'navy' ? 'bg-[#0F0F11]' : 'bg-[#FAFAFA]';
+  const isDark = variant !== 'light';
   return (
     <div className={`flex flex-col min-h-screen ${bg} overflow-hidden`}>
       <ShimmerStyles />
-      <NavbarSkeleton dark={dark} />
+      <NavbarSkeleton variant={variant} />
       <div className="container mx-auto px-6 lg:px-12 pt-32 pb-20">
         {title && (
           <div className="mb-14">
@@ -100,7 +125,7 @@ function CardListSkeleton({ dark = true, cardCount = 6, title = true }) {
         {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {Array.from({ length: cardCount }).map((_, i) => (
-            <div key={i} className={`rounded-[24px] p-6 ${dark ? 'bg-white/[0.03] border border-white/5' : 'bg-white border border-gray-100'} flex flex-col gap-4`}>
+            <div key={i} className={`rounded-[24px] p-6 ${isDark ? 'bg-white/[0.03] border border-white/5' : 'bg-white border border-gray-100'} flex flex-col gap-4`}>
               <div className={`${S} h-5 w-20 rounded-full`} />
               <div className={`${S} h-6 w-full rounded-xl`} />
               <div className={`${S} h-4 w-5/6 rounded-lg`} />
@@ -123,22 +148,22 @@ export function CareerSkeleton() {
   return (
     <div className="flex flex-col min-h-screen bg-[#0F0F11] overflow-hidden">
       <ShimmerStyles />
-      <NavbarSkeleton dark />
+      <NavbarSkeleton variant="navy" />
       <div className="container mx-auto px-6 lg:px-12 pt-32 pb-20">
         {/* Hero text */}
         <div className="mb-20">
-          <div className="sk-dark h-20 w-96 mb-6 rounded-3xl" />
-          <div className="sk-dark h-20 w-72 mb-8 rounded-3xl" />
-          <div className="sk-dark h-6 w-full max-w-2xl mb-3" />
-          <div className="sk-dark h-6 w-4/5 max-w-2xl" />
+          <div className="sk-navy h-20 w-96 mb-6 rounded-3xl" />
+          <div className="sk-navy h-20 w-72 mb-8 rounded-3xl" />
+          <div className="sk-navy h-6 w-full max-w-2xl mb-3" />
+          <div className="sk-navy h-6 w-4/5 max-w-2xl" />
         </div>
         {/* Stats grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24">
           {[1, 2, 3, 4].map(i => (
             <div key={i} className="rounded-[32px] bg-white/[0.03] border border-white/5 p-8 flex flex-col gap-4">
-              <div className="sk-dark h-6 w-6 rounded-full" />
-              <div className="sk-dark h-8 w-16 rounded-xl" />
-              <div className="sk-dark h-3 w-24 rounded-full" />
+              <div className="sk-navy h-6 w-6 rounded-full" />
+              <div className="sk-navy h-8 w-16 rounded-xl" />
+              <div className="sk-navy h-3 w-24 rounded-full" />
             </div>
           ))}
         </div>
@@ -147,15 +172,15 @@ export function CareerSkeleton() {
           {[1, 2, 3].map(i => (
             <div key={i} className="flex gap-6">
               <div className="flex flex-col items-center">
-                <div className="sk-dark w-4 h-4 rounded-full shrink-0" />
-                <div className="sk-dark w-0.5 flex-1 mt-2 rounded-full" style={{ minHeight: 80 }} />
+                <div className="sk-navy w-4 h-4 rounded-full shrink-0" />
+                <div className="sk-navy w-0.5 flex-1 mt-2 rounded-full" style={{ minHeight: 80 }} />
               </div>
               <div className="flex-1 pb-8">
-                <div className="sk-dark h-3 w-24 mb-3 rounded-full" />
-                <div className="sk-dark h-6 w-64 mb-2 rounded-xl" />
-                <div className="sk-dark h-4 w-48 mb-4 rounded-lg" />
-                <div className="sk-dark h-4 w-full rounded-lg" />
-                <div className="sk-dark h-4 w-5/6 rounded-lg mt-2" />
+                <div className="sk-navy h-3 w-24 mb-3 rounded-full" />
+                <div className="sk-navy h-6 w-64 mb-2 rounded-xl" />
+                <div className="sk-navy h-4 w-48 mb-4 rounded-lg" />
+                <div className="sk-navy h-4 w-full rounded-lg" />
+                <div className="sk-navy h-4 w-5/6 rounded-lg mt-2" />
               </div>
             </div>
           ))}
@@ -167,30 +192,30 @@ export function CareerSkeleton() {
 
 /* ─── RESEARCH PAGE SKELETON ─────────────────────────────────────── */
 export function ResearchSkeleton() {
-  return <CardListSkeleton dark cardCount={6} />;
+  return <CardListSkeleton variant="dark" cardCount={6} />;
 }
 
 /* ─── RESEARCH PAPERS PAGE SKELETON ─────────────────────────────── */
 export function ResearchPapersSkeleton() {
-  return <CardListSkeleton dark cardCount={6} />;
+  return <CardListSkeleton variant="dark" cardCount={6} />;
 }
 
 /* ─── PATENTS PAGE SKELETON ──────────────────────────────────────── */
 export function PatentsSkeleton() {
-  return <CardListSkeleton dark cardCount={6} />;
+  return <CardListSkeleton variant="dark" cardCount={6} />;
 }
 
 /* ─── COPYRIGHT PAGE SKELETON ────────────────────────────────────── */
 export function CopyrightSkeleton() {
-  return <CardListSkeleton dark cardCount={6} />;
+  return <CardListSkeleton variant="dark" cardCount={6} />;
 }
 
 /* ─── CERTIFICATIONS PAGE SKELETON ──────────────────────────────── */
 export function CertificationsSkeleton() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0F0F11] overflow-hidden">
+    <div className="flex flex-col min-h-screen bg-[#0a0a0a] overflow-hidden">
       <ShimmerStyles />
-      <NavbarSkeleton dark />
+      <NavbarSkeleton variant="dark" />
       <div className="container mx-auto px-6 lg:px-12 pt-32 pb-20">
         <div className="mb-14">
           <div className="sk-dark h-5 w-32 mb-5 rounded-full" />
@@ -223,27 +248,21 @@ export function AdminDashboardSkeleton() {
       <ShimmerStyles />
 
       {/* Top Navbar */}
-      <div className="w-full h-16 bg-[#0a0a0f]/80 border-b border-white/[0.04] flex items-center px-8 gap-6 shrink-0">
-        <div className="sk-dark h-8 w-28" />
-        <div className="flex-1" />
-        <div className="sk-dark h-4 w-14" />
-        <div className="sk-dark h-4 w-16" />
-        <div className="sk-dark h-9 w-24 rounded-full" />
-      </div>
+      <NavbarSkeleton variant="admin" />
 
       <div className="container mx-auto px-4 lg:px-8 max-w-7xl pt-10 pb-20">
 
         {/* Header Bar */}
-        <div className="bg-[#111115]/50 border border-white/[0.05] rounded-[28px] p-6 mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="bg-[#0f0f12]/50 border border-white/[0.05] rounded-[28px] p-6 mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="flex flex-col gap-3">
-            <div className="sk-dark h-4 w-24 rounded-full" />
-            <div className="sk-dark h-8 w-56 rounded-2xl" />
-            <div className="sk-dark h-4 w-80 rounded-lg" />
+            <div className="sk-admin h-4 w-24 rounded-full" />
+            <div className="sk-admin h-8 w-56 rounded-2xl" />
+            <div className="sk-admin h-4 w-80 rounded-lg" />
           </div>
           <div className="flex gap-3">
-            <div className="sk-dark h-11 w-36 rounded-xl" />
-            <div className="sk-dark h-11 w-36 rounded-xl" />
-            <div className="sk-dark h-11 w-24 rounded-xl" />
+            <div className="sk-admin h-11 w-36 rounded-xl" />
+            <div className="sk-admin h-11 w-36 rounded-xl" />
+            <div className="sk-admin h-11 w-24 rounded-xl" />
           </div>
         </div>
 
@@ -253,12 +272,12 @@ export function AdminDashboardSkeleton() {
           {/* Sidebar Tabs */}
           <div className="flex flex-col gap-2">
             {tabs.map(i => (
-              <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-[#121216]/40 border border-white/[0.04]">
+              <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-[#0f0f12]/40 border border-white/[0.04]">
                 <div className="flex items-center gap-3">
-                  <div className="sk-dark h-5 w-5 rounded-full" />
-                  <div className="sk-dark h-4 rounded-lg" style={{ width: `${60 + (i % 3) * 25}px` }} />
+                  <div className="sk-admin h-5 w-5 rounded-full" />
+                  <div className="sk-admin h-4 rounded-lg" style={{ width: `${60 + (i % 3) * 25}px` }} />
                 </div>
-                <div className="sk-dark h-5 w-6 rounded-full" />
+                <div className="sk-admin h-5 w-6 rounded-full" />
               </div>
             ))}
           </div>
@@ -266,12 +285,12 @@ export function AdminDashboardSkeleton() {
           {/* Main Content Area */}
           <div className="lg:col-span-3 space-y-6">
             {/* Content card header */}
-            <div className="bg-[#121216]/50 border border-white/[0.05] rounded-[32px] p-8">
+            <div className="bg-[#0f0f12]/50 border border-white/[0.05] rounded-[32px] p-8">
               <div className="flex items-center gap-3 mb-8">
-                <div className="sk-dark h-10 w-10 rounded-2xl" />
+                <div className="sk-admin h-10 w-10 rounded-2xl" />
                 <div className="flex flex-col gap-2">
-                  <div className="sk-dark h-6 w-40 rounded-xl" />
-                  <div className="sk-dark h-3 w-56 rounded-lg" />
+                  <div className="sk-admin h-6 w-40 rounded-xl" />
+                  <div className="sk-admin h-3 w-56 rounded-lg" />
                 </div>
               </div>
 
@@ -279,25 +298,25 @@ export function AdminDashboardSkeleton() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Profile image block */}
                 <div className="md:col-span-2 flex gap-4 items-start">
-                  <div className="sk-dark w-24 h-24 rounded-2xl shrink-0" />
+                  <div className="sk-admin w-24 h-24 rounded-2xl shrink-0" />
                   <div className="flex-1 flex flex-col gap-3">
-                    <div className="sk-dark h-11 w-full rounded-xl" />
-                    <div className="sk-dark h-11 w-full rounded-xl" />
+                    <div className="sk-admin h-11 w-full rounded-xl" />
+                    <div className="sk-admin h-11 w-full rounded-xl" />
                   </div>
                 </div>
                 {/* Text fields */}
                 {[1, 2, 3, 4, 5, 6].map(i => (
                   <div key={i} className="flex flex-col gap-2">
-                    <div className="sk-dark h-3 w-24 rounded-full" />
-                    <div className="sk-dark h-11 w-full rounded-xl" />
+                    <div className="sk-admin h-3 w-24 rounded-full" />
+                    <div className="sk-admin h-11 w-full rounded-xl" />
                   </div>
                 ))}
               </div>
 
               {/* Action buttons */}
               <div className="flex justify-end gap-3 mt-8">
-                <div className="sk-dark h-11 w-28 rounded-xl" />
-                <div className="sk-dark h-11 w-32 rounded-xl" />
+                <div className="sk-admin h-11 w-28 rounded-xl" />
+                <div className="sk-admin h-11 w-32 rounded-xl" />
               </div>
             </div>
           </div>
