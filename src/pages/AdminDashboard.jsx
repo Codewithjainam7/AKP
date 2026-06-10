@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { 
   Lock, LogIn, Save, LogOut, Download, Plus, Trash2, Edit2, Check, X,
   FileText, Award, Briefcase, GraduationCap, BookOpen, ShieldCheck, RefreshCw, AlertTriangle,
-  ChevronLeft, ChevronRight, ChevronDown
+  ChevronLeft, ChevronRight, ChevronDown, User, Image, Type, Link2, BarChart2
 } from 'lucide-react';
 import { getDatabase, saveDatabase } from '../data/dbHelper';
 
@@ -12,7 +12,11 @@ export default function AdminDashboard() {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [database, setDatabase] = useState(null);
-  const [activeTab, setActiveTab] = useState('researchPapers'); // researchPapers, patents, copyrights, certifications, experiences
+  const [activeTab, setActiveTab] = useState('researchPapers'); // hero, researchPapers, patents, copyrights, certifications, experiences
+
+  // Hero section specific state
+  const [heroData, setHeroData] = useState(null);
+  const [heroSaving, setHeroSaving] = useState(false);
   
   // CRUD states
   const [editingItem, setEditingItem] = useState(null); // The item currently being edited
@@ -34,7 +38,24 @@ export default function AdminDashboard() {
     const auth = sessionStorage.getItem('admin_authenticated');
     if (auth === 'true') {
       setIsAuthenticated(true);
-      setDatabase(getDatabase());
+      const db = getDatabase();
+      setDatabase(db);
+      if (db && db.hero) {
+        setHeroData({ ...db.hero });
+      } else {
+        setHeroData({
+          name: 'Amit',
+          roleLabel: 'Academic Innovator',
+          subtitle: 'Bridging the gap between cutting-edge <strong>Machine Learning</strong> research and scalable practical solutions.',
+          profileImage: '/amit_sir_photo.png',
+          ctaLabel: 'View Research',
+          ctaLink: '/research',
+          stats: [
+            { value: '10', suffix: '+', label: 'Publications' },
+            { value: '7', suffix: '+', label: 'Patents' }
+          ]
+        });
+      }
     }
   }, []);
 
@@ -641,6 +662,7 @@ export default function AdminDashboard() {
               </label>
               {(() => {
                 const tabs = [
+                  { id: 'hero', label: 'Hero Section', icon: User },
                   { id: 'researchPapers', label: 'Research Papers', icon: BookOpen },
                   { id: 'patents', label: 'Design Patents', icon: FileText },
                   { id: 'copyrights', label: 'Copyrights', icon: ShieldCheck },
@@ -649,7 +671,7 @@ export default function AdminDashboard() {
                 ];
                 const active = tabs.find(t => t.id === activeTab);
                 const ActiveIcon = active.icon;
-                const count = database ? (database[active.id] || []).length : 0;
+                const count = active.id === 'hero' ? 1 : (database ? (database[active.id] || []).length : 0);
                 
                 return (
                   <>
@@ -676,7 +698,7 @@ export default function AdminDashboard() {
                         {tabs.map(tab => {
                           const Icon = tab.icon;
                           const isActive = activeTab === tab.id;
-                          const tabCount = database ? (database[tab.id] || []).length : 0;
+                          const tabCount = tab.id === 'hero' ? 1 : (database ? (database[tab.id] || []).length : 0);
                           return (
                             <button
                               key={tab.id}
@@ -712,6 +734,7 @@ export default function AdminDashboard() {
             {/* Desktop Tab Sidebar (Hidden on mobile/tablet) */}
             <div className="hidden lg:flex lg:flex-col gap-2">
               {[
+                { id: 'hero', label: 'Hero Section', icon: User },
                 { id: 'researchPapers', label: 'Research Papers', icon: BookOpen },
                 { id: 'patents', label: 'Design Patents', icon: FileText },
                 { id: 'copyrights', label: 'Copyrights', icon: ShieldCheck },
@@ -720,7 +743,7 @@ export default function AdminDashboard() {
               ].map(tab => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
-                const count = database ? (database[tab.id] || []).length : 0;
+                const count = tab.id === 'hero' ? 1 : (database ? (database[tab.id] || []).length : 0);
                 return (
                   <button
                     key={tab.id}
@@ -750,9 +773,250 @@ export default function AdminDashboard() {
 
           {/* Main Content Workspace */}
           <div className="lg:col-span-3 space-y-8">
-            
-            {/* Editor form card */}
-            {editingItem && (
+
+            {/* ═══════════════════════════════════════════════════════ */}
+            {/* HERO SECTION EDITOR */}
+            {/* ═══════════════════════════════════════════════════════ */}
+            {activeTab === 'hero' && heroData && (
+              <div className="bg-[#121216]/50 backdrop-blur-xl border border-white/[0.05] rounded-[32px] p-6 md:p-8 shadow-2xl">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-primary-600 to-orange-500 flex items-center justify-center shadow-lg shadow-primary-600/20">
+                    <User size={18} className="text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-white" style={{ fontFamily: 'Syne, sans-serif' }}>Hero Section</h2>
+                    <p className="text-slate-400 text-xs mt-0.5">Edit the main landing section of the portfolio.</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                  {/* Profile Image */}
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-2">
+                      <Image size={12} /> Profile Picture
+                    </label>
+                    <div className="flex flex-col sm:flex-row gap-4 items-start">
+                      {/* Preview */}
+                      <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-white/10 bg-white/5 shrink-0 flex items-center justify-center">
+                        {heroData.profileImage ? (
+                          <img src={heroData.profileImage} alt="Profile preview" className="w-full h-full object-cover" />
+                        ) : (
+                          <User size={32} className="text-slate-600" />
+                        )}
+                      </div>
+                      <div className="flex-1 space-y-3 w-full">
+                        <input
+                          type="text"
+                          value={heroData.profileImage || ''}
+                          onChange={(e) => setHeroData(prev => ({ ...prev, profileImage: e.target.value }))}
+                          placeholder="/path/to/image.png or https://..."
+                          className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm transition-all placeholder-slate-500"
+                        />
+                        <label className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08] text-slate-300 hover:text-white font-semibold text-sm transition-all cursor-pointer active:scale-95">
+                          <span>Upload Image (max 5MB)</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => {
+                              const file = e.target.files?.[0];
+                              if (!file) return;
+                              if (file.size > 5 * 1024 * 1024) {
+                                setWarningPopup({ show: true, title: 'File Too Large', message: 'Profile image must be under 5MB. Please choose a smaller file.' });
+                                e.target.value = '';
+                                return;
+                              }
+                              const reader = new FileReader();
+                              reader.onload = (ev) => {
+                                setHeroData(prev => ({ ...prev, profileImage: ev.target.result }));
+                              };
+                              reader.readAsDataURL(file);
+                            }}
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Name */}
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+                      <Type size={12} /> Display Name
+                    </label>
+                    <input
+                      type="text"
+                      value={heroData.name || ''}
+                      onChange={(e) => setHeroData(prev => ({ ...prev, name: e.target.value }))}
+                      placeholder="e.g. Amit"
+                      className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm transition-all placeholder-slate-500"
+                    />
+                    <p className="text-slate-500 text-[11px] mt-1.5">Shown as: I'm <strong className="text-slate-300">{heroData.name}</strong>,</p>
+                  </div>
+
+                  {/* Role Label */}
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+                      <Type size={12} /> Role / Title Label
+                    </label>
+                    <input
+                      type="text"
+                      value={heroData.roleLabel || ''}
+                      onChange={(e) => setHeroData(prev => ({ ...prev, roleLabel: e.target.value }))}
+                      placeholder="e.g. Academic Innovator"
+                      className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm transition-all placeholder-slate-500"
+                    />
+                    <p className="text-slate-500 text-[11px] mt-1.5">The last word gets the orange underline accent.</p>
+                  </div>
+
+                  {/* Subtitle */}
+                  <div className="md:col-span-2">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+                      <Type size={12} /> Subtitle / Description
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={heroData.subtitle || ''}
+                      onChange={(e) => setHeroData(prev => ({ ...prev, subtitle: e.target.value }))}
+                      placeholder="Short description shown below the title..."
+                      className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm transition-all placeholder-slate-500 resize-none"
+                    />
+                    <p className="text-slate-500 text-[11px] mt-1.5">HTML is supported, e.g. &lt;strong&gt;Machine Learning&lt;/strong&gt;</p>
+                  </div>
+
+                  {/* CTA Button */}
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+                      <Link2 size={12} /> CTA Button Label
+                    </label>
+                    <input
+                      type="text"
+                      value={heroData.ctaLabel || ''}
+                      onChange={(e) => setHeroData(prev => ({ ...prev, ctaLabel: e.target.value }))}
+                      placeholder="e.g. View Research"
+                      className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm transition-all placeholder-slate-500"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
+                      <Link2 size={12} /> CTA Button Link
+                    </label>
+                    <input
+                      type="text"
+                      value={heroData.ctaLink || ''}
+                      onChange={(e) => setHeroData(prev => ({ ...prev, ctaLink: e.target.value }))}
+                      placeholder="e.g. /research or https://..."
+                      className="w-full px-4 py-3.5 rounded-xl bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm transition-all placeholder-slate-500"
+                    />
+                  </div>
+
+                  {/* Stats */}
+                  <div className="md:col-span-2">
+                    <div className="flex items-center justify-between mb-3">
+                      <label className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                        <BarChart2 size={12} /> Stats Counters
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => setHeroData(prev => ({ ...prev, stats: [...(prev.stats || []), { value: '0', suffix: '+', label: 'New Stat' }] }))}
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary-600/10 border border-primary-500/20 text-primary-400 hover:bg-primary-600/20 text-xs font-bold transition-all"
+                      >
+                        <Plus size={12} /> Add Stat
+                      </button>
+                    </div>
+                    <div className="space-y-3">
+                      {(heroData.stats || []).map((stat, i) => (
+                        <div key={i} className="flex gap-3 items-center p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+                          <div className="flex gap-2 flex-1">
+                            <input
+                              type="text"
+                              value={stat.value}
+                              onChange={(e) => {
+                                const newStats = [...heroData.stats];
+                                newStats[i] = { ...newStats[i], value: e.target.value };
+                                setHeroData(prev => ({ ...prev, stats: newStats }));
+                              }}
+                              placeholder="10"
+                              className="w-16 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm"
+                            />
+                            <input
+                              type="text"
+                              value={stat.suffix}
+                              onChange={(e) => {
+                                const newStats = [...heroData.stats];
+                                newStats[i] = { ...newStats[i], suffix: e.target.value };
+                                setHeroData(prev => ({ ...prev, stats: newStats }));
+                              }}
+                              placeholder="+"
+                              className="w-14 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm"
+                            />
+                            <input
+                              type="text"
+                              value={stat.label}
+                              onChange={(e) => {
+                                const newStats = [...heroData.stats];
+                                newStats[i] = { ...newStats[i], label: e.target.value };
+                                setHeroData(prev => ({ ...prev, stats: newStats }));
+                              }}
+                              placeholder="Publications"
+                              className="flex-1 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] focus:border-primary-500 focus:outline-none text-white text-sm"
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              const newStats = heroData.stats.filter((_, idx) => idx !== i);
+                              setHeroData(prev => ({ ...prev, stats: newStats }));
+                            }}
+                            className="p-2 rounded-lg text-red-400 hover:bg-red-500/10 transition-all shrink-0"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      ))}
+                      {(heroData.stats || []).length === 0 && (
+                        <p className="text-slate-500 text-xs text-center py-4">No stats yet. Click "Add Stat" to add one.</p>
+                      )}
+                    </div>
+                    <p className="text-slate-500 text-[11px] mt-2">Each stat shows as: value + suffix (e.g. 10+) with a label below.</p>
+                  </div>
+
+                </div>
+
+                {/* Save Hero Button */}
+                <div className="mt-8 flex justify-end">
+                  <button
+                    type="button"
+                    disabled={heroSaving}
+                    onClick={() => {
+                      try {
+                        setHeroSaving(true);
+                        const updatedDb = { ...database, hero: heroData };
+                        setDatabase(updatedDb);
+                        saveDatabase(updatedDb);
+                        setHasUnsavedChanges(false);
+                        setSaveStatus({ type: 'success', message: 'Hero section saved! Changes are live.' });
+                        setTimeout(() => setSaveStatus({ type: '', message: '' }), 5000);
+                      } catch (err) {
+                        setSaveStatus({ type: 'error', message: `Failed to save: ${err.message}` });
+                      } finally {
+                        setHeroSaving(false);
+                      }
+                    }}
+                    className="flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-primary-600 to-orange-600 hover:from-primary-500 hover:to-orange-500 disabled:opacity-50 text-white font-bold text-sm shadow-lg shadow-primary-600/20 transition-all active:scale-95 transform hover:-translate-y-0.5"
+                  >
+                    {heroSaving ? <RefreshCw size={16} className="animate-spin" /> : <Save size={16} />}
+                    Save Hero Section
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* ═══════════════════════════════════════════════════════ */}
+            {/* REGULAR ITEM EDITOR FORM (only when NOT on hero tab) */}
+            {/* ═══════════════════════════════════════════════════════ */}
+            {activeTab !== 'hero' && editingItem && (
               <div className="bg-[#121216]/50 backdrop-blur-xl border border-white/[0.05] rounded-[32px] p-6 md:p-8 shadow-2xl relative">
                 <button 
                   onClick={handleCancel}
@@ -1400,7 +1664,7 @@ export default function AdminDashboard() {
             )}
  
             {/* List and CRUD actions view */}
-            {!editingItem && database && (
+            {!editingItem && database && activeTab !== 'hero' && (
               <div className="bg-[#121216]/50 backdrop-blur-xl border border-white/[0.05] rounded-[32px] p-6 md:p-8 shadow-[0_24px_48px_rgba(0,0,0,0.3)]">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                   <div>

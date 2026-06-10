@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, ChevronDown } from 'lucide-react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import LiquidBackground from './LiquidBackground';
+import { useScroll } from 'framer-motion';
+import { getDatabase } from '../data/dbHelper';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -176,9 +176,36 @@ const GenerativeAIBackground = () => {
   return <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none opacity-90" />;
 };
 
+// Default fallback hero data
+const DEFAULT_HERO = {
+  name: 'Amit',
+  roleLabel: 'Academic Innovator',
+  subtitle: 'Bridging the gap between cutting-edge <strong>Machine Learning</strong> research and scalable practical solutions.',
+  profileImage: '/amit_sir_photo.png',
+  ctaLabel: 'View Research',
+  ctaLink: '/research',
+  stats: [
+    { value: '10', suffix: '+', label: 'Publications' },
+    { value: '7', suffix: '+', label: 'Patents' }
+  ]
+};
+
 const Hero = () => {
   const heroRef = useRef(null);
   const { scrollY } = useScroll();
+  const [heroData, setHeroData] = useState(DEFAULT_HERO);
+
+  // Load hero data from db on mount
+  useEffect(() => {
+    try {
+      const db = getDatabase();
+      if (db && db.hero) {
+        setHeroData({ ...DEFAULT_HERO, ...db.hero });
+      }
+    } catch (e) {
+      // fallback to defaults
+    }
+  }, []);
 
   useEffect(() => {
     let ctx = gsap.context(() => {
@@ -227,7 +254,9 @@ const Hero = () => {
 
     }, heroRef);
     return () => ctx.revert();
-  }, []);
+  }, [heroData]);
+
+  const stats = heroData.stats || DEFAULT_HERO.stats;
 
   return (
     <section 
@@ -244,12 +273,12 @@ const Hero = () => {
           <div className="w-full lg:w-[55%] flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1 z-20 pointer-events-auto will-change-transform">
             
             <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.1] tracking-tight text-[#1B1B3A] will-change-transform">
-              <div className="overflow-hidden pb-1"><div className="hero-title will-change-transform">I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-orange-400">Amit,</span></div></div>
+              <div className="overflow-hidden pb-1"><div className="hero-title will-change-transform">I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-orange-400">{heroData.name},</span></div></div>
               <div className="overflow-hidden pb-4">
                 <div className="hero-title will-change-transform">
-                  Academic{' '}
+                  {heroData.roleLabel.split(' ').slice(0, -1).join(' ')}{' '}
                   <span className="relative inline-block">
-                    Innovator
+                    {heroData.roleLabel.split(' ').slice(-1)[0]}
                     <svg className="svg-underline absolute -bottom-1 lg:-bottom-2 left-0 w-full h-[14px]" viewBox="0 0 100 14" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M0 10 Q 50 2 100 10" stroke="#ea580c" strokeWidth="6" vectorEffect="non-scaling-stroke" strokeLinecap="round"/>
                     </svg>
@@ -258,16 +287,17 @@ const Hero = () => {
               </div>
             </h1>
             
-            <p className="hero-subtitle mt-3 sm:mt-6 text-sm sm:text-base md:text-xl text-slate-500 max-w-xl font-medium leading-relaxed will-change-transform">
-              Bridging the gap between cutting-edge <strong className="text-[#1B1B3A]">Machine Learning</strong> research and scalable practical solutions.
-            </p>
+            <p
+              className="hero-subtitle mt-3 sm:mt-6 text-sm sm:text-base md:text-xl text-slate-500 max-w-xl font-medium leading-relaxed will-change-transform"
+              dangerouslySetInnerHTML={{ __html: heroData.subtitle }}
+            />
 
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 mt-6 sm:mt-10 w-full justify-center lg:justify-start">
               
               <div className="hero-cta">
-                <Link to="/research" className="group flex items-center gap-4 px-8 py-4 bg-[#1B1B3A] hover:bg-primary-600 text-white rounded-full shadow-lg hover:shadow-primary-600/30 transition-all duration-300 transform hover:-translate-y-1">
+                <Link to={heroData.ctaLink || '/research'} className="group flex items-center gap-4 px-8 py-4 bg-[#1B1B3A] hover:bg-primary-600 text-white rounded-full shadow-lg hover:shadow-primary-600/30 transition-all duration-300 transform hover:-translate-y-1">
                   <span className="font-bold text-xs sm:text-sm tracking-[0.2em] uppercase">
-                    View Research 
+                    {heroData.ctaLabel}
                   </span>
                   <div className="bg-white/10 w-8 h-8 rounded-full flex items-center justify-center group-hover:bg-white transition-all duration-300 group-hover:rotate-45 group-hover:scale-110">
                     <ArrowUpRight className="w-4 h-4 text-white group-hover:text-primary-600 transition-colors duration-300" />
@@ -276,14 +306,14 @@ const Hero = () => {
               </div>
 
               <div className="hero-stats flex items-center justify-center lg:justify-start gap-6 sm:border-l-2 sm:border-slate-200 sm:pl-6 h-12">
-                <div className="flex flex-col items-center lg:items-start">
-                  <span className="text-xl sm:text-2xl font-black text-[#1B1B3A] leading-none">10<span className="text-primary-600">+</span></span>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Publications</span>
-                </div>
-                <div className="flex flex-col items-center lg:items-start">
-                  <span className="text-xl sm:text-2xl font-black text-[#1B1B3A] leading-none">7<span className="text-primary-600">+</span></span>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">Patents</span>
-                </div>
+                {stats.map((stat, i) => (
+                  <div key={i} className="flex flex-col items-center lg:items-start">
+                    <span className="text-xl sm:text-2xl font-black text-[#1B1B3A] leading-none">
+                      {stat.value}<span className="text-primary-600">{stat.suffix}</span>
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">{stat.label}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -313,10 +343,10 @@ const Hero = () => {
                  className="frame-photo absolute inset-0 overflow-hidden shadow-2xl z-10"
                  style={{ borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%' }}
                >
-                 {/* The Photo — no zoom */}
+                 {/* The Photo */}
                  <img 
-                    src="/amit_sir_photo.png" 
-                    alt="Amit Kumar Pandey" 
+                    src={heroData.profileImage || '/amit_sir_photo.png'} 
+                    alt="Profile" 
                     className="w-full h-full object-cover" 
                  />
                </div>

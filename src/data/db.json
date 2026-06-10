@@ -1,4 +1,16 @@
 {
+  "hero": {
+    "name": "Amit",
+    "roleLabel": "Academic Innovator",
+    "subtitle": "Bridging the gap between cutting-edge <strong>Machine Learning</strong> research and scalable practical solutions.",
+    "profileImage": "/amit_sir_photo.png",
+    "ctaLabel": "View Research",
+    "ctaLink": "/research",
+    "stats": [
+      { "value": "10", "suffix": "+", "label": "Publications" },
+      { "value": "7",  "suffix": "+", "label": "Patents" }
+    ]
+  },
   "certifications": [
     {
       "title": "Professional Certificate in Computer Vision",
