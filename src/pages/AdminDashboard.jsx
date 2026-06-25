@@ -31,7 +31,6 @@ export default function AdminDashboard() {
   const [warningPopup, setWarningPopup] = useState({ show: false, title: '', message: '' });
   const [certUploadType, setCertUploadType] = useState('image'); // 'image' or 'pdf' for certifications
 
-  const defaultPassword = 'Amit@2026';
 
   // Check authentication on mount
   useEffect(() => {
@@ -78,8 +77,12 @@ export default function AdminDashboard() {
   // Handle login
   const handleLogin = (e) => {
     e.preventDefault();
-    const envPassword = import.meta.env.VITE_ADMIN_PASSWORD;
-    const requiredPassword = envPassword || defaultPassword;
+    const requiredPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+
+    if (!requiredPassword) {
+      setLoginError('Admin password is not configured. Please set VITE_ADMIN_PASSWORD in your environment.');
+      return;
+    }
 
     if (password === requiredPassword) {
       sessionStorage.setItem('admin_authenticated', 'true');
